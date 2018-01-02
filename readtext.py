@@ -3,6 +3,7 @@ p=re.compile('\n|\W')
 f=open('english.txt')
 lines=f.readlines()
 words=[]
+
 for line in lines:
 	#l=re.sub('\W',' ',line)
 	l=line.replace(',','').replace('?','').strip()
