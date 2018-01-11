@@ -142,5 +142,5 @@ re模块中research(pattern,string[,flags]),在string搜索pattern的第一个�
         
         Foo.add(1,2)# 调用静态方法
         
-        Foo.hi2(2)# 调用类方法
+        Foo.hi2(2)# 调用类方 法
  
