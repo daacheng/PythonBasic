@@ -81,5 +81,66 @@ re模块中research(pattern,string[,flags]),在string搜索pattern的第一个�
       >>>print(re.search(‘super’, ‘superstition’).span())
       (0, 5)
       >>>print(re.search(‘super’, ‘insuperable’).span())
-      (2, 7)
+      (2, 7)
+## 9.python中的可变对象与不可变对象
+不可变对象：int，string，float，tuple
 
+可变对象   ：list，dictionary
+
+可变对象一旦创建之后还可改变但是地址不会发生改变，即该变量指向的还是原来的对象。
+
+而不可变对象创建之后不能更改，如果更改则变量会指向一个新的对象。 
+
+    s = 'abc' # 不可变对象 
+    
+    id(s)  3072200191 
+    
+    s += 'd' 3072200325
+     
+    l = ['a','b','c'] # 可变对象
+    
+    id(l)  3072200074 
+    
+    l += 'd' 
+    
+    id(l) 3072200074 
+## 10.python中实例方法，静态方法，类方法
+实例方法：就是类的实例能够使用的方法。
+
+静态方法：就位于类定义的命名空间中，它不会对任何实例类型进行操作。使用装饰器@staticmethod定义静态方法。类对象和实例都可以调用静态方法。
+
+类方法： 类方法使用@classmethod装饰器定义，其第一个参数是类，约定写为cls。类对象和实例都可以调用类方法。
+
+    
+    class Foo:
+        
+        def __init__(self, name):
+            
+            self.name = name
+        
+        def hi(self):
+            
+            print(self.name)
+        
+        @staticmethod
+        
+        def add(a,b):
+            
+            print(a+b)
+        
+        @classmethod
+        
+        def hi2(cls,x):
+            
+            print(x)
+    
+    if __name__ == '__main__':
+        
+        foo01 = Foo('letian')
+        
+        foo01.hi()
+        
+        Foo.add(1,2)# 调用静态方法
+        
+        Foo.hi2(2)# 调用类方法
+ 
