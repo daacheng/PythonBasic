@@ -68,13 +68,17 @@ __XXX  类中的私有变量名，只有本类能访问，子类也不能访问�
 
 “双下划线” 开始的是私有成员，意思是只有类对象自己能访问，连子类对象也不能访问到这个数据。通过对象名._类名__xxx这样的方式可以访问.
 
-    class A:
-        def _method1(): # 
-            pass
-        def __method2():#私有方法 ，只有A类能访问， 通过对象._A__method2()访问
-            pass
-    class B(A):
-        def __method2():
-            pass
-    dir(A)  #['_A__method2','_method1']
-    dir(B)#['_A__method2', '_B__method2','_method1']
+        class A:
+            def _method1(self): # 不能通过from module import * 导入，只能通过类对象，或者子类对象访问。
+                print("A")
+            def __method2():#私有方法 ，只有A类能访问，子类也不能访问 通过对象._A__method2()访问
+                pass
+        class B(A):
+            def __method2():
+                pass
+        #dir(A)  #['_A__method2','_method1']
+        #dir(B)#['_A__method2', '_B__method2','_method1']
+        a=A()
+        b=B()
+        a._method1()#A
+        b._method1()#A
