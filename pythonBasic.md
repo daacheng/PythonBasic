@@ -91,4 +91,56 @@ __XXX  类中的私有变量名，只有本类能访问，子类也不能访问�
 
 %x 十六进制整数
 
-        print('hello %s,you are %d' %('aaa',11))
+        print('hello %s,you are %d' %('aaa',11))
+
+## 15. python可迭代对象（Iterable）迭代器（iterator）和生成器（generator）
+可迭代对象：可以直接作用于for循环的对象统称为可迭代对象（Iterable）。可迭代对象包含一个__iter__方法，或__getitem__方法，其中__iter__方法返回一个迭代器(iterator).可迭代对象一类是集合数据类型，如list，tuple，dict，set，str；一类是生成器generator。
+
+迭代器：可以作用于next()方法的对象都是迭代器对象。迭代器对象必须实现__next__()方法。
+
+生成器：实现了__iter__()方法和__next__()方法，生成器是Iterable也是iterator。可以作用于for循环。
+
+生成器函数：在函数中如果出现了yield关键字，那么这个函数就是生成器函数。yield的作用就是生成一个生成器generator。生成器函数返回一个生成器generator。
+
+### 原理
+for循环的时候，如果循环的是Iterable可迭代对象，会调用Iterable的__iter__()方法，返回一个迭代器，然后调用迭代器的__next__()方法，直到遇到StopIteration异常跳出循环。
+如果循环的是iterator迭代器，直接调用他的__next__()方法，直到遇到StopIteration异常跳出循环。
+### 实现一个迭代器和一个可迭代对象
+
+        from collections import Iterator
+        class AIterator(Iterator):
+            def __init__(self,s,e):
+                self.current=s
+                self.end=e
+              def __next__(self):
+                if self.current<self.end:
+                    self.index=self.current
+                    self.current+=1
+                    return self.index
+                else:
+                    raise StopIteration
+        class AIterable():
+            def __init__(self,s,e):
+                self.s=s
+                self.e=e
+            def __iter__(self):
+                return AIterator(self.s,self.e)
+        a=AIterable(2,5)
+        print(a) #<__main__.AIterable object at 0x0000023877599A90>
+        for x in a:
+            print(x)
+### 实现一个生成器
+1. 把列表的[]换成(),就创建了一个生成器。
+        
+        l=[x for x in range(10)]
+        g=(x for x in range(10))
+2. 通过yield关键字。生成器函数返回一个生成器。节省开销。
+
+    Python生成器是创建迭代器的简单方法。
+
+    1、调用生成器函数，返回一个生成器。
+
+    2、调用生成器的next()方法时，生成器才开始执行生成器函数，直到遇到yield时暂停执行（挂起），并且yield的参数将作为此次next方法的返回值。
+
+    3、之后每次调用生成器的next方法，生成器将从上次暂停执行的位置恢复执行生成器函数，直到再次遇到yield时暂停，并且同样的，yield的参数将作为next方法的返回值。
+
