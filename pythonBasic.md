@@ -81,4 +81,14 @@ __XXX  类中的私有变量名，只有本类能访问，子类也不能访问�
         a=A()
         b=B()
         a._method1()#A
-        b._method1()#A
+        b._method1()#A
+## 14. python中格式化字符串
+%d 整数
+
+%f 浮点数
+
+%s 字符串
+
+%x 十六进制整数
+        
+        print('hello %s,you are %d' %('aaa',11))
