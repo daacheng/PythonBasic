@@ -4,6 +4,7 @@ while True:
 	password=input('please input password:')
 	if username=='daacheng' and password=='daacheng':
 		print('successful')
+		break
 	else:
 		print('faile')
 		error_num+=1
