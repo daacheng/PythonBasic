@@ -139,3 +139,135 @@ add：将数组中对应元素相加</br>
 subtract:第一个数组中的元素减去第二个数组中的元素</br>
 multiply:数组相乘
 divide:除法
+
+## 七、数学和统计方法
+
+        import numpy as np
+        data=[[1,2,3],[4,5,6],[7,8,9]]
+        arr = np.array(data)   #array([[1, 2, 3],
+                               #        [4, 5, 6],
+                               #        [7, 8, 9]])
+
+        #sum()对数组中全部或某轴向的元素求和
+        arr.sum(0)  #array([12, 15, 18])
+        arr.sum(1)  #array([ 6, 15, 24])
+        arr.sum()   #45
+
+        #mean()求数组中全部元素的算数平均数或某个轴向的算数平均数
+        arr.mean()   #5.0
+        arr.mean(0)  #array([ 4.,  5.,  6.])
+        arr.mean(1)  #array([ 2.,  5.,  8.])
+
+        #std()为标准差   var()为方差
+        arr.std()    #2.5819888974716112
+        arr.var()    #6.666666666666667
+
+        #min,max求数组中最小值，最大值。
+        arr.min() #1
+        arr.max() #9
+
+        #argmin最小元素的索引，argmax最大元素的索引
+        arr.argmin()  #0
+        arr.argmax()  #8
+
+        #cumsum求所有元素的累计和
+        arr.cumsum()    #array([ 1,  3,  6, 10, 15, 21, 28, 36, 45], dtype=int32)
+
+        #cumprod求所有元素的累计积
+        arr.cumprod()   #array([     1,      2,      6,     24,    120,    720,   5040,  40320,  362880], dtype=int32)
+
+## 八、用于布尔型数组的方法
+
+    import numpy as np
+    bools = np.array([False,False,True,False])
+
+    #布尔值经常被转换为1（True），0（False）
+    (bools>0).sum()   #1
+
+    #any()用于测试数组中是否存在True
+    bools.any()       #True
+
+    #all()用于检查数组中是否所有都是True
+    bools.all()       #False
+
+## 九、集合运算
+
+    import numpy as np
+    arr1= np.array([1,1,1,2,3,4,4,4,5,5,5,0,3])
+
+    #unique()计算数组中唯一元素，并返回有序结果
+    np.unique(arr1)  #array([0, 1, 2, 3, 4, 5])
+
+    #intersect1d(x,y)  计算数组中公共元素并返回有序结果
+    arr2 = np.array([1,2,3,4])
+    arr3 = np.array([4,3,6,7,8])
+    np.intersect1d(arr2,arr3)    #array([3, 4])
+
+    #union1d(x,y)计算数组的并集，返回有序结果
+    np.union1d(arr2,arr3)        #array([1, 2, 3, 4, 6, 7, 8])
+
+    #in1d(x,y) 得到一个x中的元素是否包含于y的布尔型数组
+    np.in1d(arr2,arr3)
+
+    #setdiff1d(x,y)  集合的差，元素在x中，不在y中
+    np.setdiff1d(arr2,arr3)
+
+    #setxor1d(x,y)  集合的对称差，不同时存在于两个数组中的元素
+    np.setxor1d(arr2,arr3)
+
+## 十、数组文件的输入输出
+### 将数组以二进制格式保存
+
+    import numpy as np
+    arr = np.arange(10)
+
+    #np.save可以将数组保存为.npy的二进制文件在磁盘上
+    #np.load可以将磁盘上保存的数组读取出来
+    np.save('arr_save',arr)
+    np.load('arr_save.npy')   #array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+    #np.savez可以将多个数组保存在一个压缩文件中（.npz格式），将数组以关键字参数形式传入
+    #np.load()读取时，会得到一个类似字典的对象
+    np.savez('many_arr',a=arr,b=arr)
+    many_arr = np.load('many_arr.npz')
+    many_arr['a']   #array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+    many_arr['b']   #array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+### 存取文本文件
+
+        import numpy as np
+        arr = np.array([[1,2,3,4],[5,6,7,8]])
+        arr
+        np.savetxt('arr.txt',arr)
+
+## 十一、矩阵计算（两个矩阵的相乘）
+
+    import numpy as np
+    arr1 = np.array([[1,2,3],[2,3,4],[3,4,5]])
+    arr1  #array([[1, 2, 3],
+           #[2, 3, 4],
+           #[3, 4, 5]])
+    arr2 = np.array([[6,6],[8,8],[5,5]])
+    arr2    #array([[6, 6],
+            #       [8, 8],
+            #       [5, 5]])
+
+    arr1.dot(arr2)    #array([[37, 37],
+                      #         [56, 56],
+                      #         [75, 75]]) 
+
+## 十二、随机数生成
+
+    import numpy as np
+    #通过normal得到一个标准正态分布的样本数组
+    np.random.normal(size=(4,4))
+
+    #rand()生成[0,1)的随机值
+    np.random.rand(2,3)  #array([[ 0.96515435,  0.97895945,  0.84420243],
+                         #      [ 0.80194013,  0.53194176,  0.41690594]])
+
+    #randn产生正态分布的样本值（均值0，标准差1）   
+    np.random.randn(3)
+
+    #randint(a,b),从给出的上下限范围内随机选取整数
+    np.random.randint(3,8)
