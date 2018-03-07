@@ -117,4 +117,65 @@
                      #       [2, 4]], dtype=int64)
 
 ## 二、基本功能
-### 2.1、重新索引
+### 2.1、重新索引(reindex)
+
+        from pandas import Series,DataFrame
+        import pandas as pd
+        import numpy as np
+        #重新索引，pandas通过reindex方法，创建一个适应新索引的新对象
+        obj=Series([1,2,3],index=['a','b','c'])
+        obj2=obj.reindex(['c','b','a','e'])
+        obj2     #c    3.0
+                 #b    2.0
+                 #a    1.0
+                 #e    NaN
+                 #dtype: float64
+
+        #reindex中的method选项，可以指定向前或向后填充  ffill向前    bfill向后
+        obj3=obj.reindex(['c','b','a','e','g'],method='ffill')
+        obj3       #c    3
+                   #b    2
+                   #a    1
+                   #e    3
+                   #g    3
+                   #dtype: int64
+
+        #对于DataFrame，reindex可以修改索引，列，或者两个都修改
+        df=DataFrame(np.arange(9).reshape(3,3),index=['a','b','c'],columns=['c1','c2','c3'])      
+        df       
+               #    c1	c2	c3
+               #a	0	1	2
+               #b	3	4	5
+               #c	6	7	8    
+        df1=df.reindex(['a','b','c','d'])
+        df1        #	c1	c2	c3
+                   #a	0.0	1.0	2.0
+                   #b	3.0	4.0	5.0
+                   #c	6.0	7.0	8.0
+                   #d	NaN	NaN	NaN
+        df2=df.reindex(columns=['c1','c2','c3','c4'])
+        df2        #	c1	c2	c3	c4
+                   # a	0	1	2	NaN
+                   # b	3	4	5	NaN
+                   # c	6	7	8	NaN
+
+### 2.2、丢弃指定轴上的索引
+
+        #丢弃指定轴上的项drop
+        obj = Series([1,2,3],index=['a','b','c'])
+        obj2 = obj.drop('c')  
+        obj2     #a    1
+                # b    2
+                #dtype: int64
+
+        #DataFrame可以删除任意轴上的索引
+        df3=df.drop(['a'])
+        df3     
+                #   c1	c2	c3
+                #b	3	4	5
+                #c	6	7	8
+        df4=df.drop(['c1'],axis=1)
+        df4     #	c2	c3
+                #a	1	2
+                #b	4	5
+                #c	7	8    
