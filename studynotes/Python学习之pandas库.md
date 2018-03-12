@@ -179,3 +179,72 @@
                 #a	1	2
                 #b	4	5
                 #c	7	8    
+
+### 2.3索引、选取、过滤
+#### Series
+
+                import numpy as np
+                import pandas as pd
+                from pandas import Series,DataFrame
+                obj=Series([3,2,1],index=['a','b','c'])
+                obj   #a    3
+                      #b    2
+                      #c    1
+                      #dtype: int32
+
+                #通过索引名称获取值
+                obj['b']   #2
+                #通过索引获取值
+                obj[0]     #3
+                obj[1]     #2
+                #切片
+                obj[0:2]   #a    3
+                           #b    2
+                           #dtype: int64
+                #利用标签切片运算和普通python切片不同，其末端是包含的      
+                obj[['c','a']]   #c    1
+                                 #a    3
+                                 #dtype: int64 
+
+                obj['a':'b']     #a    3
+                                 #b    2
+                                 #dtype: int64
+
+                #赋值
+                obj['a':'b']=9
+                obj      #a    9
+                         #b    9
+                         #c    1
+                         #dtype: int64
+
+#### DataFrame
+
+                import numpy as np
+                import pandas as pd
+                from pandas import Series,DataFrame
+                data = DataFrame(np.arange(9).reshape(3,3),index=['r1','r2','r3'],columns=['c1','c2','c3'])
+                data       #	c1	c2	c3
+                           #r1	0	1	2
+                           #r2	3	4	5
+                           #r3	6	7	8
+
+                #对DataFrame索引就是获取一个或多个列
+                data['c2']    #r1    1
+                              #r2    4
+                              #r3    7
+                              #Name: c2, dtype: int32
+
+                data[['c1','c3']]        #	   c1	c3
+                                         #r1	0	2
+                                         #r2	3	5
+                                         #r3	6	8
+
+                #通过切片选取行
+                data[0:2]      #	c1	c2	c3
+                               # r1	0	1	2
+                               # r2	3	4	5
+
+                #选取指定列，指定行
+                data.loc['r2',['c1','c2']]        #c1    3
+                                                  #c2    4
+                                                  #Name: r2, dtype: int32 
