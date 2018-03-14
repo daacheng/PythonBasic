@@ -1,4 +1,4 @@
-# Python数据分析之数据加载、存储与文件格式
+# Python数据分析之数据加载
 ## 一、读写文本格式的数据
 ### 1.1读取文本格式数据
 
@@ -88,3 +88,14 @@
             writer = csv.writer(f)
             writer.writerow((1,2,3))
             writer.writerow((3,4,5))
+
+### 1.4、处理json格式对象（loads，dumps）
+
+        import json
+
+        #python对象转换成json格式字符串
+        dict={'a':111,'b':222,'c':333}
+        jsonstr=json.dumps(dict)
+        jsonstr
+        #json格式字符串转换成python对象
+        json.loads(jsonstr)
