@@ -154,3 +154,58 @@
                                                                                 #4	d	5	NaN
 
 ## 二、轴向连接
+### numpy的concatenate函数可用于连接原始数组。
+
+        import numpy as np
+        arr=np.arange(9).reshape(3,3)
+        arr                             #([[0, 1, 2],
+                                         #  [3, 4, 5],
+                                         #  [6, 7, 8]])
+        #numpy的连接数组的函数concatenate ，axis=0或1表示，第0轴沿着行的垂直往下，第1轴沿着列的方向水平延伸。
+        np.concatenate([arr,arr],axis=1)    #array([[0, 1, 2, 0, 1, 2],
+                                                  # [3, 4, 5, 3, 4, 5],
+                                                  # [6, 7, 8, 6, 7, 8]])
+        np.concatenate([arr,arr],axis=0)    #array([[0, 1, 2],
+                                            #   [3, 4, 5],
+                                            #   [6, 7, 8],
+                                            #   [0, 1, 2],
+                                            #   [3, 4, 5],
+                                            #   [6, 7, 8]])
+
+### pandas.concat连接Series（参数axis，join）
+
+        import numpy as np
+        import pandas as pd
+        from pandas import Series,DataFrame
+
+        #创建两个没有重叠索引的Series
+        s1=Series([1,2],index=['a','b'])
+        s2=Series([3,4,5],index=['c','d','e'])
+
+        #pandas.concat默认是在 axis=0上工作，这样得到一个新的Series
+        pd.concat([s1,s2])                        #a    1
+                                                  #b    2
+                                                  #c    3
+                                                  #d    4
+                                                  #e    5
+        #当axis=1时，得到一个DataFrame，
+        pd.concat([s1,s2],axis=1)                #	0	1
+                                                #a	1.0	NaN
+                                                #b	2.0	NaN
+                                                #c	NaN	3.0
+                                                #d	NaN	4.0
+                                                #e	NaN	5.0
+        #有重叠索引是Series
+        s3=Series([6,7],index=['a','c'])
+        pd.concat([s1,s3])                       #  a    1
+                                                 #  b    2
+                                                 #  a    6
+                                                 #  c    7
+        #外连接，取索引的并集
+        pd.concat([s1,s3],axis=1)                #0	1
+                                            #a	1.0	6.0
+                                            #b	2.0	NaN
+                                            #c	NaN	7.0
+        #join=inner内连接，取索引的交集
+        pd.concat([s1,s3],axis=1,join='inner')    #	0	1
+                                                #a	1	6
