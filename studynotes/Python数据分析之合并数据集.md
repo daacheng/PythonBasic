@@ -1,5 +1,5 @@
 # Python数据分析之合并数据集
-1. pandas.merge可以根据一个键或多个键将不同的DataFrame的行连接起来。（参数：left,right,how,on,left_on,right_on）
+1. pandas.merge可以根据一个键或多个键将不同的DataFrame的行连接起来。（参数：left,right,how,on,left_on,right_on,left_index,right_index）
 2. pandas.concat可以沿着一条轴将多个对象堆叠到一起。
 ## 一、pandas.merge
 ### 两个DataFrame具有相同的列名时
@@ -118,3 +118,39 @@
                                                                                 #2	two	foo	2.0	NaN
                                                                                 #3	one	bar	3.0	6.0
                                                                                 #4	two	bar	NaN	7.0
+### 索引上的合并（left_index,right_index）
+
+        import pandas as pd
+        from pandas import Series,DataFrame
+        left1=DataFrame({
+            'key':['a','a','b','c','d'],
+            'lvalue':[1,2,3,4,5]
+        })
+        left1                                        #	key	lvalue
+                                                    #0	a	1
+                                                    #1	a	2
+                                                    #2	b	3
+                                                    #3	c	4
+                                                    #4	d	5
+        right1=DataFrame({
+            'rvalue':[6,7,8]
+        },index=['a','b','c'])
+        right1                                       #	rvalue
+                                                    #a	6
+                                                    #b	7
+                                                    #c	8
+        #索引上的合并，可以通过left_index=True或者right_index=True来说明索引被用作连接键。默认是内连接，取交集。
+        pd.merge(left1,right1,left_on='key',right_index=True)               #key	lvalue	rvalue
+                                                                            #0	a	1	6
+                                                                            #1	a	2	6
+                                                                            #2	b	3	7
+                                                                            #3	c	4	8
+        #外连接 
+        pd.merge(left1,right1,left_on='key',right_index=True ,how='outer')     #   key	lvalue	rvalue
+                                                                                #0	a	1	6.0
+                                                                                #1	a	2	6.0
+                                                                                #2	b	3	7.0
+                                                                                #3	c	4	8.0
+                                                                                #4	d	5	NaN
+
+## 二、轴向连接
