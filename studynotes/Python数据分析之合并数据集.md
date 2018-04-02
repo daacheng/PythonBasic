@@ -1,7 +1,7 @@
-# Python数据分析之合并数据集
+# Python数据分析之合并数据集、及轴向旋转
 1. pandas.merge可以根据一个键或多个键将不同的DataFrame的行连接起来。（参数：left,right,how,on,left_on,right_on,left_index,right_index）
 2. pandas.concat可以沿着一条轴将多个对象堆叠到一起。
-## 一、pandas.merge
+## 一、pandas.merge合并数据集
 ### 两个DataFrame具有相同的列名时
 
     import pandas as pd
@@ -209,3 +209,54 @@
         #join=inner内连接，取索引的交集
         pd.concat([s1,s3],axis=1,join='inner')    #	0	1
                                                 #a	1	6
+
+## 三、轴向旋转（DataFrame的stack和unstack方法）
+stack：将列旋转为行
+
+        import numpy as np
+        import pandas as pd
+        from pandas import Series,DataFrame
+        df=DataFrame(np.arange(6).reshape(2,3),index=['one','two'],columns=['a','b','c'])
+        df             #    	a	b	c
+                       # one	0	1	2
+                       # two	3	4	5
+        #stack()将列旋转为行
+        df.stack()                 # one  a    0
+                                   #      b    1
+                                   #      c    2
+                                   # two  a    3
+                                   #      b    4
+                                   #      c    5
+        #对于一个层次化的Series，可以用unstack（）将其重排为一个DataFrame，stack和unstack默认操作的都是最内层。
+        result=df.stack()
+        result.unstack()                      #    a	b	c
+                                            #one	0	1	2
+                                            #two	3	4	5
+        #传出分层级别，对指定的分层进行操作
+        result.unstack(0)                    #	one	two
+                                            #a	0	3
+                                            #b	1	4
+                                            #c	2	5      
+
+        s1=Series([0,1,2,3],index=['a','b','c','d'])
+        s2=Series([4,5,6],index=['c','d','e'])
+        pd.concat([s1,s2],keys=['one','two'])               #one  a    0
+                                                            #     b    1
+                                                            #     c    2
+                                                            #     d    3
+                                                            #two  c    4
+                                                            #     d    5
+                                                            #     e    6
+        #引入缺失值
+        pd.concat([s1,s2],keys=['one','two']).unstack()     #a	b	c	d	e
+                                                       #one	0.0	1.0	2.0	3.0	NaN
+                                                       #two	NaN	NaN	4.0	5.0	6.0
+        #再次进行转化，stack（）会自动滤除缺失值
+        pd.concat([s1,s2],keys=['one','two']).unstack().stack()       #one  a    0.0
+                                                                      #     b    1.0
+                                                                      #     c    2.0
+                                                                      #     d    3.0
+                                                                      #two  c    4.0
+                                                                      #     d    5.0
+                                                                      #     e    6.0
+
