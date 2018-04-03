@@ -129,3 +129,42 @@
                                                                 #1	0	1	2
                                                                 #two	3	4	5
                                                                 #three	6	7	8
+## 检测和过滤异常值
+
+        import pandas as pd
+        from pandas import Series,DataFrame
+        import numpy as np
+        #检测和过滤异常值
+        data = DataFrame(np.arange(12).reshape(4,3))
+        #找出绝对值da大于1.2的行
+        data[(np.abs(data)>5).any(1)]        # 0	1	2
+                                            #2	6	7	8
+                                            #3	9	10	11
+        #通过这种方式可以轻松地对值进行设定
+        data[np.abs(data)>5]=1
+        data                                #0	1	2
+                                        #0	0	1	2
+                                        #1	3	4	5
+                                        #2	1	1	1
+                                        #3	1	1	1
+## 排列和随机取样
+
+        #排列和随机采样（np.random.permutation()）
+        df=DataFrame(np.arange(12).reshape(4,3))
+        df                         #0	1	2
+                                #0	0	1	2
+                                #1	3	4	5
+                                #2	6	7	8
+                                #3	9	10	11
+        sampler = np.random.permutation(4)
+        #随机排序的数组
+        sampler       #array([3, 0, 2, 1])
+        df.take(sampler)         #	0	1	2
+                                #3	9	10	11
+                                #0	0	1	2
+                                #1	3	4	5
+                                #2	6	7	8
+        #随机取前两行
+        df.take(np.random.permutation(len(df))[:2])       #0	1	2
+                                                        #3	9	10	11
+                                                        #0	0	1	2
