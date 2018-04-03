@@ -101,3 +101,31 @@
                                                       #3    NaN
         #方法二：传入一个对应关系列表
         data.replace({-99:np.nan,2:0})
+## 重命名轴索引
+
+        import pandas as pd
+        from pandas import Series,DataFrame
+        import numpy as np
+        #重命名轴索引
+        data=DataFrame(np.arange(9).reshape(3,3),index=['one','two','three'],columns=['a','b','c'])
+        data                            #	a	b	c
+                                        #one	0	1	2
+                                        #two	3	4	5
+                                        #three	6	7	8
+        #通过rename方法重新命名轴索引，不修改原始数据，相当于复制一份。
+        data.rename(index=str.title,columns=str.upper)             #	A	B	C
+                                                                #One	0	1	2
+                                                                #Two	3	4	5
+                                                                #Three	6	7	8
+        #rename可以结合dict，对部分轴索引更新
+        data.rename(index={'one':1},columns={'a':'aa'})          #	aa	b	c
+                                                                #1	0	1	2
+                                                                #two	3	4	5
+                                                                #three	6	7	8
+        #rename()方法：复制DataFrame并对其索引标签重新复制
+        #可以通过inplace=True直接修改源数据
+        data.rename(index={'one':1},columns={'a':'aa'},inplace=True)
+        data                                                       #aa	b	c
+                                                                #1	0	1	2
+                                                                #two	3	4	5
+                                                                #three	6	7	8
