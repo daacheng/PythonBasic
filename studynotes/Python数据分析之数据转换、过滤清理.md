@@ -72,3 +72,32 @@
                                 #1	五香牛肉	4	row
                                 #2	腊肉	5	pig
                                 #3	牛排	6	row
+## 替换值（replace）
+
+        import pandas as pd
+        from pandas import Series,DataFrame
+        #替换值
+        data = Series([1,-99,2,-99])
+        data                        #0     1
+                                    #1   -99
+                                    #2     2
+                                    #3   -99
+        #replace()方法替指定值，不影响原Series，重新生成一个新的Series
+        data.replace(-99,np.nan)    #0    1.0
+                                    #1    NaN
+                                    #2    2.0
+                                    #3    NaN
+        #一次性替换多个值,可以传入一个列表。
+        data.replace([-99,2],np.nan)#0    1.0
+                                    #1    NaN
+                                    #2    NaN
+                                    #3    NaN
+
+        #如果要实现对不同的值进行不同的转换
+        #方法一：可传入一个由替换关系组成的列表即可
+        data.replace([-99,2],[np.nan,0])              #0    1.0
+                                                      #1    NaN
+                                                      #2    0.0
+                                                      #3    NaN
+        #方法二：传入一个对应关系列表
+        data.replace({-99:np.nan,2:0})
