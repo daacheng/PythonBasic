@@ -23,3 +23,4 @@ for i in images:
         if img_size(r.content)[0] > 400 and img_size(r.content)[1] > 600:  # 图片宽*高大于400*600像素才保存
             print('尺寸不错，留下了')
             open('baidu_img/' + image_name, 'wb').write(r.content)
+            
