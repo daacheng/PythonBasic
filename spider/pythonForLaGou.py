@@ -67,4 +67,3 @@ companyInfo={
 df = DataFrame(companyInfo)
 #df.to_csv('拉勾.csv',index=False)
 df
-
