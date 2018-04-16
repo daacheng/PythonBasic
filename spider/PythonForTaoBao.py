@@ -70,3 +70,5 @@ for page in range(2,5):
         getProducts()
     except Exception:
         print('超时')
+
+        
