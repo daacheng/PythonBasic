@@ -36,6 +36,8 @@
 1.17. [《深入浅出统计学》笔记上.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%BB%9F%E8%AE%A1%E5%AD%A6%E3%80%8B%E7%AC%94%E8%AE%B0%E4%B8%8A.md)
 
 1.18. [《深入浅出统计学》笔记下.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%BB%9F%E8%AE%A1%E5%AD%A6%E3%80%8B%E7%AC%94%E8%AE%B0%E4%B8%8B.md)
+
+1.19. [Python十进制、十六进制、字符串、字节串之间转换](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%8D%81%E8%BF%9B%E5%88%B6%E3%80%81%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E3%80%81%E5%AD%97%E8%8A%82%E4%B8%B2%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2.md)
 ## 2、spider文件夹为爬虫练习代码
 2.[爬虫练习代码](https://github.com/daacheng/PythonBasic/tree/master/spider)
 
