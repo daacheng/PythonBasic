@@ -110,3 +110,5 @@
     print('main thread end!!!!!!')
 
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/join.png?raw=true)
+
+## 加锁与不加锁
