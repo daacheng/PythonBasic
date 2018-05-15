@@ -112,3 +112,109 @@
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/join.png?raw=true)
 
 ## 加锁与不加锁
+### 不加锁
+
+    import threading
+    import time
+
+    num = 0
+    class MyThread(threading.Thread):
+        def __init__(self,arg):
+            super(MyThread,self).__init__()      #必须显示调用父类的初始化函数
+            self.arg = arg
+        def run(self):
+            time.sleep(2)
+            global num
+            num+=1
+            #time.sleep(2)
+            print(num)
+
+    for i in range(10):
+        t = MyThread(i)   
+        t.start()
+
+    print('main thread end!!!!!!')
+
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/nolock.png?raw=true)
+
+### 加锁
+
+    import threading
+    import time
+
+    num = 0
+
+    lock = threading.Lock()
+    class MyThread(threading.Thread):
+        def __init__(self,arg):
+            super(MyThread,self).__init__()      #必须显示调用父类的初始化函数
+            self.arg = arg
+        def run(self):
+            lock.acquire()
+            #time.sleep(1)
+            global num
+            num+=1
+            #print(num)
+            lock.release()
+    for i in range(6):
+        t = MyThread(i)   
+        t.start()
+
+    print('main thread end!!!!!!')
+
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/lock.png?raw=true)
+## Condition类（生产者与消费者）
+
+    import threading
+    import time
+    """
+        Condition类：
+            除了Lock带有的锁定池外，Condition还包含一个等待池。
+            池中的线程处于等待阻塞状态，直到另一个线程调用notify()/notifyAll()通知；得到通知后线程进入锁定池等待锁定。
+        acquire/release:调用关联的锁相应方法
+        wait():调用这个方法使线程进入Condition的等待池，等待通知，并释放锁。（必须在获得锁的前提下才能释放锁，否则会异常）
+        notify()：从等待池挑选一个线程，并通知。收到通知的线程自动调用acquire()去获取锁（进入锁定池），其他线程仍在等待池。
+                  调用这个方法不会释放锁，（必须在获得锁的前提下才能调用，否则会异常）
+    """
+    con = threading.Condition()
+    products = 0
+    #生产者
+    class Producer(threading.Thread):
+        def run(self):
+            global products
+            while True:
+                if con.acquire():
+                    if products<10:
+                        products+=1
+                        print('生产者生产商品个数目前为：',products)
+                        con.notify()      #唤醒等待池中的一个线程
+                        con.release()     #释放锁
+                    else:
+                        print('生产10个了，停止生产')
+                        con.wait()        #释放锁，进入等待池
+                    time.sleep(2)
+
+    #消费者
+    class Customer(threading.Thread):
+        def run(self):
+            global products
+            while True:
+                if con.acquire():
+                    if products>1:
+                        products-=1
+                        print('消费者消费一个，目前商品数量为：',products)
+                        con.notify()      #唤醒等待池中的一个线程
+                        con.release()     #释放锁
+                    else:
+                        print('商品消费完了！！')
+                        con.wait()        #释放锁，进入等待池
+                    time.sleep(2)
+
+    for p in range(2):
+        p = Producer()
+        p.start()
+    for c in range(3):
+        c = Customer()
+        c.start()
+
+![]()
