@@ -1,4 +1,7 @@
 ## 两种方法实现多线程
+
+参考：https://www.cnblogs.com/tkqasn/p/5700281.html
+参考：http://www.cnblogs.com/huxi/archive/2010/06/26/1765808.html
 ### 1、将要执行的方法作为参数传给Thread的构造方法
 
     import threading
