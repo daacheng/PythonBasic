@@ -40,6 +40,10 @@
 1.19. [Python十进制、十六进制、字符串、字节串之间转换](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%8D%81%E8%BF%9B%E5%88%B6%E3%80%81%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E3%80%81%E5%AD%97%E8%8A%82%E4%B8%B2%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2.md)
 
 1.20. [Python网络编程之socketserver](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%B9%8Bsocketserver.md)
+
+1.21. [Python代码之pythonic几种写法](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E4%BB%A3%E7%A0%81pythonic%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95.md)
+
+1.22. [Python之多线程](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%A4%9A%E7%BA%BF%E7%A8%8B.md)
 ## 2、spider文件夹为爬虫练习代码
 2.[爬虫练习代码](https://github.com/daacheng/PythonBasic/tree/master/spider)
 
