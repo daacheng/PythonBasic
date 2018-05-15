@@ -217,4 +217,4 @@
         c = Customer()
         c.start()
 
-![]()
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/conditi.png)
