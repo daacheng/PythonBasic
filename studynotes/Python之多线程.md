@@ -221,3 +221,5 @@
         c.start()
 
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/conditi.png)
+
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/threadin.png?raw=true)
