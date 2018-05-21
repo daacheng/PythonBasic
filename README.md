@@ -44,6 +44,8 @@
 1.21. [Python代码之pythonic几种写法](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E4%BB%A3%E7%A0%81pythonic%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95.md)
 
 1.22. [Python之多线程](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%A4%9A%E7%BA%BF%E7%A8%8B.md)
+
+1.23. [Python常用小知识点](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%B8%B8%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9.md)
 ## 2、spider文件夹为爬虫练习代码
 2.[爬虫练习代码](https://github.com/daacheng/PythonBasic/tree/master/spider)
 
