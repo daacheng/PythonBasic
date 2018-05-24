@@ -37,7 +37,7 @@
     # 查看文件大小
     os.path.getsize(file_path)
 
-6.创建临时文件
+## 6.创建临时文件
 
     import tempfile
     import os
@@ -48,3 +48,30 @@
 
     # 防止占用资源
     tempfile.mktemp()  #mktemp用于返回一个临时文件的路径，但并不创建该临时文件。
+
+## 7.生成xml文件
+
+    import xml.dom.minidom as Dom 
+    # 创建XML文档
+    doc = Dom.Document()
+    # 创建根节点
+    root = doc.createElement('html')
+    # 创建h1节点
+    h1 = doc.createElement('h1')
+    h1.setAttribute('name','aaaa')
+    h1.setAttribute('value','hhhhh')
+
+    h1.appendChild(doc.createTextNode('hello world'))
+
+    doc.appendChild(root)
+    # 把h1节点作为root的子节点进行添加
+    root.appendChild(h1)
+
+    f = open("test2.xml", "w",encoding='utf-8')  
+    doc.writexml(f, addindent='\t', newl='\n', encoding="utf-8") 
+    f.close()  
+    
+    <?xml version="1.0" encoding="utf-8"?>
+    <html>
+        <h1 name="aaaa" value="hhhhh">hello world</h1>
+    </html>
