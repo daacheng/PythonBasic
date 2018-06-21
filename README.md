@@ -46,6 +46,8 @@
 1.22. [Python之多线程](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%A4%9A%E7%BA%BF%E7%A8%8B.md)
 
 1.23. [Python常用小知识点](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%B8%B8%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9.md)
+
+1.24. [Python实现TFTP文件传输](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%AE%9E%E7%8E%B0TFTP%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93.md)
 ## 2、spider文件夹为爬虫练习代码
 2.[爬虫练习代码](https://github.com/daacheng/PythonBasic/tree/master/spider)
 
