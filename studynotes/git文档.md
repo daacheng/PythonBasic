@@ -8,7 +8,7 @@ Git是目前世界上最先进的分布式版本控制系统（没有之一）�
 
 想删除一个段落，又怕将来想恢复找不回来怎么办？有办法，先把当前文件“另存为……”一个新的Word文件，再接着改，改到一定程度，再“另存为……”一个新文件，这样一直改下去，最后你的Word文档变成了这样：
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/1_1.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/1_1.png?raw=true)
 
 过了一周，你想找回被删除的文字，但是已经记不清删除前保存在哪个文件里了，只好一个一个文件去找，真麻烦。
 
@@ -20,7 +20,7 @@ Git是目前世界上最先进的分布式版本控制系统（没有之一）�
 
 这个软件用起来就应该像这个样子，能记录每次文件的改动：
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/1_2.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/1_2.png?raw=true)
 
 ### 1.2、集中式与分布式
 集中式版本控制系统，版本库是集中存放在中央服务器的，而干活的时候，用的都是自己的电脑，所以要先从中央服务器取得最新的版本，然后开始干活，干完活了，再把自己的活推送给中央服务器。
@@ -37,7 +37,7 @@ git官网下载windows版本的， https://git-scm.com/downloads
 
 安装完成后，在你安装的git文件夹下面，运行git bash 
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/1_3.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/1_3.png?raw=true)
 
 ## 二、git使用
 ### 2.1、用git创建版本库
@@ -46,30 +46,30 @@ git官网下载windows版本的， https://git-scm.com/downloads
 2. git add filename，添加文件到git仓库。
 3. git commit，提交文件到git仓库，完成。
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/2_1.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/2_1.png?raw=true)
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/2_2.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/2_2.png?raw=true)
 
 ### 2.2、查看工作区状态
 1. 通过git status命令，可以时刻掌握仓库当前的状态。
 2. 通过git diff filename，查看文件发生哪些修改。
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/2_3.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/2_3.png?raw=true)
 
 ### 2.3、版本回退          
 1. HEAD指向当前版本，可以通过git reset --hard commit_id切换版本
 2. git log  或者 git log --pretty=oneline查看提交历史
 3. 要切换版本，用 git reflog查看历史命令，以确定回到哪个版本
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/2_4.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/2_4.png?raw=true)
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/2_5.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/2_5.png?raw=true)
 
 ### 2.4、工作区和暂存区的概念
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/2_6.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/2_6.png?raw=true)
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/2_7.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/2_7.png?raw=true)
 
 ### 2.5、关于撤销操作
 理解了工作区，暂存区的概念后，明白add命令是把工作区的东西添加到暂存区，commit命令是把暂存区的东西提交到分支上。
@@ -86,11 +86,11 @@ git官网下载windows版本的， https://git-scm.com/downloads
 ### 2.6、删除文件
 当一个文件，你已经add，commit提交了，然后在在工作区把文件删除了，这个时候工作区和版本库的状态不一致，可以通过git status查看，知道删除了哪个文件。
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/2_8.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/2_8.png?raw=true)
 
 如果确实要删除这个文件 ，就用 git rm filename命令删除，并commit提交，那么版本库会和工作区一样，也删除这个文件。
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/2_9.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/2_9.png?raw=true)
 
 还有就是你在工作区不小心删错了，版本库还有，可以还原通过  git checkout -- filename 
 
@@ -106,31 +106,31 @@ git官网下载windows版本的， https://git-scm.com/downloads
 ### 3.1、创建与合并分支
 在前面第二章节中了解，每一次commit，git都会把我们的每一次提交串成一条时间线，这条时间线就是一个分支，在git里，主分支为master，HEAD指向的分支为当前分支。
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/3_1_1.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/3_1_1.png?raw=true)
 
 当我们创建新的分支时候，如dev，git创建一个指针叫dev，指向与master相同的提交，再把HEAD指向dev分支，这样就把分支切换到了dev分支上。
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/3_1_2.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/3_1_2.png?raw=true)
 
 Git创建一个分支很快，因为除了增加一个dev指针，改改HEAD的指向，工作区的文件都没有任何变化！
 
 不过，从现在开始，对工作区的修改和提交就是针对dev分支了，比如新提交一次后，dev指针往前移动一步，而master指针不变：
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/3_1_3.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/3_1_3.png?raw=true)
 
 假如我们在dev上的工作完成了，就可以把dev合并到master上。Git怎么合并呢？最简单的方法，就是直接把master指向dev的当前提交，就完成了合并：
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/3_1_4.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/3_1_4.png?raw=true)
 
 所以Git合并分支也很快！就改改指针，工作区内容也不变！
 
 合并完分支后，甚至可以删除dev分支。删除dev分支就是把dev指针给删掉，删掉后，我们就剩下了一条master分支：
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/3_1_5.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/3_1_5.png?raw=true)
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/3_1_6.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/3_1_6.png?raw=true)
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/3_1_7.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/3_1_7.png?raw=true)
 
 ### 3.2、解决冲突
 
@@ -140,13 +140,13 @@ Git创建一个分支很快，因为除了增加一个dev指针，改改HEAD的�
 
 现在合并会冲突，因为两个分支的同一个文件都修改了，git不知道怎么合并，就把两个文件不同的地方都合并起来。
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/3_2_1.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/3_2_1.png?raw=true)
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/3_2_2.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/3_2_2.png?raw=true)
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/3_2_3.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/3_2_3.png?raw=true)
 
-![](http://10.1.0.150:10080/wist/archive/raw/master/%E6%96%87%E6%A1%A3/git/pic_git_doc/3_2_4.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/3_2_4.png?raw=true)
 
 git基本常用功能和概念就差不多了，部分可以参看：
 
