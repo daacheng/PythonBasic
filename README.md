@@ -62,3 +62,5 @@
 2.5. [Python爬取豆瓣电影评论](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForDBComment.py)
 
 2.6. [Python爬取淘宝商品信息将数据保存至MongoDB](https://github.com/daacheng/PythonBasic/blob/master/spider/PythonForTaoBao.py)
+
+## 3、算法图解
