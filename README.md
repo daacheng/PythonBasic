@@ -64,4 +64,4 @@
 2.6. [Python爬取淘宝商品信息将数据保存至MongoDB](https://github.com/daacheng/PythonBasic/blob/master/spider/PythonForTaoBao.py)
 
 ## 3、算法图解
-3.1. [二分查找与选择排序](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F.md)
+3.1. [二分查找、选择排序、递归](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F.md)
