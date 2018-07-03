@@ -65,3 +65,5 @@
 
 ## 3、算法图解
 3.1. [二分查找、选择排序、递归](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E3%80%81%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E3%80%81%E9%80%92%E5%BD%92.md)
+
+3.2. [快速排序、哈希表](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E3%80%81%E5%93%88%E5%B8%8C%E8%A1%A8.md)
