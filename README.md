@@ -70,3 +70,5 @@
 
 ## 4、数据分析--pandas
 4.1. [pandas分析chipo快餐数据](https://github.com/daacheng/PythonBasic/blob/master/studynotes/pandas%E5%88%86%E6%9E%90Chipotle%E5%BF%AB%E9%A4%90%E6%95%B0%E6%8D%AE.md)
+
+4.2. [pandas分析欧洲杯数据](https://github.com/daacheng/PythonBasic/blob/master/studynotes/pandas%E5%88%86%E6%9E%90%E4%B9%8B%E6%AC%A7%E6%B4%B2%E6%9D%AF%E6%95%B0%E6%8D%AE.md)
