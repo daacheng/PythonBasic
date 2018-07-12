@@ -72,3 +72,5 @@
 4.1. [pandas分析chipo快餐数据](https://github.com/daacheng/PythonBasic/blob/master/studynotes/pandas%E5%88%86%E6%9E%90Chipotle%E5%BF%AB%E9%A4%90%E6%95%B0%E6%8D%AE.md)
 
 4.2. [pandas分析欧洲杯数据](https://github.com/daacheng/PythonBasic/blob/master/studynotes/pandas%E5%88%86%E6%9E%90%E4%B9%8B%E6%AC%A7%E6%B4%B2%E6%9D%AF%E6%95%B0%E6%8D%AE.md)
+
+4.3. [pandas分析“酒精类消费数据”和“美国犯罪数据”](https://github.com/daacheng/PythonBasic/blob/master/studynotes/pandas%E5%88%86%E6%9E%90%E9%85%92%E7%B1%BB%E6%B6%88%E8%B4%B9%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%BE%8E%E5%9B%BD%E7%8A%AF%E7%BD%AA%E6%95%B0%E6%8D%AE.md)
