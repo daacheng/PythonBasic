@@ -76,3 +76,5 @@
 4.3. [pandas分析“酒精类消费数据”和“美国犯罪数据”](https://github.com/daacheng/PythonBasic/blob/master/studynotes/pandas%E5%88%86%E6%9E%90%E9%85%92%E7%B1%BB%E6%B6%88%E8%B4%B9%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%BE%8E%E5%9B%BD%E7%8A%AF%E7%BD%AA%E6%95%B0%E6%8D%AE.md)
 
 4.4. [pandas数据集合并与风速数据统计](https://github.com/daacheng/PythonBasic/blob/master/studynotes/pandas--%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88%E5%B9%B6%E4%B8%8E%E9%A3%8E%E9%80%9F%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1.md)
+
+4.5. [pandas时间序列与删除数据](https://github.com/daacheng/PythonBasic/blob/master/studynotes/pandas--%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%92%8C%E6%95%B0%E6%8D%AE%E5%88%A0%E9%99%A4.md)
