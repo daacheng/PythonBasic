@@ -1,3 +1,5 @@
+## Linux常用操作命令
+[Linux常用操作命令(更新……)](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.md)
 ## 1、studynote文件夹
 1.[日常学习笔记总结](https://github.com/daacheng/PythonBasic/tree/master/studynotes)
 
