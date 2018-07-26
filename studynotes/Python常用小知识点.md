@@ -1,9 +1,36 @@
 ## 1.时间转换成指定格式
+#### time
+    import time
+    time.time()                        # 1529653382.830719
+    
+    # time.struct_time(tm_year=2018, tm_mon=5, tm_mday=16, tm_hour=10, tm_min=21, tm_sec=2, tm_wday=2, tm_yday=136, tm_isdst=0) 
+    time.localtime()                
+       
+    # 把时间（time.struct_time）转换成指定格式的字符串
+    time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())       # '2018-06-22 15:49:59'
+    
+    # 把时间戳转换为指定格式字符串
+    time.strftime('%Y%m%d%H%M%S', time.localtime(1529653382.830719))
+#### datetime
 
-    import time 
-    time.strftime("%Y%m%d%H%M%S", time.localtime(time.time()))
-    time.localtime(time.time())
-    # time.struct_time(tm_year=2018, tm_mon=5, tm_mday=16, tm_hour=10, tm_min=21, tm_sec=2, tm_wday=2, tm_yday=136, tm_isdst=0)
+    import datetime
+
+    #  把 “指定格式的时间字符串”  转换为“datetime对象”
+    dt_str = '2018-02-09 07:19:50'
+    dt_obj = datetime.datetime.strptime(dt_str, "%Y-%m-%d %H:%M:%S")   
+    dt_obj                                       #  datetime.datetime(2018, 2, 9, 7, 19, 50)
+
+
+    # 把“datetime对象”  转换为   “指定格式的时间字符串”
+    dt_obj.strftime("%Y%m%d%H%M%S")                #  '20180209071950'
+
+
+    # 把“指定格式的时间字符串” 转换为  “时间戳对象”
+    dt_obj = datetime.datetime.strptime(s , "%Y-%m-%d %H:%M:%S")  
+    time.mktime(dt_obj.timetuple())                                                    # 1518131990.0
+ 
+    # 把“指定格式的时间字符串” 转换为  “时间戳对象”
+    time.mktime(time.strptime(s,'%Y-%m-%d %H:%M:%S'))              # 1518131990.0
 
 ## 2.十六进制字符串转字节串
 
@@ -75,3 +102,14 @@
     <html>
         <h1 name="aaaa" value="hhhhh">hello world</h1>
     </html>
+
+## 8.utf8-BOM文件处理
+如果文件已utf-8BOM开头，肉眼发现不了，但是对文件转换会造成影响，需要处理
+
+    with open(dev_filepath, 'r+b') as f:
+        data = f.read()
+        if data[:3] == codecs.BOM_UTF8:
+            data = data[3:]
+            f.seek(0)
+            f.truncate()
+            f.write(data)
