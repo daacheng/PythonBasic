@@ -136,3 +136,8 @@
     # 例如： 运行命令     python .\test.py -h  -t bb -i cc
     # opts = [('-h', ''), ('-t', 'bb'), ('-i', 'cc')]
     # args = []
+
+## 10、字符串相关
+
+##### isdigit() 判断字符串是否只有数字组成
+    'a456'.isdigit()  # False
