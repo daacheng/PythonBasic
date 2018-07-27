@@ -63,9 +63,11 @@
     os.rename(src, dst)
     # 查看文件大小
     os.path.getsize(file_path)
-    # 运行操作系统cmd命令,例如：
+    # 运行操作系统cmd命令(从一个命令打开一个管道),例如：
     os.popen('jupyter notebook')
-    os.popen('wc -l test.txt')
+    pr = os.popen('wc -l test.txt')
+    # 可以查看返回的执行结果   15 test.py
+    pr.read() 
 
 ## 6.创建临时文件
 
