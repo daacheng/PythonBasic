@@ -63,6 +63,9 @@
     os.rename(src, dst)
     # 查看文件大小
     os.path.getsize(file_path)
+    # 运行操作系统cmd命令,例如：
+    os.popen('jupyter notebook')
+    os.popen('wc -l test.txt')
 
 ## 6.创建临时文件
 
