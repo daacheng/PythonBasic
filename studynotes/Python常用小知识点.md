@@ -141,3 +141,9 @@
 
 ##### isdigit() 判断字符串是否只有数字组成
     'a456'.isdigit()  # False
+
+## 11、print不换行(print('aaa',end=""))
+    for i in range(1,10):
+        print('')
+        for j in range(1,i+1):
+            print('%d*%d=%d ' %  (i,j,i*j),end="")
