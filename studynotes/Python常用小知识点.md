@@ -182,3 +182,20 @@
 
     # 给节点添加键值对
     config.set('test','name','daacheng')
+## 13、判断两个字符串的相似度（difflib）
+    import difflib
+
+    str1 = '广东省揭东县登岗镇洋滇村东磨区西门楼九号'
+    str2 = '广东省揭东甚登岗镇洋滇村东膺区西闫楼九号'
+    seq = difflib.SequenceMatcher(None, str1,str2)
+    ratio = seq.ratio()
+    print('相似度: ', ratio)
+## 14、set()集合
+#### remove()删除元素，元素不存在会报错
+    a=set('abcdefghijk')
+    a.remove('a')
+    a  # {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'}
+#### discard()删除元素，元素不存在不会报错
+    a=set('abcdefghijk')
+    a.discard('m')
+    a  # {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'}
