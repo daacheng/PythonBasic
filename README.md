@@ -3,7 +3,7 @@
 ## 1、studynote文件夹
 1.[日常学习笔记总结](https://github.com/daacheng/PythonBasic/tree/master/studynotes)
 
-1.0. [Python常用小知识点](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%B8%B8%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9.md)
+1.0. [Python常用小知识点（更新……）](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%B8%B8%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9(%E6%9B%B4%E6%96%B0ing%E2%80%A6%E2%80%A6).md)
 
 1.1. [Python基础总结一](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%80.md)
 
