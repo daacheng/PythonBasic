@@ -47,7 +47,7 @@ _XXX  不能用from module import * 导入
 
 __XXX  类中的私有变量名，只有本类能访问，子类也不能访问。
 
-    __XXX__  系统定义的名字,用来区别其他用户自定义的命名  Class1.__doc__ # 类型帮助信息 'Class1 Doc.' 
+__XXX__  系统定义的名字,用来区别其他用户自定义的命名  Class1.__doc__ # 类型帮助信息 'Class1 Doc.' 
     
     >>> Class1.__name__ # 类型名称 'Class1' 
     
@@ -66,22 +66,49 @@ __XXX  类中的私有变量名，只有本类能访问，子类也不能访问�
 
 “单下划线” 开始的成员变量叫做保护变量，意思是只有类对象和子类对象自己能访问到这些变量；单下划线开头（_foo）的代表不能直接访问的类属性，需通过类提供的接口进行访问，不能用“from xxx import *”而导入
 
+    class Person(object):
+
+        def __init__(self,name,age):
+            self.name = name
+            self._age = age
+
+        def play(self):
+            print(self.name,self._age)
+
+    def main():
+        p = Person('王大锤',12)
+        p.play()
+        """
+        '单下划线'的保护变量
+        大多数Python程序员会遵循一种命名惯例就是让属性名以单下划线开头来表示属性是受保护的，
+        本类之外的代码在访问这样的属性时应该要保持慎重。
+        这种做法并不是语法上的规则，单下划线开头的属性和方法外界仍然是可以访问的，所以更多的时候它是一种暗示或隐喻
+        """
+        print(p._age)
+
+    if __name__ == '__main__':
+        main()
+
 “双下划线” 开始的是私有成员，意思是只有类对象自己能访问，连子类对象也不能访问到这个数据。通过对象名._类名__xxx这样的方式可以访问.
 
-        class A:
-            def _method1(self): # 不能通过from module import * 导入，只能通过类对象，或者子类对象访问。
-                print("A")
-            def __method2():#私有方法 ，只有A类能访问，子类也不能访问 通过对象._A__method2()访问
-                pass
-        class B(A):
-            def __method2():
-                pass
-        #dir(A)  #['_A__method2','_method1']
-        #dir(B)#['_A__method2', '_B__method2','_method1']
-        a=A()
-        b=B()
-        a._method1()#A
-        b._method1()#A
+    class Person(object):
+
+        def __init__(self,name,age):
+            self.name = name
+            self.__age = age
+
+        def play(self):
+            print(self.name,self.__age)
+
+    def main():
+        p = Person('王大锤',12)
+        p.play()
+        # ‘双下划綫’的私有变量，只能通过  对象名._类名__XXX才能访问，只有类自己能访问
+        print(p._Person__age)
+
+    if __name__ == '__main__':
+        main()
+
 ## 14. python中格式化字符串
 %d 整数
 
