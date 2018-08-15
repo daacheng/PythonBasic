@@ -243,3 +243,36 @@
 
     if __name__ == '__main__':
         main()
+#### 私有变量可以通过装饰器@property访问
+
+    class Person(object):
+
+        def __init__(self,name,age):
+            self.name = name
+            self.__age = age
+
+        @property
+        def age(self):
+            # 相当于get_age()
+            return self.__age
+
+        @age.setter
+        def age(self,age):
+            # 相当于set_age()
+            self.__age = age
+
+        def play(self):
+            print(self.name,self.__age)
+
+    def main():
+        p = Person('王大锤',12)
+        p.play()
+        print(p.age)
+        p.age = 13
+        # ‘双下划綫’的私有变量，只能通过  对象名._类名__XXX才能访问，只有类自己能访问
+        print(p._Person__age)
+        # 加了装饰器之后，私有变量可以直接通过对象名访问
+        print(p.age)
+
+    if __name__ == '__main__':
+        main()
