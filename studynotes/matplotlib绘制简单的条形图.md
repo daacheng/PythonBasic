@@ -8,6 +8,7 @@
     GDP = [9386.7, 12406.5, 13908.6, 9000.94]
 
     # 绘图
+    # 第一个参数表示：每个柱x轴左边界，第二个参数表示：每个柱y轴下边界
     plt.bar(range(4),GDP, align='center', color='steelblue',alpha=0.8)
     plt.title('GDP')
     # 轴标签
