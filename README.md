@@ -84,3 +84,5 @@
 4.5. [pandas时间序列与删除数据](https://github.com/daacheng/PythonBasic/blob/master/studynotes/pandas--%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%92%8C%E6%95%B0%E6%8D%AE%E5%88%A0%E9%99%A4.md)
 
 4.6. [matplotlib绘制简单条形图](https://github.com/daacheng/PythonBasic/blob/master/studynotes/matplotlib%E7%BB%98%E5%88%B6%E7%AE%80%E5%8D%95%E7%9A%84%E6%9D%A1%E5%BD%A2%E5%9B%BE.md)
+
+4.7. [matplotlib绘制饼状图](https://github.com/daacheng/PythonBasic/blob/master/studynotes/matplotlib%E7%BB%98%E5%88%B6%E9%A5%BC%E7%8A%B6%E5%9B%BE.md)
