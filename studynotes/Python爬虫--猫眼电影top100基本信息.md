@@ -44,6 +44,8 @@
             movies.append(movies_dict)
 
     df = DataFrame(movies)
+    # 数据写成 csv文件
     df.to_csv('movies_maoyan.csv')
+    df
     
-    
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/maoyan.png) 
