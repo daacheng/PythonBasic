@@ -140,3 +140,19 @@ proxies = {
   "https": "http://41.118.132.69:4433"
 }
 r = requests.post("http://httpbin.org/post", proxies=proxies)</code></pre>
+## 九、Prepared Request
+构造requests.Request对象，将Request对象作为参数传入requests.Session()对象的prepare_request()方法中，最后通过Session对象的send()方法发送请求。
+
+    import requests
+    from requests import Request
+    url = 'http://httpbin.org/get'
+    # 创建Session对象
+    s = requests.Session()
+    # 构造Request对象
+    req = Request('GET',url)
+    # 将Request对象转换成 PreparedRequest对象
+    prepped = s.prepare_request(req)
+    # 利用Session对象的send()方法，发送PreparedRequest对象
+    res = s.send(prepped)
+    print(res.text)
+    print(type(prepped))
