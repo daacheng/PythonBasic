@@ -34,6 +34,8 @@
 1.14. [Python实现TFTP文件传输](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%AE%9E%E7%8E%B0TFTP%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93.md)
 
 1.15. [Python之多进程](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%A4%9A%E8%BF%9B%E7%A8%8B.md)
+
+1.16. [Python如何在两个py文件中使用同一个变量](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%A6%82%E4%BD%95%E5%9C%A8%E4%B8%A4%E4%B8%AApy%E6%96%87%E4%BB%B6%E4%B8%AD%E5%85%B1%E4%BA%AB%E5%90%8C%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F.md)
 ## 2、spider文件夹为爬虫练习代码
 2.[爬虫练习代码](https://github.com/daacheng/PythonBasic/tree/master/spider)
 
