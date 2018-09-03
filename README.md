@@ -45,23 +45,25 @@
 
 2.2. [Python爬虫之BeautifulSoup.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB%E4%B9%8BBeautifulSoup.md)
 
-2.3. [Python爬虫--猫眼电影top100基本信息(简单)](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E7%8C%AB%E7%9C%BC%E7%94%B5%E5%BD%B1top100%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF.md)
+2.3. [Python爬虫--xpath解析](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--xpath%E8%A7%A3%E6%9E%90.md)
 
-2.4. [Python爬虫--头条街拍图片爬取保存(简单)](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E5%A4%B4%E6%9D%A1%E8%A1%97%E6%8B%8D%E5%9B%BE%E7%89%87%E7%88%AC%E5%8F%96.md)
+2.4. [Python爬虫--猫眼电影top100基本信息(简单)](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E7%8C%AB%E7%9C%BC%E7%94%B5%E5%BD%B1top100%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF.md)
 
-2.5. [Python爬虫--爬取网站验证码(简单)](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E7%88%AC%E5%8F%96%E7%BD%91%E7%AB%99%E9%AA%8C%E8%AF%81%E7%A0%81.md)
+2.5. [Python爬虫--头条街拍图片爬取保存(简单)](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E5%A4%B4%E6%9D%A1%E8%A1%97%E6%8B%8D%E5%9B%BE%E7%89%87%E7%88%AC%E5%8F%96.md)
 
-2.6. [Python通过关键词爬取今日头条](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForTouTiaoNews.py)
+2.6. [Python爬虫--爬取网站验证码(简单)](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E7%88%AC%E5%8F%96%E7%BD%91%E7%AB%99%E9%AA%8C%E8%AF%81%E7%A0%81.md)
 
-2.7. [Python爬取百度贴吧](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForTiebaPic.py)
+2.7. [Python通过关键词爬取今日头条](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForTouTiaoNews.py)
 
-2.8. [Python爬取新浪新闻](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForNewsSina.py)
+2.8. [Python爬取百度贴吧](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForTiebaPic.py)
 
-2.9. [Python爬取拉钩往招聘信息](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForLaGou.py)
+2.9. [Python爬取新浪新闻](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForNewsSina.py)
 
-2.10. [Python爬取豆瓣电影评论](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForDBComment.py)
+2.10. [Python爬取拉钩往招聘信息](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForLaGou.py)
 
-2.11. [Python爬取淘宝商品信息将数据保存至MongoDB](https://github.com/daacheng/PythonBasic/blob/master/spider/PythonForTaoBao.py)
+2.11. [Python爬取豆瓣电影评论](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForDBComment.py)
+
+2.12. [Python爬取淘宝商品信息将数据保存至MongoDB](https://github.com/daacheng/PythonBasic/blob/master/spider/PythonForTaoBao.py)
 
 ## 3、算法图解
 3.1. [二分查找、选择排序、递归](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E3%80%81%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E3%80%81%E9%80%92%E5%BD%92.md)
