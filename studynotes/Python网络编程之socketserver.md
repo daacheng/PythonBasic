@@ -1,17 +1,22 @@
 ## 服务器端(TCP)
+1. 创建socket对象，绑定IP和端口进行监控（socketserver对象对socket对象进行了封装，不需要再bind() listen() accept()）
+2. 服务器端阻塞,直到有客户端连接进来
+3. 客户端连接进来后，开始进行通信。
+
 
         import socketserver
 
         #创建一个socketserver类继承socketserver模块下的BaseRequestHandler类
         class MyServer(socketserver.BaseRequestHandler):
             def handle(self):
-                #重写父类中的handle方法，主要实现服务端的逻辑代码，，不用写band() listen() accept()
+                # 第二部：服务器端阻塞，等待客户端连接
+                #重写父类中的handle方法，主要实现服务端的逻辑代码，，不用写bind() listen() accept()
                 while True:
                     conn = self.request
                     addr = self.client_address
                     print(conn)  #<socket.socket fd=864, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 9999), raddr=('127.0.0.1', 50565)>
                     print(addr)  #('127.0.0.1', 50565)
-
+                    # 第三步：服务器端与客户端进行通信
                     #接收到来自客户端的数据
                     recv_data = str(conn.recv(1024),encoding = 'utf8')
                     print(recv_data)
@@ -25,16 +30,21 @@
 
                 conn.close()
         if __name__ == '__main__':
+            # 第一步
             #实例化server对象，传入本机ip，以及监听的端口号，还有新建的继承socketserver模块下的BaseRequestHandler类
             server = socketserver.ThreadingTCPServer(('127.0.0.1',9999),MyServer)  
             #激活服务端
             server.serve_forever()
 
 ## 客户端(TCP)
+1. 创建socket对象
+2. 指定IP和端口，建立连接
+3. 连接成功后，开始通信。
 
         import socket
 
         #创建一个socket对象，指定要连接的目标服务器 ip及端口号
+        # 第一步
         s =  socket.socket()
         s.connect(('127.0.0.1',9999))
         while True:
@@ -70,7 +80,8 @@
             server.serve_forever()
 
 ## 客户端(UDP)
-
+1. 创建socket对象
+2. 直接往指定IP和端口发送数据
         import socket
         import time
         s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
