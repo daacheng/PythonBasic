@@ -82,6 +82,7 @@
 ## 客户端(UDP)
 1. 创建socket对象
 2. 直接往指定IP和端口发送数据
+
         import socket
         import time
         s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
