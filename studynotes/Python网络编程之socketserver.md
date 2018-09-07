@@ -1,4 +1,4 @@
-## 服务器端
+## 服务器端(TCP)
 
         import socketserver
 
@@ -30,7 +30,7 @@
             #激活服务端
             server.serve_forever()
 
-## 客户端
+## 客户端(TCP)
 
         import socket
 
@@ -48,4 +48,38 @@
             #客户端接收来自服务器端发送的数据
             recv_data =  str(s.recv(1024),encoding='utf8')
             print(recv_data)
+        s.close()
+
+## 服务端(UDP)
+
+        import socketserver
+        import time
+        class MyServer(socketserver.BaseRequestHandler):
+            def handle(self):
+                while True:
+                    data = self.request[0].strip()
+                    socket = self.request[1]
+                    print('客户端IP：',self.client_address[0])    # 192.168.141.1
+                    socket.sendto(data, self.client_address)
+                    time.sleep(2)
+
+                conn.close()
+        if __name__ == '__main__':
+            server = socketserver.ThreadingUDPServer(('0.0.0.0',9999),MyServer)
+            print('servering……')
+            server.serve_forever()
+
+## 客户端(UDP)
+
+        import socket
+        import time
+        s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+        while True:
+            send_data = '111111111111111111111111111111111111'
+            print(send_data)
+            s.sendto(bytes(send_data,encoding = 'utf8'),('127.0.0.1',9999))    
+            #客户端接收来自服务器端发送的数据
+            recv_data =  str(s.recv(1024),encoding='utf8')
+            print(recv_data)  
+            time.sleep(2)
         s.close()
