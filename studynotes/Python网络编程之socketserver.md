@@ -9,7 +9,7 @@
         #创建一个socketserver类继承socketserver模块下的BaseRequestHandler类
         class MyServer(socketserver.BaseRequestHandler):
             def handle(self):
-                # 第二部：服务器端阻塞，等待客户端连接
+                # 第二步：服务器端阻塞，等待客户端连接
                 #重写父类中的handle方法，主要实现服务端的逻辑代码，，不用写bind() listen() accept()
                 while True:
                     conn = self.request
@@ -46,11 +46,13 @@
         #创建一个socket对象，指定要连接的目标服务器 ip及端口号
         # 第一步
         s =  socket.socket()
+        # 第二步
         s.connect(('127.0.0.1',9999))
         while True:
 
             #连接成功后向服务器端发送数据 
             send_data = input('请输入需要发送的内容')
+            # 第三步
             s.sendall(bytes(send_data,encoding = 'utf8'))
             if send_data=='bye':
                 break
