@@ -124,3 +124,20 @@
     print(in_put.tag_name)   # input
     print(btn.tag_name)   # button
     browser.close()
+
+### expected_conditions常用等待条件
+
+    # 等待节点加载出来，传入的参数是元组
+    presence_of_element_located
+    
+    # 等待所有节点加载出来
+    presence_of_all_elements_located
+    
+    # 等待某个节点文本包含某个文字
+    text_to_be_present_in_element
+    
+    # 等待某个节点包含某个文字
+    text_to_be_present_in_element_value
+    
+    # 等待节点可被点击
+    element_to_be_clickable
