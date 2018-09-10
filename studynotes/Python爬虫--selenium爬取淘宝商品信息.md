@@ -15,3 +15,118 @@
 [selenium基础操作文档](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--selenium%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.md)
 
 [BeautifulSoup基础操作文档](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB%E4%B9%8BBeautifulSoup.md)
+
+## 代码
+
+    from selenium import webdriver
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support import expected_conditions as EC
+    from bs4 import BeautifulSoup
+    from pymongo import MongoClient
+    import time
+
+    """
+        Python连接MongoDB数据库
+    """
+    client = MongoClient('localhost',27017)
+    taobao = client.taobao
+    collection_product = taobao.products
+
+
+    """
+        插入数据到MongoDB数据库
+    """
+    def save_product_to_mongodb(product):
+        try:
+            if collection_product.insert_one(product):
+                print('记录成功！')
+        except Exception:
+            print('记录失败！')
+
+
+    """
+        创建浏览器对象，这里用的是谷歌浏览器无界面模式，不用每一次请求都弹出浏览器
+    """
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless')
+    browser = webdriver.Chrome(chrome_options = chrome_options)
+    wait = WebDriverWait(browser, 15)
+
+    # 要爬取的url
+    url = 'https://s.taobao.com/search?q=' + '小米mix'
+
+    products = []
+
+    # 爬取前9页的内容
+    for i in range(1,10):
+        try:
+
+            """
+                这段功能主要是，操作浏览器去执行页面跳转功能
+            """
+            # 发起请求
+            browser.get(url)
+            # 等待页码输入框加载出来，获取页码输入框
+            page_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,'.form .J_Input')))
+            # 等待提交按钮加载出来，获取按钮
+            page_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR,'.form .J_Submit')))
+            # 清空页码输入框
+            page_input.clear()
+            # 输入指定要跳转的页数
+            page_input.send_keys(str(i))
+            # 点击确定，跳转
+            page_button.click()
+
+            """
+                页面跳转之后，获取页面html资源，用BeautifulSoup去解析，获取相关的商品信息(商品价格，销量，名称，店名，地址)，存入数据库。
+            """
+            # 等待商品列表加载出来
+            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,'.m-itemlist .items .item')))
+            html = browser.page_source
+            soup = BeautifulSoup(html,'html.parser')
+            items = soup.select('.m-itemlist .items .item')
+            for item in items:
+                """
+                    BeautifulSoup解析html，获取商品信息
+                """
+                price_list = item.select('strong')
+                price = price_list[0].string if len(price_list)>0 else ''
+                # 销量
+                volume_list = item.select('.deal-cnt')
+                sales_volume = volume_list[0].string if len(volume_list)>0 else ''
+                # 商品标题
+                title_list = item.select('.title .J_ClickStat')
+                title = title_list[0].get_text().replace('\n','').replace(' ','') if len(title_list)>0 else ''
+                # 店铺名称
+                shop_name_list = item.select('.shop .shopname')
+                shop_name = shop_name_list[0].get_text().replace('\n','').replace(' ','') if len(shop_name_list)>0 else ''
+                # 地点
+                location_list = item.select('.location')
+                location = location_list[0].string if len(location_list)>0 else ''
+
+
+                """
+                    将爬取到的商品信息，用字典存储，然后存入MongoDB数据库
+                """
+                product = {
+                    'price':price,
+                    'sales_volume':sales_volume,
+                    'title':title,
+                    'shopname':shop_name,
+                    'location':location
+                }
+                products.append(product)
+                save_product_to_mongodb(product)
+        except Exception:
+            print('连接超时，停5秒！')
+            time.sleep(5)
+
+    print(products)
+    # 关闭浏览器
+    browser.close()
+
+## 结果
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/taobaores1.png)
+
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/taobaores2.png)
