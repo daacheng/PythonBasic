@@ -55,6 +55,8 @@
 
 2.7. [Python爬虫--selenium基础操作](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--selenium%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.md)
 
+2.8. [Python爬虫--selenium爬取淘宝商品信息](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--selenium%E7%88%AC%E5%8F%96%E6%B7%98%E5%AE%9D%E5%95%86%E5%93%81%E4%BF%A1%E6%81%AF.md)
+
 2.8. [Python通过关键词爬取今日头条](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForTouTiaoNews.py)
 
 2.9. [Python爬取百度贴吧](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForTiebaPic.py)
