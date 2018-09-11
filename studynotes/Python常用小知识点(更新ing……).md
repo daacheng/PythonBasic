@@ -37,6 +37,14 @@
     data = '7c900030000001780000000030303035'
     bytes().fromhex(data)
     b'|\x90\x000\x00\x00\x01x\x00\x00\x00\x000005'
+    
+## 字节转十六进制字符串
+
+    def bytes_to_hex_str(bytes_data):
+        if bytes_data:
+            return ''.join(['%02x' % b for b in bytes_data])
+        else:
+            return ''
 
 ## 3.struct用法
 
