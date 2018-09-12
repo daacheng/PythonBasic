@@ -45,6 +45,9 @@
             return ''.join(['%02x' % b for b in bytes_data])
         else:
             return ''
+## 字节转换成十六进制字节
+
+    hex(ord(b'K'))  # 0x4b     K是ascii中可见字符，所以编辑器在碰到0x4b的时候就把0x4b转换成了b'K'
 
 ## 3.struct用法
 
