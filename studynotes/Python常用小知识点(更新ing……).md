@@ -153,6 +153,10 @@
 ##### isdigit() 判断字符串是否只有数字组成
     'a456'.isdigit()  # False
 
+##### 字符串平均分
+    import re
+    '-'.join(re.findall(r'.{2}', 'F0B42998CE34'))  # 'F0-B4-29-98-CE-34'
+
 ## 11、print不换行(print('aaa',end=""))
     for i in range(1,10):
         print('')
