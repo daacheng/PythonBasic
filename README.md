@@ -59,6 +59,8 @@
 
 2.9. [Python爬虫--武汉15个区90000条二手房数据](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E6%AD%A6%E6%B1%8915%E4%B8%AA%E5%9C%B0%E5%8C%BA9%E4%B8%87%E6%9D%A1%E4%BA%8C%E6%89%8B%E6%88%BF%E6%95%B0%E6%8D%AE.md)
 
+2.10. [Python爬虫--设置代理](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86.md)
+
 2.8. [Python通过关键词爬取今日头条](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForTouTiaoNews.py)
 
 2.9. [Python爬取百度贴吧](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForTiebaPic.py)
