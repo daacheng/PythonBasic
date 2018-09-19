@@ -108,7 +108,7 @@
         sheet.put_cell(1,3,xlrd.XL_CELL_TEXT,'new cell',None)
         sheet.row_values(1)         #[1.0, 100.0, 200.0, 'new cell']
 
-### 写Excel
+### 写Excel(.xls)
 
         import xlwt
         # 创建excel工作表
@@ -153,3 +153,11 @@
 
 
         workbook.save('OK.xls')
+### 写Excel(.xlsx)
+
+        from openpyxl import Workbook
+        wb = Workbook()    # 创建文件对象
+        ws = wb.active     # 获取第一个sheet
+        ws.append(['MAC','IMSI','IMEI','微信','QQ','淘宝','京东','滴滴','美团','新浪微博','腾讯微博','旺信','米聊','YY语音'])
+        ws.append([11111,'2','3'])
+        wb.save("OK.xlsx")
