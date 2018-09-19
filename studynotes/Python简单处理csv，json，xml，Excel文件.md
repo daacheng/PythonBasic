@@ -111,10 +111,45 @@
 ### 写Excel
 
         import xlwt
-        #写excel文件
-        book = xlwt.Workbook()
-        sheet1 = book.add_sheet('sheet1')
-        for x in range(3):
-            for y in range(4):
-                sheet1.write(x,y,'aaa')
-        book.save('aaa.xlsx')
+        # 创建excel工作表
+        workbook = xlwt.Workbook(encoding='utf-8')
+        worksheet = workbook.add_sheet('sheet1')
+        # 设置表头 (第一个参数为行数，第二个参数为单元格位置，第三个参数为单元格值)
+        worksheet.write(0, 0, label='MAC')
+        worksheet.write(0, 1, label='IMSI')
+        worksheet.write(0, 2, label='IMEI')
+        worksheet.write(0, 3, label='微信')
+        worksheet.write(0, 4, label='QQ')
+        worksheet.write(0, 5, label='淘宝')
+        worksheet.write(0, 6, label='京东')
+        worksheet.write(0, 7, label='滴滴')
+        worksheet.write(0, 8, label='美团')
+        worksheet.write(0, 9, label='新浪微博')
+        worksheet.write(0, 10, label='腾讯微博')
+        worksheet.write(0, 11, label='旺信')
+        worksheet.write(0, 12, label='米聊')
+        worksheet.write(0, 13, label='YY语音')
+
+        row_num = 1
+
+        res = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',]
+        for i in res:
+            # 设置值 (第一个参数为行数，第二个参数为单元格位置，第三个参数为单元格值)
+            worksheet.write(row_num, 0, '1111')
+            worksheet.write(row_num, 1, i)
+            worksheet.write(row_num, 2, i)
+            worksheet.write(row_num, 3, i)
+            worksheet.write(row_num, 4, i)
+            worksheet.write(row_num, 5, i)
+            worksheet.write(row_num, 6, i)
+            worksheet.write(row_num, 7, i)
+            worksheet.write(row_num, 8, i)
+            worksheet.write(row_num, 9, i)
+            worksheet.write(row_num, 10, i)
+            worksheet.write(row_num, 11, i)
+            worksheet.write(row_num, 12, i)
+            worksheet.write(row_num, 13, i)
+            row_num += 1
+
+
+        workbook.save('OK.xls')
