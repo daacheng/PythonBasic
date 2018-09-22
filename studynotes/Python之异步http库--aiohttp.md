@@ -4,6 +4,7 @@
 
 这里主要介绍的是aiohttp客户端的操作
 ## 一、发送http请求
+这里面的用法跟requests库很相似。
 ### get请求
 
     import aiohttp
@@ -44,6 +45,15 @@
     loop = asyncio.get_event_loop()
     task = loop.create_task(main())
     loop.run_until_complete(task)
+### 自定义请求头
+
+    headers = {'content-type': 'image/gif'}
+    session.post(url, data=data, headers=headers)
+### cookie
+
+    url = 'http://httpbin.org/cookies'
+    cookies = {'cookies_are': 'working'}
+    async with ClientSession(cookies=cookies) as session:
 ## 二、传递参数
 
     import aiohttp
