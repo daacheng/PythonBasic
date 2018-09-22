@@ -66,6 +66,8 @@
 
 2.10. [Python爬虫--设置代理](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86.md)
 
+2.11. [Python爬虫--代理池维护系统代码](https://github.com/daacheng/PythonBasic/tree/master/agent_pool)
+
 2.8. [Python通过关键词爬取今日头条](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForTouTiaoNews.py)
 
 2.9. [Python爬取百度贴吧](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForTiebaPic.py)
