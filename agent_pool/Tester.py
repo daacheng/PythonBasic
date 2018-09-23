@@ -9,7 +9,7 @@ import time
 """
 
 # 用来测试代理是否可用的地址
-test_url = 'https://www.baidu.com'
+test_url = 'http://www.baidu.com'
 
 
 class Tester(object):
@@ -24,6 +24,7 @@ class Tester(object):
         """
             检测代理的可用性
         """
+        # conn = aiohttp.TCPConnector(verify_ssl=False)
         async with aiohttp.ClientSession() as session:
             try:
                 if isinstance(proxy, bytes):
@@ -37,10 +38,10 @@ class Tester(object):
                     else:
                         # 代理不可用，就降低其优先级
                         self.redisdb.decrease(proxy)
-                        print('代理有问题 : %s' % proxy)
+                        print('代理不可用 : %s' % proxy)
             except Exception as e:
                 self.redisdb.decrease(proxy)
-                print('代理有问题 : %s (%s)' % (proxy, e))
+                print('代理不可用 : %s (%s)' % (proxy, e))
 
     def run(self):
         print('启动检测模块......')

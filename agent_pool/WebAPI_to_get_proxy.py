@@ -1,4 +1,4 @@
-from flask import Flask,g
+from flask import Flask, g
 import RedisClient
 
 """
@@ -33,6 +33,13 @@ def count():
     # 查询代理池中代理的个数
     redisdb = get()
     return str(redisdb.get_proxy_count())
+
+
+@app.route('/all')
+def get_all():
+    # 查询代理池中代理的个数
+    redisdb = get()
+    return str(redisdb.get_all_proxy())
 
 
 if __name__ == '__main__':

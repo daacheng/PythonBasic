@@ -1,7 +1,7 @@
 import requests
 from pyquery import PyQuery as pq
 """
-    代理池获取模块，爬取代理网站的免费代理并返回
+    爬取代理网站的免费代理并返回
 """
 
 
@@ -16,7 +16,7 @@ class Crawler(object):
             爬取西刺代理
         """
         proxy_list = []
-        for i in range(1, 6):
+        for i in range(1, 20):
 
             url = 'http://www.xicidaili.com/nn/' + str(i)
 
@@ -33,8 +33,6 @@ class Crawler(object):
             for odd in doc('.odd').items():
                 info_list = odd.find('td').text().split(' ')
                 if len(info_list) == 11:
-                    # print(info_list)
-                    proxy = info_list[5].lower() + '://' + info_list[1] + ':' + info_list[2]
+                    proxy = info_list[5].lower().strip() + '://' + info_list[1].strip() + ':' + info_list[2].strip()
                     proxy_list.append(proxy)
-
         return proxy_list

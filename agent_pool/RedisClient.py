@@ -15,7 +15,7 @@ MAX_SCORE = 100
 
 
 """
-    代理池存储模块，利用redis的Sorted Set结构, 从redis中添加、查询、获取代理,以及修改代理的优先级
+    利用redis的Sorted Set结构, 从redis中添加、查询、获取代理,以及修改代理的优先级
 """
 
 
@@ -41,7 +41,7 @@ class RedisClient(object):
         # 返回key为REDIS_KEY的zset结构中score在给定区间(100,100)的元素
         res = self.redisdb.zrangebyscore(REDIS_KEY, MAX_SCORE, MAX_SCORE)
         if len(res):
-            proxy = random.choies(res)
+            proxy = random.choice(res)
         else:
             if self.redisdb.zrevrange(REDIS_KEY, 0, 10):
                 proxy = random.choice(self.redisdb.zrevrange(REDIS_KEY, 0, 10))
