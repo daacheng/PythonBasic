@@ -12,6 +12,7 @@
 3. 通过flask，对外提供获取代理IP的接口，如果想要使用代理池中的代理IP，只需要访问我们提供的接口即可。
 
 ## 代理池系统具体实现思路
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/proxypool.png)
 ### 1、存储模块
 存储模块：主要实现的功能是，去一些免费代理网站爬取大量的代理IP，并存储至redis数据库中。redis的Sorted Set结构是一个有序集合，我们会对每一个爬取到的代理IP
 设置一个初始化的优先级10，Sorted Set也是通过这个优先级来进行排序的。</br>
