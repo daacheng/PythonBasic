@@ -3,13 +3,13 @@ import requests
 import redis
 import pickle
 from pyquery import PyQuery as pq
-
+import traceback
 
 class WeixinRequests(Request):
     """
         构造一个请求对象
     """
-    def __init__(self, callback, method=None, url=None, headers=None, need_proxy=False, failtime=None, timeout=10):
+    def __init__(self, callback, method='GET', url=None, headers=None, need_proxy=False, failtime=0, timeout=10):
         Request.__init__(self, method, url, headers)
         self.callback = callback
         self.need_proxy = need_proxy
@@ -41,7 +41,7 @@ class RedisQueue(object):
             如果redis中不为空，就取出一个
         """
         if self.redisdb.llen(redis_key):
-            return self.redisdb.lpop(redis_key)
+            return pickle.loads(self.redisdb.lpop(redis_key))
         else:
             return False
 
@@ -83,8 +83,9 @@ class SpiderWeixin(object):
             初始化操作
         """
         # 为每一个请求都设置请求头
-        self.session.header.update(self.headers)
+        self.session.headers.update(self.headers)
         start_url = self.url + '?query=' + self.keyword + '&type=2'
+        print(start_url)
         weixin_req = WeixinRequests(url=start_url, callback=self.parse_index, need_proxy=True)
         self.queue.add(weixin_req)
 
@@ -140,11 +141,13 @@ class SpiderWeixin(object):
                         proxies = {
                             'https': proxy
                         }
+                    print(proxy)
                     prepare = self.session.prepare_request(weixin_req)
                     res = self.session.send(prepare, proxies=proxies)
                     return res
                 return self.session.send(self.session.prepare_request(weixin_req))
         except Exception as e:
+            # print(traceback.format_exc())
             print('执行请求出错了！！ %s' % e)
             return False
 
@@ -152,7 +155,7 @@ class SpiderWeixin(object):
         """
             当请求发生错误时，就记录一次错误，重新将请求放入对列，等待下次重新发起请求，错误次数达到一定次数，就不再加入对列
         """
-        weixin_req.failtime += 1
+        weixin_req.failtime = weixin_req.failtime + 1
         print('Request Failed("次数：%s", "url": %s")' % (weixin_req.failtime, weixin_req.url))
         if weixin_req.failtime < 10:
             self.queue.add(weixin_req)
