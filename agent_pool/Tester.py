@@ -24,13 +24,14 @@ class Tester(object):
         """
             检测代理的可用性
         """
-        # conn = aiohttp.TCPConnector(verify_ssl=False)
-        async with aiohttp.ClientSession() as session:
+        conn = aiohttp.TCPConnector(verify_ssl=False)
+        async with aiohttp.ClientSession(connector=conn) as session:
             try:
                 if isinstance(proxy, bytes):
                     proxy = proxy.decode('utf-8')
-                print('正在检测 : %s' % proxy)
-                async with session.get(test_url, proxy=proxy, timeout=15) as res:
+                real_proxy = 'http://' + proxy
+                print('正在检测 : %s' % real_proxy)
+                async with session.get(test_url, proxy=real_proxy, timeout=15) as res:
                     if res.status == 200:
                         # 说明代理可用,将其优先级置为最大
                         self.redisdb.max(proxy)

@@ -9,9 +9,12 @@ class WeixinRequests(Request):
     """
         构造一个请求对象
     """
-    def __init__(self, callback, method='GET', url=None, headers=None, need_proxy=False, failtime=0, timeout=10):
-        Request.__init__(self, method, url, headers)
-        self.callback = callback
+    def __init__(self, url, call_back, method='GET', headers=None, need_proxy=False, failtime=0, timeout=10):
+        # Request.__init__(self, method, url, headers)
+        self.headers = headers
+        self.method = method
+        self.url = url
+        self.call_back = call_back
         self.need_proxy = need_proxy
         self.failtime = failtime
         self.timeout = timeout
@@ -57,7 +60,9 @@ class SpiderWeixin(object):
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
         'Accept-Encoding': 'gzip, deflate',
         'Accept-Language': 'zh-CN,zh;q=0.9',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36',
+        'Cookie': 'SUV=006B71D77139A84A5B5AE571AD5DA453; CXID=C8E5DA6273C95D22410632D4243944C9; SUID=4AA839713965860A5B626D580005DFD1; ABTEST=6|1537866610|v1; SNUID=6183125A2C2E5D8255231EE62CBD0949; IPLOC=CN4201; JSESSIONID=aaa3dqRqYyG42bbIkHHvw',
+        'Host': 'weixin.sogou.com'
     }
     session = requests.Session()
     queue = RedisQueue()
@@ -78,17 +83,6 @@ class SpiderWeixin(object):
             print('从代理池中获取代理IP出错了！！ %s' % e)
             return None
 
-    def start(self):
-        """
-            初始化操作
-        """
-        # 为每一个请求都设置请求头
-        self.session.headers.update(self.headers)
-        start_url = self.url + '?query=' + self.keyword + '&type=2'
-        print(start_url)
-        weixin_req = WeixinRequests(url=start_url, callback=self.parse_index, need_proxy=True)
-        self.queue.add(weixin_req)
-
     def parse_index(self, res):
         """
             解析每一页的所有的文章url链接
@@ -97,7 +91,7 @@ class SpiderWeixin(object):
         items = doc('.news-box .news-list li .txt-box h3 a').items()
         for item in items:
             text_url = item.attr('href')
-            weixin_req = WeixinRequests(url=text_url, callback=None, need_proxy=True)
+            weixin_req = WeixinRequests(url=text_url, callback=self.parse_detail, need_proxy=True)
             yield weixin_req
         # 获取下一页的url
         next = doc('#sogo_next').attr('href')
@@ -105,6 +99,17 @@ class SpiderWeixin(object):
             next_url = self.url + str(next)
             weixin_req = WeixinRequests(url=next_url, callback=self.parse_index, need_proxy=True)
             yield weixin_req
+
+    def start(self):
+        """
+            初始化操作
+        """
+        # 为每一个请求都设置请求头
+        # self.session.headers.update(self.headers)
+        start_url = self.url + '?query=' + self.keyword + '&type=2'
+        print(start_url)
+        weixin_req = WeixinRequests(start_url, call_back=self.parse_index, need_proxy=True, headers=self.headers)
+        self.queue.add(weixin_req)
 
     def parse_detail(self, res):
         """
@@ -131,23 +136,16 @@ class SpiderWeixin(object):
             if weixin_req.need_proxy:
                 proxy = self.get_proxy()
                 if proxy:
-                    # 协议类型
-                    protocol_type = proxy.split(':')[0]
-                    if protocol_type == 'http':
-                        proxies = {
-                            'http': proxy
-                        }
-                    else:
-                        proxies = {
-                            'https': proxy
-                        }
-                    print(proxy)
+                    proxies = {
+                        'http': 'http://' + proxy
+                    }
                     prepare = self.session.prepare_request(weixin_req)
                     res = self.session.send(prepare, proxies=proxies)
+                    # print(res.text)
                     return res
                 return self.session.send(self.session.prepare_request(weixin_req))
         except Exception as e:
-            # print(traceback.format_exc())
+            print(traceback.format_exc())
             print('执行请求出错了！！ %s' % e)
             return False
 
@@ -167,9 +165,9 @@ class SpiderWeixin(object):
         while not self.queue.is_empty():
             weixin_req = self.queue.pop()
             # 回调函数
-            callback_func = weixin_req.callback
+            callback_func = weixin_req.call_back
             res = self.excute_request(weixin_req)
-            if res and res.status_code != 200:
+            if res and res.status_code == 200:
                 results = list(callback_func(res))
                 for result in results:
                     print('请求结果, ',result)
