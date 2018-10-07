@@ -14,35 +14,25 @@
 
 1.4. [Python简单处理csv，json，xml，Excel文件.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%AE%80%E5%8D%95%E5%A4%84%E7%90%86csv%EF%BC%8Cjson%EF%BC%8Cxml%EF%BC%8CExcel%E6%96%87%E4%BB%B6.md)
 
-1.5. [《图解HTTP》—http首部字段总结.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E5%9B%BE%E8%A7%A3HTTP%E3%80%8B%E2%80%94http%E9%A6%96%E9%83%A8%E5%AD%97%E6%AE%B5%E6%80%BB%E7%BB%93.md)
+1.5. [Python十进制、十六进制、字符串、字节串之间转换](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%8D%81%E8%BF%9B%E5%88%B6%E3%80%81%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E3%80%81%E5%AD%97%E8%8A%82%E4%B8%B2%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2.md)
 
-1.6. [《图解HTTP》学习—状态码、网关、代理、隧道.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E5%9B%BE%E8%A7%A3HTTP%E3%80%8B%E5%AD%A6%E4%B9%A0%E2%80%94%E7%8A%B6%E6%80%81%E7%A0%81%E3%80%81%E7%BD%91%E5%85%B3%E3%80%81%E4%BB%A3%E7%90%86%E3%80%81%E9%9A%A7%E9%81%93.md)
+1.6. [Python网络编程之socketserver](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%B9%8Bsocketserver.md)
 
-1.7. [《图解HTTP》学习笔记之协议.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E5%9B%BE%E8%A7%A3HTTP%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%8D%8F%E8%AE%AE.md)
+1.7. [Python代码之pythonic几种写法](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E4%BB%A3%E7%A0%81pythonic%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95.md)
 
-1.8. [《深入浅出统计学》笔记上.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%BB%9F%E8%AE%A1%E5%AD%A6%E3%80%8B%E7%AC%94%E8%AE%B0%E4%B8%8A.md)
+1.8. [Python之多线程](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%A4%9A%E7%BA%BF%E7%A8%8B.md)
 
-1.9. [《深入浅出统计学》笔记下.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%BB%9F%E8%AE%A1%E5%AD%A6%E3%80%8B%E7%AC%94%E8%AE%B0%E4%B8%8B.md)
+1.9. [Python实现TFTP文件传输](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%AE%9E%E7%8E%B0TFTP%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93.md)
 
-1.10. [Python十进制、十六进制、字符串、字节串之间转换](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%8D%81%E8%BF%9B%E5%88%B6%E3%80%81%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E3%80%81%E5%AD%97%E8%8A%82%E4%B8%B2%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2.md)
+1.10. [Python之多进程](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%A4%9A%E8%BF%9B%E7%A8%8B.md)
 
-1.11. [Python网络编程之socketserver](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%B9%8Bsocketserver.md)
+1.11. [Python如何在两个py文件中使用同一个变量](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%A6%82%E4%BD%95%E5%9C%A8%E4%B8%A4%E4%B8%AApy%E6%96%87%E4%BB%B6%E4%B8%AD%E5%85%B1%E4%BA%AB%E5%90%8C%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F.md)
 
-1.12. [Python代码之pythonic几种写法](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E4%BB%A3%E7%A0%81pythonic%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95.md)
+1.12. [Python进程、线程、协程概念理解](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%E6%A6%82%E5%BF%B5.md)
 
-1.13. [Python之多线程](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%A4%9A%E7%BA%BF%E7%A8%8B.md)
+1.13. [Python异步IO--asyncio用法](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%BC%82%E6%AD%A5IO--asyncio%E7%94%A8%E6%B3%95.md)
 
-1.14. [Python实现TFTP文件传输](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%AE%9E%E7%8E%B0TFTP%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93.md)
-
-1.15. [Python之多进程](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%A4%9A%E8%BF%9B%E7%A8%8B.md)
-
-1.16. [Python如何在两个py文件中使用同一个变量](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%A6%82%E4%BD%95%E5%9C%A8%E4%B8%A4%E4%B8%AApy%E6%96%87%E4%BB%B6%E4%B8%AD%E5%85%B1%E4%BA%AB%E5%90%8C%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F.md)
-
-1.17. [Python进程、线程、协程概念理解](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%E6%A6%82%E5%BF%B5.md)
-
-1.18. [Python异步IO--asyncio用法](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%BC%82%E6%AD%A5IO--asyncio%E7%94%A8%E6%B3%95.md)
-
-1.19. [Python异步HTTP--aiohttp用法](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%BC%82%E6%AD%A5http%E5%BA%93--aiohttp.md)
+1.14. [Python异步HTTP--aiohttp用法](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%BC%82%E6%AD%A5http%E5%BA%93--aiohttp.md)
 ## 2、spider文件夹为爬虫练习代码
 2.[爬虫练习代码](https://github.com/daacheng/PythonBasic/tree/master/spider)
 
@@ -69,18 +59,6 @@
 2.11. [Python爬虫--代理池维护系统代码](https://github.com/daacheng/PythonBasic/tree/master/agent_pool)
 
 2.12. [Python爬虫--代理池系统](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E4%BB%A3%E7%90%86%E6%B1%A0%E7%BB%B4%E6%8A%A4.md)
-
-2.8. [Python通过关键词爬取今日头条](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForTouTiaoNews.py)
-
-2.9. [Python爬取百度贴吧](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForTiebaPic.py)
-
-2.10. [Python爬取新浪新闻](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForNewsSina.py)
-
-2.11. [Python爬取拉钩往招聘信息](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForLaGou.py)
-
-2.12. [Python爬取豆瓣电影评论](https://github.com/daacheng/PythonBasic/blob/master/spider/pythonForDBComment.py)
-
-2.13. [Python爬取淘宝商品信息将数据保存至MongoDB](https://github.com/daacheng/PythonBasic/blob/master/spider/PythonForTaoBao.py)
 
 ## 3、算法图解
 3.1. [二分查找、选择排序、递归](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E3%80%81%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E3%80%81%E9%80%92%E5%BD%92.md)
@@ -117,3 +95,13 @@
 4.14. [matplotlib绘制饼状图](https://github.com/daacheng/PythonBasic/blob/master/studynotes/matplotlib%E7%BB%98%E5%88%B6%E9%A5%BC%E7%8A%B6%E5%9B%BE.md)
 
 ## 5、《图解TCP/IP》
+## 6、《图解HTTP》
+6.1. [《图解HTTP》学习笔记之协议.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E5%9B%BE%E8%A7%A3HTTP%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%8D%8F%E8%AE%AE.md)
+
+6.2. [《图解HTTP》学习—状态码、网关、代理、隧道.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E5%9B%BE%E8%A7%A3HTTP%E3%80%8B%E5%AD%A6%E4%B9%A0%E2%80%94%E7%8A%B6%E6%80%81%E7%A0%81%E3%80%81%E7%BD%91%E5%85%B3%E3%80%81%E4%BB%A3%E7%90%86%E3%80%81%E9%9A%A7%E9%81%93.md)
+
+6.3. [《图解HTTP》—http首部字段总结.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E5%9B%BE%E8%A7%A3HTTP%E3%80%8B%E2%80%94http%E9%A6%96%E9%83%A8%E5%AD%97%E6%AE%B5%E6%80%BB%E7%BB%93.md)
+## 7、《深入浅出统计学》
+7.1. [《深入浅出统计学》笔记上.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%BB%9F%E8%AE%A1%E5%AD%A6%E3%80%8B%E7%AC%94%E8%AE%B0%E4%B8%8A.md)
+
+7.2. [《深入浅出统计学》笔记下.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%BB%9F%E8%AE%A1%E5%AD%A6%E3%80%8B%E7%AC%94%E8%AE%B0%E4%B8%8B.md)
