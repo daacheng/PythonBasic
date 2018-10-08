@@ -9,12 +9,13 @@ class WeixinRequests(Request):
     """
         构造一个请求对象
     """
-    def __init__(self, url, call_back, method='GET', headers=None, need_proxy=False, failtime=0, timeout=10):
-        # Request.__init__(self, method, url, headers)
-        self.headers = headers
-        self.method = method
-        self.url = url
-        self.call_back = call_back
+
+    def __init__(self,
+                 method='GET', url=None, headers=None, files=None, data=None,
+                 params=None, auth=None, cookies=None, hooks=None, json=None,
+                 callback=None, need_proxy=False, failtime=0, timeout=10):
+        Request.__init__(self, method, url, headers)
+        self.callback = callback
         self.need_proxy = need_proxy
         self.failtime = failtime
         self.timeout = timeout
@@ -52,6 +53,44 @@ class RedisQueue(object):
         return self.redisdb.llen(redis_key) == 0
 
 
+def parse_index(res):
+    """
+        解析每一页的所有的文章url链接
+    """
+    url = 'http://weixin.sogou.com/weixin'
+    doc = pq(res.text)
+    items = doc('.news-box .news-list li .txt-box h3 a').items()
+    for item in items:
+        text_url = item.attr('href')
+        weixin_req = WeixinRequests(url=text_url, callback=parse_detail, need_proxy=True)
+        yield weixin_req
+    # 获取下一页的url
+    next = doc('#sogo_next').attr('href')
+    if next:
+        next_url = url + str(next)
+        weixin_req = WeixinRequests(url=next_url, callback=parse_index, need_proxy=True)
+        yield weixin_req
+
+
+def parse_detail(res):
+    """
+        解析详情页,获取每篇文章的详细信息
+    """
+
+    doc = pq(res.text)
+    title = doc('.rich_media_title').text()
+    content = doc('.rich_media_content').text()
+    date = doc('#publish_time').text()
+    author = doc('#js_name').text()
+    data = {
+        'title': title,
+        'content': content,
+        'date': date,
+        'author': author
+    }
+    yield data
+
+
 class SpiderWeixin(object):
     # url = 'http://weixin.sogou.com/weixin?query=Python&type=2'
     url = 'http://weixin.sogou.com/weixin'
@@ -83,22 +122,22 @@ class SpiderWeixin(object):
             print('从代理池中获取代理IP出错了！！ %s' % e)
             return None
 
-    def parse_index(self, res):
-        """
-            解析每一页的所有的文章url链接
-        """
-        doc = pq(res.text)
-        items = doc('.news-box .news-list li .txt-box h3 a').items()
-        for item in items:
-            text_url = item.attr('href')
-            weixin_req = WeixinRequests(url=text_url, callback=self.parse_detail, need_proxy=True)
-            yield weixin_req
-        # 获取下一页的url
-        next = doc('#sogo_next').attr('href')
-        if next:
-            next_url = self.url + str(next)
-            weixin_req = WeixinRequests(url=next_url, callback=self.parse_index, need_proxy=True)
-            yield weixin_req
+    # def parse_index(self, res):
+    #     """
+    #         解析每一页的所有的文章url链接
+    #     """
+    #     doc = pq(res.text)
+    #     items = doc('.news-box .news-list li .txt-box h3 a').items()
+    #     for item in items:
+    #         text_url = item.attr('href')
+    #         weixin_req = WeixinRequests(url=text_url, callback=self.parse_detail, need_proxy=True)
+    #         yield weixin_req
+    #     # 获取下一页的url
+    #     next = doc('#sogo_next').attr('href')
+    #     if next:
+    #         next_url = self.url + str(next)
+    #         weixin_req = WeixinRequests(url=next_url, callback=self.parse_index, need_proxy=True)
+    #         yield weixin_req
 
     def start(self):
         """
@@ -107,26 +146,25 @@ class SpiderWeixin(object):
         # 为每一个请求都设置请求头
         # self.session.headers.update(self.headers)
         start_url = self.url + '?query=' + self.keyword + '&type=2'
-        print(start_url)
-        weixin_req = WeixinRequests(start_url, call_back=self.parse_index, need_proxy=True, headers=self.headers)
+        weixin_req = WeixinRequests(url=start_url, callback=parse_index, need_proxy=True, headers=self.headers)
         self.queue.add(weixin_req)
 
-    def parse_detail(self, res):
-        """
-            解析详情页,获取每篇文章的详细信息
-        """
-        doc = pq(res.text)
-        title = doc('.rich_media_title').text()
-        content = doc('.rich_media_content').text()
-        date = doc('#publish_time').text()
-        author = doc('#js_name').text()
-        data = {
-            'title': title,
-            'content': content,
-            'date': date,
-            'author': author
-        }
-        yield data
+    # def parse_detail(self, res):
+    #     """
+    #         解析详情页,获取每篇文章的详细信息
+    #     """
+    #     doc = pq(res.text)
+    #     title = doc('.rich_media_title').text()
+    #     content = doc('.rich_media_content').text()
+    #     date = doc('#publish_time').text()
+    #     author = doc('#js_name').text()
+    #     data = {
+    #         'title': title,
+    #         'content': content,
+    #         'date': date,
+    #         'author': author
+    #     }
+    #     yield data
 
     def excute_request(self, weixin_req):
         """
@@ -165,6 +203,7 @@ class SpiderWeixin(object):
         while not self.queue.is_empty():
             weixin_req = self.queue.pop()
             # 回调函数
+            print(weixin_req.callback)
             callback_func = weixin_req.call_back
             res = self.excute_request(weixin_req)
             if res and res.status_code == 200:

@@ -2,6 +2,26 @@ import requests
 from requests import Request
 
 
+class MyRequest(Request):
+    """
+        继承Request对象，重新构造一个请求对象
+    """
+
+    def __init__(self,
+                 method='GET', url=None, headers=None, files=None, data=None,
+                 params=None, auth=None, cookies=None, hooks=None, json=None,
+                 call_back=None, need_proxy=False, failtime=0, timeout=10):
+        Request.__init__(self, method, url, headers)
+        self.call_back = call_back
+        self.need_proxy = need_proxy
+        self.failtime = failtime
+        self.timeout = timeout
+
+
+def hello(name):
+    print('hello,', name)
+
+
 def main():
     url = 'http://weixin.sogou.com/weixin?query=Python&type=2'
     headers = {
@@ -13,21 +33,9 @@ def main():
             'Host': 'weixin.sogou.com'
         }
 
-    # 创建Session对象
-    s = requests.Session()
     # 构造Request对象
-    req = Request('GET', url, headers=headers)
-
-    proxies = {
-        'http': 'http://119.28.46.123:8888'
-    }
-    # 将Request对象转换成 PreparedRequest对象
-    prepped = s.prepare_request(req)
-    # 利用Session对象的send()方法，发送PreparedRequest对象
-    res = s.send(prepped, proxies=proxies)
-
-    print(res.text)
-    print(res.status_code)
+    req = MyRequest(url=url, headers=headers, call_back=hello)
+    req.call_back('aa')
 
 if __name__ == '__main__':
     main()
