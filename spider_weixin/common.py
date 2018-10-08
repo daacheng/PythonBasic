@@ -4,6 +4,15 @@ import redis
 import pickle
 from pyquery import PyQuery as pq
 import traceback
+from pymongo import MongoClient
+
+"""
+    Python连接MongoDB数据库
+"""
+client = MongoClient('localhost', 27017)
+weixin = client.weixin
+collection_article = weixin.article
+
 
 class WeixinRequests(Request):
     """
@@ -174,6 +183,7 @@ class SpiderWeixin(object):
             if res and res.status_code == 200:
                 results = callback_func(res)
                 if isinstance(results, dict):
+                    collection_article.insert_one(results)
                     print('数据入库。。', results)
                 elif isinstance(results, list):
                     for result in results:
