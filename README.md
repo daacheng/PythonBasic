@@ -60,6 +60,8 @@
 
 2.12. [Python爬虫--代理池系统](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E4%BB%A3%E7%90%86%E6%B1%A0%E7%BB%B4%E6%8A%A4.md)
 
+2.13. [Python爬虫--利用代理池系统爬取微信公众号文章](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E5%88%A9%E7%94%A8%E4%BB%A3%E7%90%86%E6%B1%A0%E7%B3%BB%E7%BB%9F%E7%88%AC%E5%8F%96%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0.md)
+
 ## 3、算法图解
 3.1. [二分查找、选择排序、递归](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E3%80%81%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E3%80%81%E9%80%92%E5%BD%92.md)
 
