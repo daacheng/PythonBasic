@@ -24,6 +24,8 @@
 
     import requests
     from pyquery import PyQuery as pq
+    from bs4 import BeautifulSoup
+
     """
         爬取代理网站的免费代理并返回
     """
@@ -32,34 +34,40 @@
     class Crawler(object):
 
         def get_crawler_proxy(self):
-            proxy_list = self.crawl_xici()
+            # proxy_list = self.crawl_xici()
+            proxy_list = self.crawl_66()
             return proxy_list
 
-        def crawl_xici(self):
+        def crawl_66(self):
             """
-                爬取西刺代理
+                爬取66代理
             """
-            proxy_list = []
-            for i in range(1, 20):
+            print('爬取66代理......')
+            proxies = set()
+            for i in range(1, 35):
 
-                url = 'http://www.xicidaili.com/nn/' + str(i)
-
+                url = 'http://www.66ip.cn/areaindex_' + str(i) + '/1.html'
                 headers = {
                     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
                     'Accept-Encoding': 'gzip, deflate',
                     'Accept-Language': 'zh-CN,zh;q=0.9',
-                    'Host': 'www.xicidaili.com',
+                    'Host': 'www.66ip.cn',
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
                 }
 
                 res = requests.get(url, headers=headers)
-                doc = pq(res.text)
-                for odd in doc('.odd').items():
-                    info_list = odd.find('td').text().split(' ')
-                    if len(info_list) == 11:
-                        proxy = info_list[5].lower().strip() + '://' + info_list[1].strip() + ':' + info_list[2].strip()
-                        proxy_list.append(proxy)
-            return proxy_list
+                soup = BeautifulSoup(res.text, 'html.parser')
+                items = soup.select('.footer table tr')
+
+                for i in range(1, len(items)):
+                    tds = items[i].select('td')
+                    ip = tds[0].string
+                    port = tds[1].string
+                    proxy = ip + ':' + port
+                    if proxy:
+                        # print(proxy.replace(' ', ''))
+                        proxies.add(proxy.replace(' ', ''))
+            return list(proxies)
 
 #### RedisClient.py
 
@@ -204,7 +212,7 @@ Tester.py
     """
 
     # 用来测试代理是否可用的地址
-    test_url = 'http://www.baidu.com'
+    test_url = 'http://weixin.sogou.com/weixin?type=2&query=Python'
 
 
     class Tester(object):
@@ -219,13 +227,14 @@ Tester.py
             """
                 检测代理的可用性
             """
-            # conn = aiohttp.TCPConnector(verify_ssl=False)
-            async with aiohttp.ClientSession() as session:
+            conn = aiohttp.TCPConnector(verify_ssl=False)
+            async with aiohttp.ClientSession(connector=conn) as session:
                 try:
                     if isinstance(proxy, bytes):
                         proxy = proxy.decode('utf-8')
-                    print('正在检测 : %s' % proxy)
-                    async with session.get(test_url, proxy=proxy, timeout=15) as res:
+                    real_proxy = 'http://' + proxy
+                    print('正在检测 : %s' % real_proxy)
+                    async with session.get(test_url, proxy=real_proxy, timeout=15) as res:
                         if res.status == 200:
                             # 说明代理可用,将其优先级置为最大
                             self.redisdb.max(proxy)
@@ -257,6 +266,7 @@ Tester.py
                     time.sleep(5)
             except Exception as e:
                 print('检测模块出错！！！')
+
 ### 3、通过flask向外提供获取代理IP的接口
 通过flask可以很简单的创建一个web服务器，对外提供url接口，用户只需要请求指定的url，即可获取redis中的代理IP。
 
@@ -357,6 +367,5 @@ controller.py
     if __name__ == '__main__':
         control = Controller()
         control.run()
-
 
 
