@@ -21,10 +21,6 @@ class WeixinRequests(Request):
         self.timeout = timeout
 
 
-
-def hello(name):
-    print('hello,', name)
-
 host = '127.0.0.1'
 port = 6379
 redis_key = 'req'
