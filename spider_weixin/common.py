@@ -21,6 +21,10 @@ class WeixinRequests(Request):
         self.timeout = timeout
 
 
+
+def hello(name):
+    print('hello,', name)
+
 host = '127.0.0.1'
 port = 6379
 redis_key = 'req'
@@ -51,44 +55,6 @@ class RedisQueue(object):
 
     def is_empty(self):
         return self.redisdb.llen(redis_key) == 0
-
-
-def parse_index(res):
-    """
-        解析每一页的所有的文章url链接
-    """
-    url = 'http://weixin.sogou.com/weixin'
-    doc = pq(res.text)
-    items = doc('.news-box .news-list li .txt-box h3 a').items()
-    for item in items:
-        text_url = item.attr('href')
-        weixin_req = WeixinRequests(url=text_url, callback=parse_detail, need_proxy=True)
-        yield weixin_req
-    # 获取下一页的url
-    next = doc('#sogo_next').attr('href')
-    if next:
-        next_url = url + str(next)
-        weixin_req = WeixinRequests(url=next_url, callback=parse_index, need_proxy=True)
-        yield weixin_req
-
-
-def parse_detail(res):
-    """
-        解析详情页,获取每篇文章的详细信息
-    """
-
-    doc = pq(res.text)
-    title = doc('.rich_media_title').text()
-    content = doc('.rich_media_content').text()
-    date = doc('#publish_time').text()
-    author = doc('#js_name').text()
-    data = {
-        'title': title,
-        'content': content,
-        'date': date,
-        'author': author
-    }
-    yield data
 
 
 class SpiderWeixin(object):
@@ -122,49 +88,51 @@ class SpiderWeixin(object):
             print('从代理池中获取代理IP出错了！！ %s' % e)
             return None
 
-    # def parse_index(self, res):
-    #     """
-    #         解析每一页的所有的文章url链接
-    #     """
-    #     doc = pq(res.text)
-    #     items = doc('.news-box .news-list li .txt-box h3 a').items()
-    #     for item in items:
-    #         text_url = item.attr('href')
-    #         weixin_req = WeixinRequests(url=text_url, callback=self.parse_detail, need_proxy=True)
-    #         yield weixin_req
-    #     # 获取下一页的url
-    #     next = doc('#sogo_next').attr('href')
-    #     if next:
-    #         next_url = self.url + str(next)
-    #         weixin_req = WeixinRequests(url=next_url, callback=self.parse_index, need_proxy=True)
-    #         yield weixin_req
+    def parse_index(self, res):
+        """
+            解析每一页的所有的文章url链接
+        """
+        doc = pq(res.text)
+        print(doc)
+        items = doc('.news-box .news-list li .txt-box h3 a').items()
+        weixin_req_list = []
+        for item in items:
+            text_url = item.attr('href')
+            weixin_req = WeixinRequests(url=text_url, callback=self.parse_detail, need_proxy=True)
+            weixin_req_list.append(weixin_req)
+        # 获取下一页的url
+        next = doc('#sogou_next').attr('href')
+        if next:
+            next_url = self.url + str(next)
+            print('下一页：', next_url)
+            weixin_req = WeixinRequests(url=next_url, callback=self.parse_index, need_proxy=True, headers=self.headers)
+            weixin_req_list.append(weixin_req)
+        return weixin_req_list
 
     def start(self):
         """
             初始化操作
         """
-        # 为每一个请求都设置请求头
-        # self.session.headers.update(self.headers)
         start_url = self.url + '?query=' + self.keyword + '&type=2'
-        weixin_req = WeixinRequests(url=start_url, callback=parse_index, need_proxy=True, headers=self.headers)
+        weixin_req = WeixinRequests(url=start_url, callback=self.parse_index, need_proxy=True, headers=self.headers)
         self.queue.add(weixin_req)
 
-    # def parse_detail(self, res):
-    #     """
-    #         解析详情页,获取每篇文章的详细信息
-    #     """
-    #     doc = pq(res.text)
-    #     title = doc('.rich_media_title').text()
-    #     content = doc('.rich_media_content').text()
-    #     date = doc('#publish_time').text()
-    #     author = doc('#js_name').text()
-    #     data = {
-    #         'title': title,
-    #         'content': content,
-    #         'date': date,
-    #         'author': author
-    #     }
-    #     yield data
+    def parse_detail(self, res):
+        """
+            解析详情页,获取每篇文章的详细信息
+        """
+        doc = pq(res.text)
+        title = doc('.rich_media_title').text()
+        content = doc('.rich_media_content').text()
+        date = doc('#publish_time').text()
+        author = doc('#js_name').text()
+        data = {
+            'title': title,
+            'content': content,
+            'date': date,
+            'author': author
+        }
+        return data
 
     def excute_request(self, weixin_req):
         """
@@ -183,7 +151,7 @@ class SpiderWeixin(object):
                     return res
                 return self.session.send(self.session.prepare_request(weixin_req))
         except Exception as e:
-            print(traceback.format_exc())
+            # print(traceback.format_exc())
             print('执行请求出错了！！ %s' % e)
             return False
 
@@ -192,7 +160,7 @@ class SpiderWeixin(object):
             当请求发生错误时，就记录一次错误，重新将请求放入对列，等待下次重新发起请求，错误次数达到一定次数，就不再加入对列
         """
         weixin_req.failtime = weixin_req.failtime + 1
-        print('Request Failed("次数：%s", "url": %s")' % (weixin_req.failtime, weixin_req.url))
+        print('Request Failed(次数：%s, url: %s)' % (weixin_req.failtime, weixin_req.url))
         if weixin_req.failtime < 10:
             self.queue.add(weixin_req)
 
@@ -203,21 +171,25 @@ class SpiderWeixin(object):
         while not self.queue.is_empty():
             weixin_req = self.queue.pop()
             # 回调函数
-            print(weixin_req.callback)
-            callback_func = weixin_req.call_back
+            # print(weixin_req.callback)
+            callback_func = weixin_req.callback
             res = self.excute_request(weixin_req)
+
             if res and res.status_code == 200:
-                results = list(callback_func(res))
-                for result in results:
-                    print('请求结果, ',result)
-                    if isinstance(result, WeixinRequests):
-                        self.queue.add(result)
-                    if isinstance(result, dict):
-                        print('数据入库。。', result)
+                results = callback_func(res)
+                if isinstance(results, dict):
+                    print('数据入库。。', results)
+                elif isinstance(results, list):
+                    for result in results:
+                        print('请求结果, ', result)
+                        if isinstance(result, WeixinRequests):
+                            self.queue.add(result)
                 else:
                     self.error(weixin_req)
             else:
                 self.error(weixin_req)
+
+        print('请求队列空了！！')
 
     def run(self):
         self.start()

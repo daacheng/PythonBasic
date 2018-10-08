@@ -35,6 +35,7 @@ def main():
 
     # 构造Request对象
     req = MyRequest(url=url, headers=headers, call_back=hello)
+    print(req.call_back)
     req.call_back('aa')
 
 if __name__ == '__main__':
