@@ -9,7 +9,9 @@
 #### 构造请求对象WeixinRequests
 
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/weixinrequests.png)
+为什么要在Request请求对象基础上添加callback回调函数？
 
+**不同的url请求，对应不同的返回结果。访问每一页的url，得到的是文章列表；访问文章链接url，得到的是文章的具体内容。所以，针对不同的请求返回的结果，需要用到不同的解析函数，这个解析函数，也就是我们为每个请求对象WeixinRequests额外添加的回调函数callback。**
 #### 利用redis的List实现一个队列
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/redisqueue.png)
 
