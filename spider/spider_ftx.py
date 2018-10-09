@@ -117,7 +117,7 @@ def get_wh_roominfo(collection, baseurl):
                     }
                     save_to_mongodb(collection, room_info)
             print('********************************************************************')
-            time.sleep(3)
+            time.sleep(1)
         except Exception:
             print('出错了!!!! url:%s' % url)
             time.sleep(5)
