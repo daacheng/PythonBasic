@@ -3,7 +3,6 @@ import requests
 import redis
 import pickle
 from pyquery import PyQuery as pq
-import traceback
 from pymongo import MongoClient
 
 """
@@ -63,7 +62,6 @@ class RedisQueue(object):
 
 
 class SpiderWeixin(object):
-    # url = 'http://weixin.sogou.com/weixin?query=Python&type=2'
     url = 'http://weixin.sogou.com/weixin'
     keyword = 'Python'
     headers = {
@@ -98,7 +96,6 @@ class SpiderWeixin(object):
             解析每一页的所有的文章url链接
         """
         doc = pq(res.text)
-        print(doc)
         items = doc('.news-box .news-list li .txt-box h3 a').items()
         weixin_req_list = []
         for item in items:
@@ -152,11 +149,9 @@ class SpiderWeixin(object):
                     }
                     prepare = self.session.prepare_request(weixin_req)
                     res = self.session.send(prepare, proxies=proxies)
-                    # print(res.text)
                     return res
                 return self.session.send(self.session.prepare_request(weixin_req))
         except Exception as e:
-            # print(traceback.format_exc())
             print('执行请求出错了！！ %s' % e)
             return False
 
@@ -175,8 +170,6 @@ class SpiderWeixin(object):
         """
         while not self.queue.is_empty():
             weixin_req = self.queue.pop()
-            # 回调函数
-            # print(weixin_req.callback)
             callback_func = weixin_req.callback
             res = self.excute_request(weixin_req)
 
