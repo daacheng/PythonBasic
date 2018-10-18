@@ -33,6 +33,8 @@
 1.13. [Python异步IO--asyncio用法](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%BC%82%E6%AD%A5IO--asyncio%E7%94%A8%E6%B3%95.md)
 
 1.14. [Python异步HTTP--aiohttp用法](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%BC%82%E6%AD%A5http%E5%BA%93--aiohttp.md)
+
+1.15. [Python通用日志模块配置](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E9%80%9A%E7%94%A8%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97%E9%85%8D%E7%BD%AE.md)
 ## 2、spider文件夹为爬虫练习代码
 2.[爬虫练习代码](https://github.com/daacheng/PythonBasic/tree/master/spider)
 
