@@ -79,6 +79,8 @@
     pr = os.popen('wc -l test.txt')
     # 可以查看返回的执行结果   15 test.py
     pr.read() 
+    # 获取文件的最后修改时间
+    os.stat(file_path).st_mtime
 
 ## 6.创建临时文件
 
