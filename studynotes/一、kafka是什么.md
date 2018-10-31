@@ -9,7 +9,7 @@
 1. kafka作为一个集群运行中一台或多台服务器上。
 2. kafka集群存储的消息，以Topic为类别记录。
 3. 每个消息叫做record，由key, value, 时间戳组成。
-### 名词解释
+### 名词解释（很重要）
 * Topic:kafka把消息用Topic来分类，Topic相当于一个分类标签。
 * Producer：向Topic中发布消息的是生产者。
 * consumer：预定Topic中的消息并消费的是消费者。
