@@ -118,3 +118,4 @@
 7.1. [《深入浅出统计学》笔记上.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%BB%9F%E8%AE%A1%E5%AD%A6%E3%80%8B%E7%AC%94%E8%AE%B0%E4%B8%8A.md)
 
 7.2. [《深入浅出统计学》笔记下.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%BB%9F%E8%AE%A1%E5%AD%A6%E3%80%8B%E7%AC%94%E8%AE%B0%E4%B8%8B.md)
+## 8、kafka(分布式发布消息订阅系统)
