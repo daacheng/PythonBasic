@@ -29,5 +29,5 @@
 1. kafka的一个Topic可以有多个分区（partition），如果存在key，消息会按照key做分类，存储在不同的分区中；如果没有key，就按照轮询机制，存储在不同的分区中。
 2. kafka每个分区（partition）都是一个消息队列，分区中使用偏移（offset）表示每个消息的位置。
 3. 一个Topic中的一个分区（partition）只能对应一个消费者组中的一个消费者。（每个Topic中的一个分区中的消息，可以发送给所有的消费者组，但是消费者组中只能有一个消费者消费这个消息。）**一个分区对应一个消费者，一个消费者可以对应多个分区**
-4. kafka通过leader和followe的方式，将分区的数据复制到不同是服务器中，进行同步。
+4. kafka通过leader和followe的方式，将分区的数据复制到不同是服务器中，进行同步。**kafka往分区中写入数据时，只会往leader分区中写入数据，然后再复制给followers**。
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/kafkaleader.png)
