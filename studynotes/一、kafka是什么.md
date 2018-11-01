@@ -19,11 +19,15 @@
 3. 每个消息叫做record，由key, value, 时间戳组成。
 ### 名词解释（很重要）
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/kafkahanyi.png)
-* **Topic:kafka把消息用Topic来分类，Topic相当于一个分类标签。**
+* **Topic: kafka把消息用Topic来分类，Topic相当于一个分类标签。**
 * **Producer：向Topic中发布消息的是生产者。**
 * **consumer：预定Topic中的消息并消费的是消费者。**
 * **broker：kafka是分布式的，可以运行在多台服务器上，一台kafka服务器就是一个broker，一个broker可以容纳多个Topic。**
 * **partition:消息分区，一个Topic可以分为多个“消息分区”，每个“消息分区”都是一个有序的队列，partition中每条消息都会分配一个有序的ID（offset）。**
 * **offset：偏移，消息在消息分区中的偏移量，每个消息都有一个唯一的offset，消费者可以指定offset来消费消息。**
 ### 三、kafka的分区机制
+1. kafka的一个Topic可以有多个分区（partition），如果存在key，消息会按照key做分类，存储在不同的分区中；如果没有key，就按照轮询机制，存储在不同的分区中。
+2. kafka每个分区（partition）都是一个消息队列，分区中使用偏移（offset）表示每个消息的位置。
+3. 一个Topic中的一个分区（partition）只能对应一个消费者组中的一个消费者。（每个Topic中的一个分区中的消息，可以发送给所有的消费者组，但是消费者组中只能有一个消费者消费这个消息。）**一个分区对应一个消费者，一个消费者可以对应多个分区**
+4. kafka通过leader和followe的方式，将分区的数据复制到不同是服务器中，进行同步。
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/kafkaleader.png)
