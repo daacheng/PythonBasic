@@ -32,3 +32,4 @@
 #### 4、一个分区对应一个消费者，所以消息肯定是按照顺序发送给这个消费者的，但是这这能保证Topic中这个分区内消息是顺序处理的，不能保证跨分区的消息先后处理，如果想要顺序处理Topic中所有的数据，那就是只提供一个分区。
 #### 5、kafka通过leader和follower的方式，将分区的数据复制到不同是服务器中，进行同步。**kafka往分区中写入数据时，只会往leader分区中写入数据，然后再复制给followers**。
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/kafkaleader.png)
+
