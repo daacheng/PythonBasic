@@ -14,7 +14,11 @@ BOT_NAME = 'ftx_spider'
 SPIDER_MODULES = ['ftx_spider.spiders']
 NEWSPIDER_MODULE = 'ftx_spider.spiders'
 
-
+# MongoDB
+HOST = 'localhost'
+PORT = 27017
+DB_NAME = 'ftx'
+COLL_NAME = 'roomprice'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'ftx_spider (+http://www.yourdomain.com)'
 
@@ -64,9 +68,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'ftx_spider.pipelines.FtxSpiderPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'ftx_spider.pipelines.FtxSpiderPipeline': 300
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
