@@ -102,5 +102,7 @@ Item Pipeline为项目管道，当Item生成后，会自动被送到Item Pipelin
     }
 #### 运行命令行 scrapy crawl '爬虫名称name' ，就可以发现数据成功存入到数据库中了    
 
+## 大概流程
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/scrapy3.png)
 ## [完整代码地址](https://github.com/daacheng/PythonBasic/tree/master/spider/ftx_spider)
 https://github.com/daacheng/PythonBasic/tree/master/spider/ftx_spider
