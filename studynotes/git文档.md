@@ -52,6 +52,9 @@ git官网下载windows版本的， https://git-scm.com/downloads
 
 ### 2.2、查看工作区状态
 1. 通过git status命令，可以时刻掌握仓库当前的状态。
+
+git config --global core.quotepath false 设置成识别中文
+
 2. 通过git diff filename，查看文件发生哪些修改。
 
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/2_3.png?raw=true)
