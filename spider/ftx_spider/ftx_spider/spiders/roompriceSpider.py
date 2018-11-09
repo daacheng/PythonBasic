@@ -3,9 +3,20 @@ from ftx_spider.items import FtxSpiderItem
 
 
 class roompriceSpider(scrapy.Spider):
-    
+    """
+            scrapy初始化URL两种方法
+            第一种：通过定义start_requests方法，调用scrapy.Request(url=url, callback=func)方法执行请求,通过callback指定解析函数
+            第二种：通过常量start_urls存储请求URL，scrapy自动发送请求，并且固定解析函数为parse
+    """
     name = 'roomprice'
 
+    # 方法一
+    # def start_requests(self):
+    #     urls = ['http://lab.scrapyd.cn/page/1/']
+    #     for url in urls:
+    #         yield scrapy.Request(url=url, callback=self.parse)
+
+    # 方法二
     start_urls = ['http://wuhan.esf.fang.com/house-a013126/i3']
 
     def parse(self, response):
