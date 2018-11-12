@@ -20,4 +20,5 @@ class FtxSpiderPipeline(object):
         self.collection = self.db[settings['COLL_NAME']]
 
     def process_item(self, item, spider):
+        print(dict(item))
         self.collection.insert(dict(item))
