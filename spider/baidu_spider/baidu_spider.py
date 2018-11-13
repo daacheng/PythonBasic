@@ -12,21 +12,20 @@ def main():
         'Referer': 'http://zhaopin.baidu.com/quanzhi?query=%E6%B0%B4%E7%94%B5%E5%B7%A5'
     }
 
-    with open('query_condition.csv', 'r', encoding='utf-8') as f:
+    with open('query_condition.csv', 'r', encoding='UTF-8-sig') as f:
         reader = csv.reader(f, delimiter='\t')
         for row in reader:
             print(row)
             token = '%3D%3DAlj2KpD%2F90XRlaW%2BWmqZWattGZTl1mopman1Jlqpml'
-            # url = 'http://zhaopin.baidu.com/api/qzasync?query=%s&city=%s&is_adq=1&pcmod=1&token=%s&pn=10&rn=10&date=%s_%s' % ('%E6%B0%B4%E7%94%B5%E5%B7%A5', '%25E6%25AD%25A6%25E6%25B1%2589', token, row[3], row[4])
-
-            url = 'http://zhaopin.baidu.com/api/qzasync?query=%E6%B0%B4%E7%94%B5%E5%B7%A5&city=%25E6%25AD%25A6%25E6%25B1%2589&is_adq=1&pcmod=1&token=%3D%3DAlj2KpD%2F90XRlaW%2BWmqZWattGZTl1mopman1Jlqpml&pn=10&rn=10&date=20181111_20181112'
+            # url = 'http://zhaopin.baidu.com/api/qzasync?query=%s&city=%s&is_adq=1&pcmod=1&token=%s&pn=10&rn=10&date=%s_%s' % ('水电工', '武汉', token, row[3], row[4])
+            url = 'http://zhaopin.baidu.com/api/qzasync?query=%E6%B0%B4%E7%94%B5%E5%B7%A5&city=%25E6%25AD%25A6%25E6%25B1%2589&is_adq=1&pcmod=1&token=%3D%3DwlTz61TKrpFmYbbeplfW2YmlZaIOVZZiZmtJJlWq2k&pn=10&rn=10'
+            # url = 'http://zhaopin.baidu.com/api/qzasync?query=%E6%B0%B4%E7%94%B5%E5%B7%A5&city=%25E6%25AD%25A6%25E6%25B1%2589&is_adq=1&pcmod=1&token=%3D%3DAlj2KpD%2F90XRlaW%2BWmqZWattGZTl1mopman1Jlqpml&pn=10&rn=10&date=20181111_20181112'
             print(url)
             res = requests.get(url, headers=headers)
             print(res.text)
-            time.sleep(10)
+            print(res.json())
+            time.sleep(5)
 
 
 if __name__ == '__main__':
-    data = '%E6%B0%B4%E7%94%B5%E5%B7%A5'
-
     main()
