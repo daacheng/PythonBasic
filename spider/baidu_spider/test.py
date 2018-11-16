@@ -3,6 +3,8 @@ import json
 from bs4 import BeautifulSoup
 import re
 import urllib
+import datetime
+import random
 
 
 headers = {
@@ -17,8 +19,8 @@ def main():
     pn = 0
     job_type = '焊工'
     city = '北京'
-    token = '%3D%3DwkmKrqYydqXxlmwJGlXi2Yoh2lZRoYqp2bXeZlmhZZ'
-    for i in range(2):
+    token = '%3D%3DwkmKrqYydqXxVmpRWnXi2Yoh2lZR4ZxJ2bXaJmndpZ'
+    for i in range(10):
 
         url = 'https://zhaopin.baidu.com/api/qzasync?query=%s&city=%s&is_adq=1&pcmod=1&token=%s&pn=%d&rn=10' % (urllib.parse.quote(job_type), urllib.parse.quote(city), token, pn)
         print(url)
@@ -29,8 +31,8 @@ def main():
 
         # print(data)
 
-        for item in data['data']['disp_data']:
-            print(item['@name'])
+        # for item in data['data']['disp_data']:
+        #     print(item['@name'])
 
         for url in data['data']['urls']:
             detail_url = 'https://zhaopin.baidu.com/szzw?id=%s' % url
@@ -41,21 +43,74 @@ def main():
                 print(detail_res.status_code)
                 html = detail_res.text
                 #         print(html)
-                address = re.compile(r'<p>工作地点：\D{2,6}</p>').findall(html)[0]
-                print(address.replace('<p>', '').replace('</p>', ''))
 
-                title = re.compile(r'class="job-name">(.*?)</').findall(html)[0]
-                print(title)
+                title = ''            # 标题
+                job_desc = ''         # 工作描述
+                detail_address = ''   # 详细地址
+                release_time = ''     # 发布时间
+                valid_time = ''       # 有效时间
+                salary = ''           # 薪水
 
-                job_desc = re.compile(r'<span>职位描述：(.*?)<!---->').findall(html)[0]
-                print(job_desc
-                      )
-                detail_address = re.compile(r'工作地址：</p><p class="job-addr-txt">(.*?)</p><div').findall(html)[0]
-                print(detail_address)
+                try:
+                    title = re.compile(r'class="job-name">(.*?)</').findall(html)[0]
+                except Exception as e:
+                    print(e)
+                    title = '%s市招%s' % (city, job_type)
+
+                try:
+                    job_desc = re.compile(r'<span>职位描述：(.*?)<!---->').findall(html)[0]
+                    job_desc = job_desc.replace('<span>', '').replace('<p>', '').replace('</p>', '').replace('</span>', '')
+                except Exception as e:
+                    print(e)
+                    try:
+                        job_desc = re.compile(r'><p>工作内容：(.*?)</p>').findall(html)[0]
+                        job_desc = job_desc.replace('<span>', '').replace('<p>', '').replace('</p>', '').replace('</span>', '')
+                    except:
+                        job_desc = "招%s,要熟练工" % job_type
+
+                try:
+                    detail_address = re.compile(r'工作地址：</p><p class="job-addr-txt">(.*?)</p><div').findall(html)[0]
+                    detail_address = detail_address.replace('<p>', '').replace('</p>', '')
+                except Exception as e:
+                    print(e)
+                    try:
+                        detail_address = re.compile(r'<p>工作地点：\D{2,6}</p>').findall(html)[0]
+                        detail_address = detail_address.replace('<p>', '').replace('</p>', '')
+                    except:
+                        detail_address = "%s市" % city
+
+                try:
+                    release_time = re.compile(r'<p>发布时间：(2018-\d{2}-\d{2}).*?</p>').findall(html)[0]
+                    release_time = release_time.replace('<p>', '').replace('</p>', '')
+                except Exception as e:
+                    release_time = str(datetime.datetime.now().strftime('%Y/%m/%d'))
+
+                try:
+                    valid_time = re.compile(r'<p>有效日期：(.*?)</p>').findall(html)[0]
+                    valid_time = valid_time.replace('<p>', '').replace('</p>', '')
+                except Exception as e:
+                    valid_time = str((datetime.date.today() + datetime.timedelta(days=+61)).strftime("%Y/%m/%d"))
+
+                try:
+                    salary = re.compile(r'(\d{3,5})-(\d{3,5})</span><span\sclass="unit"').findall(html)[0]
+                    salary = salary.replace('</span><span\sclass="unit"', '')
+                except Exception as e:
+                    salary = random.randint(50, 70) * 100
+
+
+                print('***************************************')
+                print('标题: ', title)
+                print('发布时间: ', release_time)
+                print('有效时间: ', valid_time)
+                print('薪水: ', salary)
+                print('地址: ', detail_address)
+                print('工作描述: ', job_desc)
+                print('***************************************')
+
             except:
                 print('error')
                 continue
 
 
-if __name__ =='__main__':
+if __name__ == '__main__':
     main()
