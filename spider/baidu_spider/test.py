@@ -18,7 +18,7 @@ headers = {
 def main():
     pn = 0
     job_type = '焊工'
-    city = '北京'
+    city = '大同'
     token = '%3D%3DwkmKrqYydqXxVmpRWnXi2Yoh2lZR4ZxJ2bXaJmndpZ'
     for i in range(10):
 
@@ -44,12 +44,19 @@ def main():
                 html = detail_res.text
                 #         print(html)
 
+                company = ''          # 公司名称
                 title = ''            # 标题
                 job_desc = ''         # 工作描述
                 detail_address = ''   # 详细地址
                 release_time = ''     # 发布时间
                 valid_time = ''       # 有效时间
                 salary = ''           # 薪水
+
+                try:
+                    company = re.compile(r'class="bd-tt" data-a-39d218aa>(.*?)<').findall(html)[0]
+                    company = company.replace('class="bd-tt" data-a-39d218aa>', '').replace('<', '')
+                except:
+                    company = ''
 
                 try:
                     title = re.compile(r'class="job-name">(.*?)</').findall(html)[0]
@@ -97,8 +104,8 @@ def main():
                 except Exception as e:
                     salary = random.randint(50, 70) * 100
 
-
                 print('***************************************')
+                print('公司名称', company)
                 print('标题: ', title)
                 print('发布时间: ', release_time)
                 print('有效时间: ', valid_time)
