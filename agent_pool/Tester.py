@@ -9,7 +9,7 @@ import time
 """
 
 # 用来测试代理是否可用的地址
-test_url = 'http://weixin.sogou.com/weixin?type=2&query=Python'
+test_url = 'http://www.11467.com/'
 
 
 class Tester(object):

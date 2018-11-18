@@ -1,3 +1,4 @@
+# coding=gbk
 import requests
 import json
 from bs4 import BeautifulSoup
@@ -5,6 +6,20 @@ import re
 import urllib
 import datetime
 import random
+import csv
+import time
+from pymongo import MongoClient
+from urllib import parse
+from parsel import Selector
+
+
+# info_list = []
+# with open('info1.csv', 'r', encoding='utf-8') as f:
+#     reader = csv.reader(f)
+#     for row in reader:
+#         # print(row)
+#         info_list.append(row)
+#         # print(info_list)
 
 
 headers = {
@@ -15,109 +30,57 @@ headers = {
 }
 
 
+client = MongoClient('localhost', 27017)
+baidu = client.baidu
+collection = baidu.company_phone
+
 def main():
-    pn = 0
-    job_type = '焊工'
-    city = '大同'
-    token = '%3D%3DwkmKrqYydqXxVmpRWnXi2Yoh2lZR4ZxJ2bXaJmndpZ'
-    for i in range(10):
-
-        url = 'https://zhaopin.baidu.com/api/qzasync?query=%s&city=%s&is_adq=1&pcmod=1&token=%s&pn=%d&rn=10' % (urllib.parse.quote(job_type), urllib.parse.quote(city), token, pn)
-        print(url)
-        res = requests.get(url, headers=headers)
-        pn += 10
-        print(res.status_code)
-        data = res.json()
-
-        # print(data)
-
-        # for item in data['data']['disp_data']:
-        #     print(item['@name'])
-
-        for url in data['data']['urls']:
-            detail_url = 'https://zhaopin.baidu.com/szzw?id=%s' % url
-            print(detail_url)
-
-            try:
-                detail_res = requests.get(detail_url)
-                print(detail_res.status_code)
-                html = detail_res.text
-                #         print(html)
-
-                company = ''          # 公司名称
-                title = ''            # 标题
-                job_desc = ''         # 工作描述
-                detail_address = ''   # 详细地址
-                release_time = ''     # 发布时间
-                valid_time = ''       # 有效时间
-                salary = ''           # 薪水
-
-                try:
-                    company = re.compile(r'class="bd-tt" data-a-39d218aa>(.*?)<').findall(html)[0]
-                    company = company.replace('class="bd-tt" data-a-39d218aa>', '').replace('<', '')
-                except:
-                    company = ''
-
-                try:
-                    title = re.compile(r'class="job-name">(.*?)</').findall(html)[0]
-                except Exception as e:
-                    print(e)
-                    title = '%s市招%s' % (city, job_type)
-
-                try:
-                    job_desc = re.compile(r'<span>职位描述：(.*?)<!---->').findall(html)[0]
-                    job_desc = job_desc.replace('<span>', '').replace('<p>', '').replace('</p>', '').replace('</span>', '')
-                except Exception as e:
-                    print(e)
-                    try:
-                        job_desc = re.compile(r'><p>工作内容：(.*?)</p>').findall(html)[0]
-                        job_desc = job_desc.replace('<span>', '').replace('<p>', '').replace('</p>', '').replace('</span>', '')
-                    except:
-                        job_desc = "招%s,要熟练工" % job_type
-
-                try:
-                    detail_address = re.compile(r'工作地址：</p><p class="job-addr-txt">(.*?)</p><div').findall(html)[0]
-                    detail_address = detail_address.replace('<p>', '').replace('</p>', '')
-                except Exception as e:
-                    print(e)
-                    try:
-                        detail_address = re.compile(r'<p>工作地点：\D{2,6}</p>').findall(html)[0]
-                        detail_address = detail_address.replace('<p>', '').replace('</p>', '')
-                    except:
-                        detail_address = "%s市" % city
-
-                try:
-                    release_time = re.compile(r'<p>发布时间：(2018-\d{2}-\d{2}).*?</p>').findall(html)[0]
-                    release_time = release_time.replace('<p>', '').replace('</p>', '')
-                except Exception as e:
-                    release_time = str(datetime.datetime.now().strftime('%Y/%m/%d'))
-
-                try:
-                    valid_time = re.compile(r'<p>有效日期：(.*?)</p>').findall(html)[0]
-                    valid_time = valid_time.replace('<p>', '').replace('</p>', '')
-                except Exception as e:
-                    valid_time = str((datetime.date.today() + datetime.timedelta(days=+61)).strftime("%Y/%m/%d"))
-
-                try:
-                    salary = re.compile(r'(\d{3,5})-(\d{3,5})</span><span\sclass="unit"').findall(html)[0]
-                    salary = salary.replace('</span><span\sclass="unit"', '')
-                except Exception as e:
-                    salary = random.randint(50, 70) * 100
-
-                print('***************************************')
-                print('公司名称', company)
-                print('标题: ', title)
-                print('发布时间: ', release_time)
-                print('有效时间: ', valid_time)
-                print('薪水: ', salary)
-                print('地址: ', detail_address)
-                print('工作描述: ', job_desc)
-                print('***************************************')
-
-            except:
-                print('error')
+    # city_list = []
+    # with open('common_citys.csv', 'r', encoding='utf-8') as f:
+    #     reader = csv.reader(f)
+    #     for row in reader:
+    #         city_list.append(row[0])
+    #
+    # with open('info1.csv', 'r', encoding='utf-8') as f:
+    #     with open('info.csv', 'w', encoding='utf-8', newline='') as fw:
+    #         writer = csv.writer(fw, delimiter='\t')
+    #         reader = csv.reader(f)
+    #         for row in reader:
+    #             if row[2] in city_list:
+    #                 print(row)
+    #                 writer.writerow(row)
+    # items = collection.find()
+    with open('company_phone.csv', 'r', encoding='utf-8', newline='') as f:
+        reader = csv.reader(f, delimiter='\t')
+        for row in reader:
+            if row[1] == 'None' or row[1] == '':
                 continue
+            print(row)
+            info = {
+                'name': row[0],
+                'phone': row[1]
+            }
+
+            collection.insert_one(info)
+
+    # res = {}
+    # with open('log.txt', 'r', encoding='utf-8', newline='') as f:
+    #     data = f.readlines()
+    #     for line in data:
+    #         if '�绰' in line:
+    #             company = line.split(', ')[0].split('��˾��')[1]
+    #             phone = line.split(', ')[1].split('�绰��')[1].replace('\r\n', '')
+    #             res[company] = phone
+    #     print(res)
+
+
+
+    # with open('company_phone1.csv', 'w', encoding='utf-8', newline='') as f:
+    #     writer = csv.writer(f, delimiter='\t')
+    #     for k, v in res.items():
+    #         writer.writerow([k, v])
 
 
 if __name__ == '__main__':
     main()
+
