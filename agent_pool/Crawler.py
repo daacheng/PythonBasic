@@ -59,8 +59,8 @@ class Crawler(object):
                 'Accept-Language': 'zh-CN,zh;q=0.9',
                 'Host': 'www.66ip.cn',
                 'Referer': 'http://www.66ip.cn/',
-                'Cookie': 'yd_cookie=1542a1a3-8c21-469fb3c0f1b77c62d8076f1273aca4fa3d63; Hm_lvt_1761fabf3c988e7f04bec51acd4073f4=1542431334,1542515035,1542515047; _ydclearance=10cf46c2d996b41751b83b5d-6ab7-499e-a3dd-c9264878dd38-1542522393; Hm_lpvt_1761fabf3c988e7f04bec51acd4073f4=1542515195',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
+                'Cookie': 'yd_cookie=1e93c6a0-31ba-472ae0a7ecd7d133f467b34efe5c5338567e; Hm_lvt_1761fabf3c988e7f04bec51acd4073f4=1542592554,1542610344; Hm_lpvt_1761fabf3c988e7f04bec51acd4073f4=1542610344; _ydclearance=bd204b987a2ee89860d45482-a9fd-429d-ba51-be4d326487cc-1542617548',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36'
             }
 
             res = requests.get(url, headers=headers)

@@ -3,15 +3,52 @@ import re
 import csv
 from bs4 import BeautifulSoup
 import time
+import os
+import logging.handlers
+from queue import Queue
+import threading
 
 """
     顺企网爬虫：通过公司名爬取公司联系方式
 """
-company_list = []
-with open('company.csv', 'r', encoding='utf-8') as f:
+
+###############################################################################
+"""
+    通用日志配置,代码copy过来直接使用mylog对象即可
+"""
+# 日志模块配置
+# CRITICAL > ERROR > WARNING > INFO > DEBUG > NOTSET
+# 创建log日志文件夹
+dir_path = os.path.split(__file__)[0]
+logdir = os.path.join(dir_path, 'log')
+try:
+    os.makedirs(logdir, exist_ok=True)
+except FileExistsError:
+    pass
+module_name = os.path.basename(__file__).replace('.py', '')
+mylog = logging.getLogger(__name__)
+mylog.setLevel(logging.DEBUG)
+# 按照每天一个日志，保留最近14个
+filehandler = logging.handlers.TimedRotatingFileHandler(
+    filename='%s/%s' % (logdir, module_name),
+    when='midnight', interval=1, backupCount=14)
+filehandler.suffix = '%Y%m%d.log'
+filehandler.extMatch = re.compile(r'^\d{8}.log$')  # 只有填写了此变量才能删除旧日志
+# 日志打印格式
+filehandler.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
+mylog.addHandler(filehandler)
+# 让日志输出到console
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+console.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
+mylog.addHandler(console)
+###################################################################################
+
+company_queue = Queue()
+with open('company_1119.csv', 'r', encoding='utf-8') as f:
     reader = csv.reader(f, delimiter='\t')
     for row in reader:
-        company_list.append(row[0])
+        company_queue.put(row[0])
 
 company_dict = {}
 
@@ -34,87 +71,76 @@ def get_proxy():
         return None
 
 
-def main():
-    for company in company_list:
+def crawl_company_phone():
+    while True:
         try:
-            # 请求url
-            company_name = company
-            url = 'http://so.11467.com/cse/search?s=662286683871513660&ie=utf-8&q=' + company_name
+            try:
+                # 请求url
+                company_name = company_queue.get(block=True)
+                url = 'http://so.11467.com/cse/search?s=662286683871513660&ie=utf-8&q=' + company_name
 
-            # 获取代理IP
-            proxies = get_proxy()
-            print('#######################################################')
-            print('代理ip：', proxies)
-            if not proxies:
-                res = requests.get(url, timeout=30 )
-            else:
-                res = requests.get(url, proxies=proxies, timeout=30)
-            print(res.status_code, 'url:', url)
-
-            html = res.text
-            p = re.compile(r'<a rpos="" cpos="title" href="http://www.11467.com/qiye/\d*.htm')
-            a_res = p.findall(html)
-            if a_res:
-                company_url = a_res[0].replace('<a rpos="" cpos="title" href="', '').replace("'", '')
-                print('公司url: ', company_url)
-
+                # 获取代理IP
+                proxies = get_proxy()
+                print('#######################################################')
+                print('代理ip：', proxies)
                 if not proxies:
-                    company_res = requests.get(company_url, timeout=30)
+                    res = requests.get(url, timeout=30 )
                 else:
-                    company_res = requests.get(company_url, proxies=proxies, timeout=30)
+                    res = requests.get(url, proxies=proxies, timeout=30)
+                print(res.status_code, 'url:', url)
 
+                html = res.text
+                p = re.compile(r'<a rpos="" cpos="title" href="http://www.11467.com/qiye/\d*.htm')
+                a_res = p.findall(html)
+                if a_res:
+                    company_url = a_res[0].replace('<a rpos="" cpos="title" href="', '').replace("'", '')
+                    print('公司url: ', company_url)
+
+                    if not proxies:
+                        company_res = requests.get(company_url, timeout=30)
+                    else:
+                        company_res = requests.get(company_url, proxies=proxies, timeout=30)
+
+                    company_html = company_res.text
+                    soup = BeautifulSoup(company_html, 'html.parser')
+                    tel_list = soup.select('#logotel')
+                    # print(tel_list)
+                    if tel_list:
+                        phone = tel_list[0].string
+                        mylog.info('公司：%s, 电话：%s' % (company_name, phone))
+                        company_dict[company_name] = phone
+
+            except Exception as e:
+                print('error: ', e)
+
+                res = requests.get(url)
+                html = res.text
+                p = re.compile(r'<a rpos="" cpos="title" href="http://www.11467.com/qiye/\d*.htm')
+                a_res = p.findall(html)
+                if a_res:
+                    company_url = a_res[0].replace('<a rpos="" cpos="title" href="', '').replace("'", '')
+                    print('公司url: ', company_url)
+                company_res = requests.get(company_url)
                 company_html = company_res.text
                 soup = BeautifulSoup(company_html, 'html.parser')
                 tel_list = soup.select('#logotel')
                 # print(tel_list)
                 if tel_list:
                     phone = tel_list[0].string
-                    print('公司：%s, 电话：%s' % (company, phone))
-                    company_dict[company] = phone
-
-
-
-
-                # time.sleep(10)
-                # # print(company_html)
-                #
-                # phone_list = None
-                # res_list = re.compile(r'<dt>固定电话：</dt><dd>\d*-\d*</dd>').findall(company_html)
-                # if res_list:
-                #     phone_list = res_list
-                #
-                # else:
-                #     res_list = re.compile(r'<dt>固定电话：</dt><dd>\d*</dd>').findall(company_html)
-                #     if res_list:
-                #         phone_list = res_list
-                #
-                # if phone_list:
-                #     phone = phone_list[0].replace('<dt>固定电话：</dt><dd>', '').replace('</dd>', '')
-                #     print(phone)
-                #     company_dict[company] = phone
+                    mylog.info('公司：%s, 电话：%s' % (company_name, phone))
+                    company_dict[company_name] = phone
         except Exception as e:
-            print('error: ', e)
-
-            res = requests.get(url)
-            html = res.text
-            p = re.compile(r'<a rpos="" cpos="title" href="http://www.11467.com/qiye/\d*.htm')
-            a_res = p.findall(html)
-            if a_res:
-                company_url = a_res[0].replace('<a rpos="" cpos="title" href="', '').replace("'", '')
-                print('公司url: ', company_url)
-            company_res = requests.get(company_url)
-            company_html = company_res.text
-            soup = BeautifulSoup(company_html, 'html.parser')
-            tel_list = soup.select('#logotel')
-            # print(tel_list)
-            if tel_list:
-                phone = tel_list[0].string
-                print('公司：%s, 电话：%s' % (company, phone))
-                company_dict[company] = phone
-
+            time.sleep(1)
             continue
 
-    print(company_dict)
+def main():
+    td_list = []
+    for i in range(5):
+        td = threading.Thread(target=crawl_company_phone)
+        td_list.append(td)
+
+    for td in td_list:
+        td.start()
 
 
 if __name__ == '__main__':

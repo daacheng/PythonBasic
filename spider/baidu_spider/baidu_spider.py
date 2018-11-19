@@ -8,7 +8,6 @@ import random
 import csv
 import time
 from pymongo import MongoClient
-from fake_useragent import UserAgent
 
 
 """
@@ -16,7 +15,7 @@ from fake_useragent import UserAgent
 """
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
-collection = baidu.work_1117
+collection = baidu.work_1119
 
 
 def save_to_mongodb(work_info):
@@ -65,15 +64,21 @@ with open('info.csv', 'r', encoding='utf-8') as f:
     初始化变量
 """
 job_type_list = []
-ua = UserAgent()
+ua = ['Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50',
+      'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50',
+      'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; InfoPath.3; rv:11.0) like Gecko',
+      'Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1',
+      'Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11',
+      'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SE 2.X MetaSr 1.0; SE 2.X MetaSr 1.0; .NET CLR 2.0.50727; SE 2.X MetaSr 1.0)',
+      'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; The World)']
 
 
-def crawl(job_type, city, province, token):
+def crawl(job_type, city, province, token, cookie):
     headers = {
         'Accept': '*/*',
-        'Cookie': 'BAIDUID=2176D64D05517AC3780B774A47F39EB6:FG=1; BIDUPSID=2176D64D05517AC3780B774A47F39EB6; PSTM=1539070163; BDUSS=1lsMWZKSFRUWjBzTDU0TjNJMWxCdnJmc0tOTUR4N2E2MDNxeGdINmZxSk5LdlZiQVFBQUFBJCQAAAAAAAAAAAEAAADi6c1PYmJveb-nt8jX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE2dzVtNnc1bb; MCITY=-218%3A; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; delPer=0; PSINO=2; H_PS_PSSID=26522_1446_21094_27400; Hm_lvt_da3258e243c3132f66f0f3c247b48473=1541989917,1542350086; Hm_lpvt_da3258e243c3132f66f0f3c247b48473=1542350420',
+        'Cookie': cookie,
         'Referer': 'https://zhaopin.baidu.com/',
-        'User-Agent': ua.random
+        'User-Agent': random.choice(ua)
     }
 
     pn = 0
@@ -81,8 +86,9 @@ def crawl(job_type, city, province, token):
 
         try:
             url = 'https://zhaopin.baidu.com/api/qzasync?query=%s&city=%s&is_adq=1&pcmod=1&token=%s&pn=%d&rn=10' % (
-            urllib.parse.quote(job_type), urllib.parse.quote(city), token, pn)
-            # url = 'https://zhaopin.baidu.com/api/qzasync?query=%s&city=%s&is_adq=1&pcmod=1&pn=%d&rn=10' % (urllib.parse.quote(job_type), urllib.parse.quote(city), pn)
+            urllib.parse.quote(job_type), urllib.parse.quote(city).replace('%', '%25'), token, pn)
+
+            # url = 'https://zhaopin.baidu.com/api/qzasync?query=%E6%96%87%E5%91%98&city=%25E6%25AD%25A6%25E6%25B1%2589&is_adq=1&pcmod=1&token=%3D%3DAmS3tqY%2BaoEqFbtxmabe5aspJaXt1Zqd2kYS5kst5l&pn=10&rn=10'
             print(url)
 
             # 获取代理IP
@@ -97,7 +103,11 @@ def crawl(job_type, city, province, token):
             print(res.status_code)
             data = res.json()
 
-            for url in data['data']['urls']:
+
+            for disp_data in data['data']['disp_data']:
+                url = disp_data.get('loc', '')
+                district = disp_data.get('district', '')  # 区县
+
                 detail_url = 'https://zhaopin.baidu.com/szzw?id=%s' % url
                 print(detail_url)
 
@@ -175,6 +185,7 @@ def crawl(job_type, city, province, token):
 
                     print('***************************************')
                     print('公司名称', company)
+                    print('区县', district)
                     print('标题: ', title)
                     print('发布时间: ', release_time)
                     print('有效时间: ', valid_time)
@@ -186,6 +197,7 @@ def crawl(job_type, city, province, token):
                     info_dict = {
                         'province': province,
                         'city': city,
+                        'district': district,
                         'title': title,
                         'company': company,
                         'job_desc': job_desc,
@@ -193,6 +205,7 @@ def crawl(job_type, city, province, token):
                         'job_type': job_type,
                         'release_time': release_time,
                         'valid_time': valid_time,
+                        'salary': salary,
                         'require': job_desc,
                         'status': '审核通过',
                         'phone': '',
@@ -212,11 +225,12 @@ def crawl(job_type, city, province, token):
 
 def main():
     job_type = '电工'
-    city = '杭州'
-    province = '浙江省'
-    token = '==QmmCbqWu9oEqVZp1GaoVpaYWWlUdVmTGWccemaqFnl'
+    city = '沈阳'
+    province = '辽宁省'
+    token = '%3D%3DAmS3tqY%2BaoEqVZl52bbe5aspJaXtVasdWlYeJltZJm'
+    cookie = 'BAIDUID=2176D64D05517AC3780B774A47F39EB6:FG=1; BIDUPSID=2176D64D05517AC3780B774A47F39EB6; PSTM=1539070163; BDUSS=1lsMWZKSFRUWjBzTDU0TjNJMWxCdnJmc0tOTUR4N2E2MDNxeGdINmZxSk5LdlZiQVFBQUFBJCQAAAAAAAAAAAEAAADi6c1PYmJveb-nt8jX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE2dzVtNnc1bb; MCITY=-218%3A; Hm_lvt_4b55f5db1b521481b884efb1078a89cc=1542350600; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; delPer=0; PSINO=2; Hm_lvt_da3258e243c3132f66f0f3c247b48473=1541989917,1542350086,1542592345; Hm_lpvt_da3258e243c3132f66f0f3c247b48473=1542592345; H_PS_PSSID=26522_1446_21094_27400'
 
-    crawl(job_type, city, province, token)
+    crawl(job_type, city, province, token, cookie)
 
 
 if __name__ == '__main__':

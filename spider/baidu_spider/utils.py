@@ -1,11 +1,27 @@
 from pymongo import MongoClient
 import csv
 import xlwt
+import random
 
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
 company_phone = baidu.company_phone
-work_1117 = baidu.work_1117
+coll = baidu.work_1118
+
+
+
+def save_company_phone_to_mongodb():
+    """
+        读取 'company_phone.csv'中的信息，存入数据库 company_phone表中
+    """
+    with open('company_phone.csv', 'r', encoding='utf-8') as f:
+        reader = csv.reader(f, delimiter='\t')
+        for row in reader:
+            info ={
+                'name': row[0],
+                'phone': row[1]
+            }
+            company_phone.insert_one(info)
 
 
 def get_company_phone_dict():
@@ -51,7 +67,7 @@ def clear_job_desc(job_desc):
             .replace('回族及骗路费的勿扰', '').replace('回族骗路费的勿扰', '').replace('回族等勿扰谢谢', '').replace('回民兄弟勿扰', '').replace('回民及骗路费勿扰', '')\
             .replace('回民绕行', '').replace('回民朋友勿扰', '').replace('回民请饶行', '').replace('回族不要', '').replace('回民及骗路费的勿扰', '')\
             .replace('，回民', '').replace('回民无扰', '').replace('回民请绕道', '').replace('回民及骗路勿扰', '').replace('回民谢绝', '').replace('回民离我远点', '')\
-            .replace('回民及提前打路费的勿扰', '')
+            .replace('回民及提前打路费的勿扰', '').replace('&amp;', '').replace('nbsp;', '')
     return job_desc
 
 
@@ -61,7 +77,7 @@ def get_data_of_job():
     """
     job_data_list = []
     company_phone_dict = get_company_phone_dict()
-    job_list = work_1117.find()
+    job_list = coll.find()
 
     for info in job_list:
         print(info)
@@ -76,6 +92,7 @@ def get_data_of_job():
 
         province = info['province']  # 省
         city = info['city']  # 市
+        district = info['district']  # 区县
         title = info['title']  # 标题
         job_desc = info['job_desc']  # 职位描述
 
@@ -85,10 +102,11 @@ def get_data_of_job():
         job_type = info['job_type']  # 工种
         release_time = info['release_time']  # 发布时间
         valid_time = info['valid_time']  # 有效时间
+        salary = info['salary']  # 有效时间
         require = job_desc  # 职位要求
         status = info['status']  # 状态
 
-        row = [company, province, city, title, job_desc, detail_address, job_type, release_time, valid_time, require, phone, status]
+        row = [company, province, city, district, title, job_desc, detail_address, job_type, release_time, valid_time, salary, require, phone, status]
         job_data_list.append(row)
 
     return job_data_list
@@ -113,12 +131,31 @@ def job_data_to_excel(job_data_list):
         worksheet.write(i, 9, label=job_data_list[i][9])
         worksheet.write(i, 10, label=job_data_list[i][10])
         worksheet.write(i, 11, label=job_data_list[i][11])
-    workbook.save('OK.xls')
+        worksheet.write(i, 12, label=job_data_list[i][12])
+        worksheet.write(i, 13, label=job_data_list[i][13])
+    workbook.save('OK2.xls')
 
 
 def main():
     job_data_list = get_data_of_job()
     job_data_to_excel(job_data_list)
+    # job_list = coll.find()
+    # company_list = []
+    # for info in job_list:
+    #     if info['company'] not in company_list:
+    #         company_list.append(info['company'])
+    #
+    # with open('company_1119.csv', 'w', encoding='utf-8', newline='') as f:
+    #     writer = csv.writer(f, delimiter='\t')
+    #     for item in company_list:
+    #         writer.writerow([item])
+    # save_company_phone_to_mongodb()
+
+    # job_list = coll.find()
+    #
+    # for info in job_list:
+    #     info['salary'] = random.randint(50, 70) * 100
+    #     coll_1118.insert_one(info)
 
 
 if __name__ == '__main__':
