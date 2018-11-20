@@ -9,6 +9,13 @@ import csv
 import time
 from pymongo import MongoClient
 
+"""
+    该脚本主要是 爬取百度招聘网站上的招聘信息，并将数据存入MongoDB数据库。
+    主要内容:
+    (省, 市, 区, 工程标题, 工程描述, 详细地址, 工种, 开工日期, 完工日期, 
+     薪酬金额, 接包要求 , 发布状态, 发布日期)
+"""
+
 
 """
     数据库操作
@@ -45,19 +52,6 @@ def get_proxy():
         print('从代理池中获取代理IP出错了！！ %s' % e)
         return None
 
-##########################################################
-
-
-"""
-    读取文件信息info.csv(查询条件)
-"""
-info_list = []
-with open('info.csv', 'r', encoding='utf-8') as f:
-    reader = csv.reader(f, delimiter='\t')
-    for row in reader:
-        # print(row)
-        info_list.append(row)
-        # print(info_list)
 
 ###########################################################
 """
@@ -103,7 +97,6 @@ def crawl(job_type, city, province, token, cookie):
             print(res.status_code)
             data = res.json()
 
-
             for disp_data in data['data']['disp_data']:
                 url = disp_data.get('loc', '')
                 district = disp_data.get('district', '')  # 区县
@@ -128,6 +121,7 @@ def crawl(job_type, city, province, token, cookie):
                     release_time = ''  # 发布时间
                     valid_time = ''  # 有效时间
                     salary = ''  # 薪水
+                    public_time = str(datetime.datetime.now().strftime('%Y/%m/%d'))  # 采集时间
 
                     try:
                         company = re.compile(r'class="bd-tt" data-a-39d218aa>(.*?)<').findall(html)[0]
@@ -135,11 +129,13 @@ def crawl(job_type, city, province, token, cookie):
                     except:
                         company = ''
 
-                    try:
-                        title = re.compile(r'class="job-name">(.*?)</').findall(html)[0]
-                    except Exception as e:
-                        print(e)
-                        title = '%s市招%s' % (city, job_type)
+                    # try:
+                    #     title = re.compile(r'class="job-name">(.*?)</').findall(html)[0]
+                    # except Exception as e:
+                    #     print(e)
+                    #     title = '%s市招%s' % (city, job_type)
+
+                    title = '招' + job_type
 
                     try:
                         job_desc = re.compile(r'<span>职位描述：(.*?)<!---->').findall(html)[0]
@@ -209,7 +205,7 @@ def crawl(job_type, city, province, token, cookie):
                         'require': job_desc,
                         'status': '审核通过',
                         'phone': '',
-                        'public_time': ''
+                        'public_time': public_time
                     }
                     save_to_mongodb(info_dict)
 

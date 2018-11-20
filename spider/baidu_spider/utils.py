@@ -2,26 +2,12 @@ from pymongo import MongoClient
 import csv
 import xlwt
 import random
+import re
 
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
 company_phone = baidu.company_phone
-coll = baidu.work_1118
-
-
-
-def save_company_phone_to_mongodb():
-    """
-        读取 'company_phone.csv'中的信息，存入数据库 company_phone表中
-    """
-    with open('company_phone.csv', 'r', encoding='utf-8') as f:
-        reader = csv.reader(f, delimiter='\t')
-        for row in reader:
-            info ={
-                'name': row[0],
-                'phone': row[1]
-            }
-            company_phone.insert_one(info)
+coll = baidu.work_1117
 
 
 def get_company_phone_dict():
@@ -71,6 +57,37 @@ def clear_job_desc(job_desc):
     return job_desc
 
 
+def clear_job_data(job_data_list):
+    pass
+    # row[1] = row[1].replace('省', '')
+    #         row[2] = row[2].replace('市', '')
+    #         row[3] = row[3].replace('区', '')
+    #         row[4] = '招' + row[7]
+    #
+    #         pattern = re.compile(r'([\d-]{8,15})')
+    #         pattern1 = re.compile(r'(.*?岗位职责:?)')
+    #         desc = re.sub(pattern, '', row[5])
+    #         desc = re.sub(pattern1, '', desc)
+    #         desc = desc.replace('&quot;', '').replace('&amp;', '').replace('nbsp;', '').replace('联系方式:', '').replace('联系电话', '')\
+    #                 .replace('】', '').replace('\xa0', '').replace('\xa02', '').replace('】', '').replace('龙经理招聘经理：龙经理', '')\
+    #                 .replace('quot;', '').replace('\u3000', '').replace('：1', '1')
+    #         if len(desc) < 12:
+    #             desc = ''
+    #         elif '中介费' in desc:
+    #             desc = ''
+    #         elif '押金' in desc:
+    #             desc = ''
+    #         row[5] = desc
+    #         row[11] = desc
+    #
+    #         row[13] = re.compile(r'([\d-]{8,15})').findall(row[13])
+    #         if row[13]:
+    #             row[13] = row[13][0]
+    #             if desc and row[13] and len(row[13]) == 11 and '-' not in row[13] and row[13][0] == '1':
+    #                 print(row)
+    #                 job_data_list.append(row)
+
+
 def get_data_of_job():
     """
         从数据库中获取招聘数据，根据‘公司名称’去获取公司电话，将数据添加到  job_data_list列表中
@@ -105,8 +122,9 @@ def get_data_of_job():
         salary = info['salary']  # 有效时间
         require = job_desc  # 职位要求
         status = info['status']  # 状态
+        public_time = info['public_time']  # 采集时间
 
-        row = [company, province, city, district, title, job_desc, detail_address, job_type, release_time, valid_time, salary, require, phone, status]
+        row = [company, province, city, district, title, job_desc, detail_address, job_type, release_time, valid_time, salary, require, phone, status, public_time]
         job_data_list.append(row)
 
     return job_data_list
@@ -136,26 +154,26 @@ def job_data_to_excel(job_data_list):
     workbook.save('OK2.xls')
 
 
-def main():
-    job_data_list = get_data_of_job()
-    job_data_to_excel(job_data_list)
-    # job_list = coll.find()
-    # company_list = []
-    # for info in job_list:
-    #     if info['company'] not in company_list:
-    #         company_list.append(info['company'])
-    #
-    # with open('company_1119.csv', 'w', encoding='utf-8', newline='') as f:
-    #     writer = csv.writer(f, delimiter='\t')
-    #     for item in company_list:
-    #         writer.writerow([item])
-    # save_company_phone_to_mongodb()
+def get_company_name_from_mongodb():
+    """
+        从数据库中读取“公司名称”字段，去重，写入到company_name.csv文件中
+    """
+    company_list = []
+    job_list = coll.find()
+    for info in job_list:
+        # print(info['company'])
+        if info['company'] not in company_list:
+            company_list.append(info['company'])
+    # print(company_list)
 
-    # job_list = coll.find()
-    #
-    # for info in job_list:
-    #     info['salary'] = random.randint(50, 70) * 100
-    #     coll_1118.insert_one(info)
+    with open('company_name.csv', 'w', encoding='utf-8', newline='') as f:
+        writer = csv.writer(f, delimiter='\t')
+        for company in company_list:
+            writer.writerow([company])
+
+
+def main():
+    get_company_name_from_mongodb()
 
 
 if __name__ == '__main__':

@@ -7,6 +7,7 @@ import os
 import logging.handlers
 from queue import Queue
 import threading
+from pymongo import MongoClient
 
 """
     顺企网爬虫：通过公司名爬取公司联系方式
@@ -45,12 +46,27 @@ mylog.addHandler(console)
 ###################################################################################
 
 company_queue = Queue()
-with open('company_1119.csv', 'r', encoding='utf-8') as f:
+with open('company_name.csv', 'r', encoding='utf-8') as f:
     reader = csv.reader(f, delimiter='\t')
     for row in reader:
         company_queue.put(row[0])
 
 company_dict = {}
+
+"""
+    数据库操作
+"""
+client = MongoClient('localhost', 27017)
+baidu = client.baidu
+collection = baidu.company_phone
+
+
+def save_to_mongodb(phone_dict):
+    try:
+        if collection.insert_one(phone_dict):
+            print('记录成功！')
+    except Exception:
+        print('记录失败！')
 
 
 def get_proxy():
@@ -84,7 +100,7 @@ def crawl_company_phone():
                 print('#######################################################')
                 print('代理ip：', proxies)
                 if not proxies:
-                    res = requests.get(url, timeout=30 )
+                    res = requests.get(url, timeout=30)
                 else:
                     res = requests.get(url, proxies=proxies, timeout=30)
                 print(res.status_code, 'url:', url)
@@ -128,7 +144,12 @@ def crawl_company_phone():
                 if tel_list:
                     phone = tel_list[0].string
                     mylog.info('公司：%s, 电话：%s' % (company_name, phone))
-                    company_dict[company_name] = phone
+                    phone_dict = {
+                        'name': company_name,
+                        'phone': phone
+                    }
+                    save_to_mongodb(phone_dict)
+
         except Exception as e:
             time.sleep(1)
             continue
