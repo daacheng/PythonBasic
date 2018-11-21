@@ -124,7 +124,11 @@ def crawl_company_phone():
                     if tel_list:
                         phone = tel_list[0].string
                         mylog.info('公司：%s, 电话：%s' % (company_name, phone))
-                        company_dict[company_name] = phone
+                        phone_dict = {
+                            'name': company_name,
+                            'phone': phone
+                        }
+                        save_to_mongodb(phone_dict)
 
             except Exception as e:
                 print('error: ', e)
@@ -156,7 +160,7 @@ def crawl_company_phone():
 
 def main():
     td_list = []
-    for i in range(5):
+    for i in range(8):
         td = threading.Thread(target=crawl_company_phone)
         td_list.append(td)
 

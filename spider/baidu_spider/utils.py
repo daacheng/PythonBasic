@@ -7,7 +7,7 @@ import re
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
 company_phone = baidu.company_phone
-coll = baidu.work_1117
+coll = baidu.work_1121
 
 
 def get_company_phone_dict():
@@ -31,8 +31,12 @@ def get_data_of_company_phone():
     with open('company_phone.csv', 'w', encoding='utf-8', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
         for info in company_phone_list:
-            print(info['name'], info['phone'])
-            writer.writerow([info['name'], info['phone']])
+            if not info['phone']:
+                continue
+            phone = info['phone'].replace('-', '').replace(' ', '')
+            if phone and phone[0] == '1' and len(phone) == 11:
+                print(info['name'], phone)
+                writer.writerow([info['name'], phone])
 
 
 def clear_job_desc(job_desc):
@@ -163,17 +167,39 @@ def get_company_name_from_mongodb():
     for info in job_list:
         # print(info['company'])
         if info['company'] not in company_list:
-            company_list.append(info['company'])
+            if not info['phone']:
+                company_list.append(info['company'])
     # print(company_list)
 
     with open('company_name.csv', 'w', encoding='utf-8', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
         for company in company_list:
+            print(company)
             writer.writerow([company])
 
 
+def find_phone_from_desc():
+    """
+        查询数据库表，从职位描述中提取手机号，然后把值填如对应的phone字段中
+    """
+    info_list = coll.find()
+    for info in info_list:
+        # print(info)
+        p1 = re.compile(r'\d{11}')
+        p2 = re.compile(r'\d{3}-\d{4}-\d{4}')
+
+        phone1_list = p1.findall(info['job_desc'])
+        phone2_list = p2.findall(info['job_desc'])
+        if phone1_list:
+            print(info['company'], phone1_list[0])
+            coll.update({'company': info['company']}, {'$set': {'phone': phone1_list[0]}})
+        elif phone2_list:
+            print(info['company'], phone2_list[0])
+            coll.update({'company': info['company']}, {'$set': {'phone': phone2_list[0].replace('-', '')}})
+
+
 def main():
-    get_company_name_from_mongodb()
+    get_data_of_company_phone()
 
 
 if __name__ == '__main__':
