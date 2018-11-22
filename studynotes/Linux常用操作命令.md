@@ -3,6 +3,7 @@
 * 后台运行程序  **:  nohup python3 others2bh.py &** 
 * 删除文件夹  **:  rm -rf 目录名字**
 * 删除文件  **:  rm 文件名**
+* 批量删除文件  **： find . -name "*.java" |xargs rm -rfv**
 * 接收文件  **: rz**
 * 发送文件  **: sz**
 * 复制粘贴文件  **: cp 源文件或目录 目标文件或目录**
