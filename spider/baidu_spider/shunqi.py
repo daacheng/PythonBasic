@@ -160,7 +160,7 @@ def crawl_company_phone():
 
 def main():
     td_list = []
-    for i in range(8):
+    for i in range(20):
         td = threading.Thread(target=crawl_company_phone)
         td_list.append(td)
 

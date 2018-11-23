@@ -8,6 +8,7 @@ import random
 import csv
 import time
 from pymongo import MongoClient
+import threading
 
 """
     该脚本主要是 爬取百度招聘网站上的招聘信息，并将数据存入MongoDB数据库。
@@ -22,7 +23,7 @@ from pymongo import MongoClient
 """
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
-collection = baidu.work_1119
+collection = baidu.work_1123
 
 
 def save_to_mongodb(work_info):
@@ -57,7 +58,6 @@ def get_proxy():
 """
     初始化变量
 """
-job_type_list = []
 ua = ['Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50',
       'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50',
       'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; InfoPath.3; rv:11.0) like Gecko',
@@ -129,13 +129,21 @@ def crawl(job_type, city, province, token, cookie):
                     except:
                         company = ''
 
-                    # try:
-                    #     title = re.compile(r'class="job-name">(.*?)</').findall(html)[0]
-                    # except Exception as e:
-                    #     print(e)
-                    #     title = '%s市招%s' % (city, job_type)
+                    try:
+                        title = re.compile(r'class="job-name">(.*?)</').findall(html)[0]
+                    except Exception as e:
+                        print(e)
+                        title = '招%s' % (job_type)
 
-                    title = '招' + job_type
+                    if '管理培训生' in title \
+                            or '销售' in title \
+                            or '风控岗' in title \
+                            or '临床推广' in title \
+                            or 'android' in title \
+                            or '推广专员' in title:
+                        continue
+
+                    # title = '招' + job_type
 
                     try:
                         job_desc = re.compile(r'<span>职位描述：(.*?)<!---->').findall(html)[0]
@@ -220,13 +228,17 @@ def crawl(job_type, city, province, token, cookie):
 
 
 def main():
-    job_type = '电工'
-    city = '沈阳'
-    province = '辽宁省'
-    token = '%3D%3DAmS3tqY%2BaoEqVZl52bbe5aspJaXtVasdWlYeJltZJm'
-    cookie = 'BAIDUID=2176D64D05517AC3780B774A47F39EB6:FG=1; BIDUPSID=2176D64D05517AC3780B774A47F39EB6; PSTM=1539070163; BDUSS=1lsMWZKSFRUWjBzTDU0TjNJMWxCdnJmc0tOTUR4N2E2MDNxeGdINmZxSk5LdlZiQVFBQUFBJCQAAAAAAAAAAAEAAADi6c1PYmJveb-nt8jX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE2dzVtNnc1bb; MCITY=-218%3A; Hm_lvt_4b55f5db1b521481b884efb1078a89cc=1542350600; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; delPer=0; PSINO=2; Hm_lvt_da3258e243c3132f66f0f3c247b48473=1541989917,1542350086,1542592345; Hm_lpvt_da3258e243c3132f66f0f3c247b48473=1542592345; H_PS_PSSID=26522_1446_21094_27400'
 
-    crawl(job_type, city, province, token, cookie)
+    job_type_list = ['工长', '电工', '木工', '油漆工', '焊工', '安装工', '水电工', '普工杂工', '工程监理']  # 常见工种
+
+    city = '广州'
+    province = '广东'
+    token = '%3D%3Dgll2K2XC%2BpJS1ZqZGZpx5aktplZZoaZKGbUimZm92Y'
+    cookie = 'BAIDUID=2176D64D05517AC3780B774A47F39EB6:FG=1; BIDUPSID=2176D64D05517AC3780B774A47F39EB6; PSTM=1539070163; BDUSS=1lsMWZKSFRUWjBzTDU0TjNJMWxCdnJmc0tOTUR4N2E2MDNxeGdINmZxSk5LdlZiQVFBQUFBJCQAAAAAAAAAAAEAAADi6c1PYmJveb-nt8jX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE2dzVtNnc1bb; MCITY=-218%3A; Hm_lvt_4b55f5db1b521481b884efb1078a89cc=1542350600; Hm_lvt_da3258e243c3132f66f0f3c247b48473=1541989917,1542350086,1542592345; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; H_PS_PSSID=26522_1446_21094; ZD_ENTRY=baidu; pgv_pvi=143252480; pgv_si=s6975098880; delPer=0; PSINO=2'
+
+    for job_type in job_type_list:
+        td = threading.Thread(target=crawl, args=(job_type, city, province, token, cookie))
+        td.start()
 
 
 if __name__ == '__main__':

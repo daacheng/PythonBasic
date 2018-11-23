@@ -27,14 +27,18 @@ shiqu_dict = {
     '武汉': ['江岸', '江汉', '沌口', '硚口', '汉阳', '武昌', '青山', '洪山', '东西湖', '汉南', '蔡甸', '江夏', '黄陂'],
     '长沙': ['芙蓉', '天心', '岳麓', '开福', '雨花', '望城'],
     '广州': ['越秀', '东山', '海珠', '荔湾', '番禺', '花都', '从化', '增城'],
-    '成都': ['武侯', '锦江', '青羊', '金牛', '成华', '龙泉驿', '温江', '新都', '青白江', '双流', '郫都']
+    '成都': ['武侯', '锦江', '青羊', '金牛', '成华', '龙泉驿', '温江', '新都', '青白江', '双流', '郫都'],
+    '南京': ['玄武', '秦淮', '鼓楼', '建邺', '雨花台', '栖霞', '浦口', '六合', '江宁', '溧水', '高淳'],
+    '深圳': ['福田', '罗湖', '南山', '盐田', '宝安', '龙岗', '坪山', '龙华', '光明', '大鹏新'],
+    '南宁': ['青秀', '兴宁', '江南', '良庆', '邕宁', '西乡塘', '武鸣'],
+    '西安': ['未央', '新城', '碑林', '莲湖', '灞桥', '雁塔', '阎良', '临潼', '长安', '高陵', '鄠邑']
 }
 
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
 phonenum = baidu.phonenum            # 里面是增量的有效手机号，不定时更新数据
 company_phone = baidu.company_phone  # 临时的公司-电话数据
-coll = baidu.work_1121
+coll = baidu.work_1123
 
 
 def find_phone_from_desc():
@@ -96,7 +100,7 @@ def clear_phone_of_company_phone():
                 print(info['name'], phone)
                 res = phonenum.find({'name': info['name']}).count()
                 if not res:
-                    phonenum.insert_one({'name': info['company'],
+                    phonenum.insert_one({'name': info['name'],
                                          'phone': phone})
 
 
@@ -187,7 +191,8 @@ def clear_job_data(job_data_list):
         if row[3] in row[2]:
             row[3] = random.choice(shiqu_dict.get(row[2]))
 
-        row[4] = '招' + row[7]
+        if row[4] in ['工长', '电工', '木工', '油漆工', '焊工', '安装工', '水电工', '普工杂工', '工程监理']:
+            row[4] = '招' + row[7]
 
         pattern = re.compile(r'([\d-]{8,15})')
         pattern1 = re.compile(r'(.*?岗位职责:?)')
@@ -262,6 +267,18 @@ def job_data_to_excel(job_data_list):
 
 
 def main():
+    # 1、从“职位描述”字段中提取手机号，存入phonenum表中
+    # find_phone_from_desc()
+
+    # 2、从数据库读取"公司名称"字段，去重，生成company_name.csv文件
+    # get_company_name_to_csv()
+
+    # 3、读取company_name.csv文件，通过公司名称，爬取公司电话，存入MongoDB的company_phone表中。(这个表临时存公司-电话信息)  shunqi.py
+
+    # 4、读取 company_phone表中的数据，对手机号进行校验，合格的存入 phonenum 表中。
+    # clear_phone_of_company_phone()
+
+    # 5、清洗
     job_data_list = get_data_of_job()
     new_job_data_list = clear_job_data(job_data_list)
     job_data_to_excel(new_job_data_list)
