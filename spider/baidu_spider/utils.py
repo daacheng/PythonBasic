@@ -31,14 +31,39 @@ shiqu_dict = {
     '南京': ['玄武', '秦淮', '鼓楼', '建邺', '雨花台', '栖霞', '浦口', '六合', '江宁', '溧水', '高淳'],
     '深圳': ['福田', '罗湖', '南山', '盐田', '宝安', '龙岗', '坪山', '龙华', '光明', '大鹏新'],
     '南宁': ['青秀', '兴宁', '江南', '良庆', '邕宁', '西乡塘', '武鸣'],
-    '西安': ['未央', '新城', '碑林', '莲湖', '灞桥', '雁塔', '阎良', '临潼', '长安', '高陵', '鄠邑']
+    '西安': ['未央', '新城', '碑林', '莲湖', '灞桥', '雁塔', '阎良', '临潼', '长安', '高陵', '鄠邑'],
+    '哈尔滨': ['道里', '南岗', '道外', '平房', '松北', '香坊', '呼兰', '阿城', '双城'],
+    '大庆': ['萨尔图', '龙凤', '让胡路', '红岗', '大同'],
+    '长春': ['南关', '宽城', '朝阳', '二道', '绿园', '双阳'],
+    '包头': ['昆都仑', '青山', '东河', '九原', '石拐', '固阳'],
+    '连云港': ['海州', '连云', '赣榆', '灌南', '东海', '灌云'],
+    '扬州': ['邗江', '广陵', '江都'],
+    '南通': ['崇川', '港闸', '通州'],
+    '宁波': ['海曙', '江北', '北仑', '镇海', '鄞州', '奉化', '余姚', '慈溪', '象山', '宁海'],
+    '温州': ['鹿城', '龙湾', '瓯海', '洞头'],
+    '嘉兴': ['南湖', '秀洲', '嘉善', '海盐'],
+    '绍兴': ['越城', '柯桥', '上虞', '新昌'],
+    '乌鲁木齐': ['天山', '沙依巴克', '新市', '水磨沟', '头屯河', '达坂城', '米东'],
+    '绵阳': ['涪城', '游仙', '安州'],
+    '贵阳': ['南明', '云岩', '花溪', '乌当', '白云', '观山湖'],
+    '遵义': ['红花岗', '汇川', '播州'],
+    '昆明': ['五华', '盘龙', '官渡', '西山', '呈贡', '晋宁', '东川', '安宁', '富民', '嵩明', '宜良'],
+    '百色': ['田阳', '田东', '平果', '德保', '那坡', '凌云', '乐业', '田林', '西林', '右江'],
+    '三亚': ['崖州', '天涯', '吉阳', '海棠'],
+    '海口': ['秀英', '龙华', '琼山', '美兰'],
+    '常德': ['武陵', '鼎城', '安乡', '汉寿', '桃源', '临澧', '石门'],
+    '株洲': ['天元', '芦淞', '荷塘', '石峰', '渌口'],
+    '银川': ['兴庆', '西夏', '金凤', '永宁', '贺兰'],
+    '赣州': ['章贡', '南康', '大余', '上犹', '崇义', '信丰', '龙南', '定南', '全南', '安远', '宁都', '于都', '兴国', '会昌', '石城', '寻乌'],
+    '芜湖': ['镜湖', '弋江', '鸠江', '三山'],
+    '合肥': ['蜀山', '瑶海', '庐阳', '包河', '肥西', '庐江']
 }
 
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
 phonenum = baidu.phonenum            # 里面是增量的有效手机号，不定时更新数据
 company_phone = baidu.company_phone  # 临时的公司-电话数据
-coll = baidu.work_1123
+coll = baidu.work_1124
 
 
 def find_phone_from_desc():
@@ -134,7 +159,8 @@ def clear_job_desc(job_desc):
             .replace('回族及骗路费的勿扰', '').replace('回族骗路费的勿扰', '').replace('回族等勿扰谢谢', '').replace('回民兄弟勿扰', '').replace('回民及骗路费勿扰', '')\
             .replace('回民绕行', '').replace('回民朋友勿扰', '').replace('回民请饶行', '').replace('回族不要', '').replace('回民及骗路费的勿扰', '')\
             .replace('，回民', '').replace('回民无扰', '').replace('回民请绕道', '').replace('回民及骗路勿扰', '').replace('回民谢绝', '').replace('回民离我远点', '')\
-            .replace('回民及提前打路费的勿扰', '').replace('&amp;', '').replace('nbsp;', '').replace('lt;', '').replace('brgt;', '')
+            .replace('回民及提前打路费的勿扰', '').replace('&amp;', '').replace('nbsp;', '').replace('lt;', '').replace('brgt;', '').replace('联系电话', '')\
+            .replace('【', '').replace('】', '').replace('\u200c', '').replace('电话', '').replace('*', '')
     return job_desc
 
 
@@ -191,7 +217,7 @@ def clear_job_data(job_data_list):
         if row[3] in row[2]:
             row[3] = random.choice(shiqu_dict.get(row[2]))
 
-        if row[4] in ['工长', '电工', '木工', '油漆工', '焊工', '安装工', '水电工', '普工杂工', '工程监理']:
+        if row[4] in ['工长', '电工', '木工', '油漆工', '焊工', '安装工', '水电工', '普工杂工', '工程监理', '工程机械']:
             row[4] = '招' + row[7]
 
         pattern = re.compile(r'([\d-]{8,15})')
@@ -214,7 +240,7 @@ def clear_job_data(job_data_list):
         row[11] = desc
 
         row[6] = row[6].replace('工作地点：', '')
-
+        row[14] = row[7]
         row[12] = re.compile(r'([\d-]{8,15})').findall(row[12])
         if row[12]:
             row[12] = row[12][0]
@@ -266,6 +292,15 @@ def job_data_to_excel(job_data_list):
     workbook.save('OK2.xls')
 
 
+def to_company_num_csv():
+    phone_list = phonenum.find()
+
+    with open('company_phone.csv', 'w', encoding='utf-8', newline='') as f:
+        writer = csv.writer(f, delimiter='\t')
+        for phone in phone_list:
+            writer.writerow([phone['name'], phone['phone']])
+
+
 def main():
     # 1、从“职位描述”字段中提取手机号，存入phonenum表中
     # find_phone_from_desc()
@@ -279,10 +314,10 @@ def main():
     # clear_phone_of_company_phone()
 
     # 5、清洗
-    job_data_list = get_data_of_job()
-    new_job_data_list = clear_job_data(job_data_list)
-    job_data_to_excel(new_job_data_list)
-
+    # job_data_list = get_data_of_job()
+    # new_job_data_list = clear_job_data(job_data_list)
+    # job_data_to_excel(new_job_data_list)
+    to_company_num_csv()
 
 if __name__ == '__main__':
     main()

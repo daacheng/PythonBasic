@@ -23,7 +23,7 @@ import threading
 """
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
-collection = baidu.work_1123
+collection = baidu.work_1124
 
 
 def save_to_mongodb(work_info):
@@ -215,7 +215,10 @@ def crawl(job_type, city, province, token, cookie):
                         'phone': '',
                         'public_time': public_time
                     }
-                    save_to_mongodb(info_dict)
+
+                    res = collection.find({'company': info_dict['company']}).count()
+                    if not res:
+                        save_to_mongodb(info_dict)
 
                 except:
                     print('error')
@@ -229,12 +232,12 @@ def crawl(job_type, city, province, token, cookie):
 
 def main():
 
-    job_type_list = ['工长', '电工', '木工', '油漆工', '焊工', '安装工', '水电工', '普工杂工', '工程监理']  # 常见工种
+    job_type_list = ['工长', '电工', '木工', '油漆工', '焊工', '安装工', '水电工', '普工杂工', '工程监理', '工程机械']  # 常见工种
 
-    city = '广州'
-    province = '广东'
-    token = '%3D%3Dgll2K2XC%2BpJS1ZqZGZpx5aktplZZoaZKGbUimZm92Y'
-    cookie = 'BAIDUID=2176D64D05517AC3780B774A47F39EB6:FG=1; BIDUPSID=2176D64D05517AC3780B774A47F39EB6; PSTM=1539070163; BDUSS=1lsMWZKSFRUWjBzTDU0TjNJMWxCdnJmc0tOTUR4N2E2MDNxeGdINmZxSk5LdlZiQVFBQUFBJCQAAAAAAAAAAAEAAADi6c1PYmJveb-nt8jX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE2dzVtNnc1bb; MCITY=-218%3A; Hm_lvt_4b55f5db1b521481b884efb1078a89cc=1542350600; Hm_lvt_da3258e243c3132f66f0f3c247b48473=1541989917,1542350086,1542592345; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; H_PS_PSSID=26522_1446_21094; ZD_ENTRY=baidu; pgv_pvi=143252480; pgv_si=s6975098880; delPer=0; PSINO=2'
+    city = '合肥'
+    province = '安徽'
+    token = '%3D%3DAmjy6qGL7oXNVmghZalBGZqp5kaZIav1WcWuZZZWWl'
+    cookie = 'BAIDUID=2176D64D05517AC3780B774A47F39EB6:FG=1; BIDUPSID=2176D64D05517AC3780B774A47F39EB6; PSTM=1539070163; BDUSS=1lsMWZKSFRUWjBzTDU0TjNJMWxCdnJmc0tOTUR4N2E2MDNxeGdINmZxSk5LdlZiQVFBQUFBJCQAAAAAAAAAAAEAAADi6c1PYmJveb-nt8jX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE2dzVtNnc1bb; MCITY=-218%3A; Hm_lvt_4b55f5db1b521481b884efb1078a89cc=1542350600; Hm_lvt_da3258e243c3132f66f0f3c247b48473=1541989917,1542350086,1542592345; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; H_PS_PSSID=26522_1446_21094; delPer=0; PSINO=2; pgv_pvi=9382668288; pgv_si=s7562173440'
 
     for job_type in job_type_list:
         td = threading.Thread(target=crawl, args=(job_type, city, province, token, cookie))

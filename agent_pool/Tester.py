@@ -9,8 +9,8 @@ import time
 """
 
 # 用来测试代理是否可用的地址
-test_url = 'http://www.11467.com/'
-# test_url = 'https://zhaopin.baidu.com/'
+# test_url = 'http://www.11467.com/'
+test_url = 'https://zhaopin.baidu.com/'
 
 
 class Tester(object):
