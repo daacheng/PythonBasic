@@ -56,14 +56,19 @@ shiqu_dict = {
     '银川': ['兴庆', '西夏', '金凤', '永宁', '贺兰'],
     '赣州': ['章贡', '南康', '大余', '上犹', '崇义', '信丰', '龙南', '定南', '全南', '安远', '宁都', '于都', '兴国', '会昌', '石城', '寻乌'],
     '芜湖': ['镜湖', '弋江', '鸠江', '三山'],
-    '合肥': ['蜀山', '瑶海', '庐阳', '包河', '肥西', '庐江']
+    '合肥': ['蜀山', '瑶海', '庐阳', '包河', '肥西', '庐江'],
+    '厦门': ['思明', '湖里', '集美', '海沧', '同安', '翔安'],
+    '泉州': ['鲤城', '丰泽', '洛江', '泉港'],
+    '淄博': ['张店', '淄川', '博山', '周村', '临淄'],
+    '安阳': ['文峰', '北关', '殷都', '龙安'],
+    '南阳': ['宛城', '卧龙，南召', '镇平', '内乡', '淅川', '新野', '唐河', '桐柏', '方城', '西峡', '社旗']
 }
 
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
 phonenum = baidu.phonenum            # 里面是增量的有效手机号，不定时更新数据
 company_phone = baidu.company_phone  # 临时的公司-电话数据
-coll = baidu.work_1124
+coll = baidu.work_1126
 
 
 def find_phone_from_desc():
@@ -160,7 +165,20 @@ def clear_job_desc(job_desc):
             .replace('回民绕行', '').replace('回民朋友勿扰', '').replace('回民请饶行', '').replace('回族不要', '').replace('回民及骗路费的勿扰', '')\
             .replace('，回民', '').replace('回民无扰', '').replace('回民请绕道', '').replace('回民及骗路勿扰', '').replace('回民谢绝', '').replace('回民离我远点', '')\
             .replace('回民及提前打路费的勿扰', '').replace('&amp;', '').replace('nbsp;', '').replace('lt;', '').replace('brgt;', '').replace('联系电话', '')\
-            .replace('【', '').replace('】', '').replace('\u200c', '').replace('电话', '').replace('*', '')
+            .replace('【', '').replace('】', '').replace('\u200c', '').replace('电话', '').replace('*', '').replace('岗位职责', '')\
+            .replace('：', '').replace('1', '').replace('2', '').replace('3', '').replace('4', '').replace('5', '').replace('、', '') \
+            .replace('任职资格', '').replace('职位要求', '').replace('任职要求', '').replace('职务要求', '').replace('一', '').replace('二', '') \
+            .replace('三', '').replace('四', '').replace('五', '').replace('工资', '').replace('月工资', '').replace('元', '').replace('-', '') \
+            .replace('（', '').replace('）', '').replace('/月', '').replace('月薪', '').replace('0', '').replace('&quot;', '').replace('&amp;', '')\
+            .replace('nbsp;', '').replace('联系方式:', '').replace('联系电话', '')\
+            .replace('】', '').replace('\xa0', '').replace('\xa02', '').replace('】', '').replace('龙经理招聘经理：龙经理', '')\
+            .replace('quot;', '').replace('\u3000', '').replace('：1', '1')
+
+    # 去掉描述中的薪资
+    pattern = re.compile(r'\d{4,6}')
+    job_desc = re.sub(pattern, '', job_desc, count=0, flags=0)
+    # print(job_desc)
+
     return job_desc
 
 
@@ -192,12 +210,12 @@ def get_data_of_job():
 
         detail_address = info['detail_address']  # 详细地址
         job_type = info['job_type']  # 工种
-        release_time = info['release_time']  # 发布时间
+        release_time = info['release_time']  # 开工时间（当前时间）
         valid_time = info['valid_time']  # 有效时间
         salary = info['salary']  # 有效时间
         require = job_desc  # 职位要求
         status = info['status']  # 状态
-        public_time = info['public_time']  # 采集时间
+        public_time = info['public_time']  # 发布时间
 
         row = [company, province, city, district, title, job_desc, detail_address, job_type, release_time, valid_time, salary, require, phone, status, public_time]
         # print(row)
@@ -209,24 +227,25 @@ def get_data_of_job():
 def clear_job_data(job_data_list):
     new_job_data_list = []
     for row in job_data_list:
+        new_row = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
         # print(row)
-        row[1] = row[1].replace('省', '')
-        row[2] = row[2].replace('市', '')
-        row[3] = row[3].replace('区', '')
+        new_row[0] = row[0]
+        new_row[1] = row[1].replace('省', '')
+        new_row[2] = row[2].replace('市', '')
+        new_row[3] = row[3].replace('区', '')
 
-        if row[3] in row[2]:
-            row[3] = random.choice(shiqu_dict.get(row[2]))
+        if new_row[3] in new_row[2]:
+            new_row[3] = random.choice(shiqu_dict.get(new_row[2]))
 
         if row[4] in ['工长', '电工', '木工', '油漆工', '焊工', '安装工', '水电工', '普工杂工', '工程监理', '工程机械']:
-            row[4] = '招' + row[7]
+            new_row[4] = '招' + row[7]
+        else:
+            new_row[4] = row[4]
 
         pattern = re.compile(r'([\d-]{8,15})')
         pattern1 = re.compile(r'(.*?岗位职责:?)')
         desc = re.sub(pattern, '', row[5])
         desc = re.sub(pattern1, '', desc)
-        desc = desc.replace('&quot;', '').replace('&amp;', '').replace('nbsp;', '').replace('联系方式:', '').replace('联系电话', '')\
-                .replace('】', '').replace('\xa0', '').replace('\xa02', '').replace('】', '').replace('龙经理招聘经理：龙经理', '')\
-                .replace('quot;', '').replace('\u3000', '').replace('：1', '1')
         if len(desc) < 12:
             desc = ''
         elif '中介' in desc:
@@ -236,19 +255,39 @@ def clear_job_data(job_data_list):
         if not desc:
             desc = "招%s,要熟练工, 要求有工作经验，无不良嗜好" % row[7]
 
-        row[5] = desc
-        row[11] = desc
+        new_row[5] = desc
+        new_row[11] = desc
 
-        row[6] = row[6].replace('工作地点：', '')
-        row[14] = row[7]
-        row[12] = re.compile(r'([\d-]{8,15})').findall(row[12])
-        if row[12]:
-            row[12] = row[12][0]
-            if desc and row[12] and len(row[12]) == 11 and '-' not in row[12] and row[12][0] == '1':
-                print(row)
-                new_job_data_list.append(row)
+        new_row[6] = row[6].replace('工作地点：', '')
+        new_row[7] = row[7]
+        new_row[8] = row[8]
+        new_row[9] = row[9]
+        new_row[10] = row[10]
+        new_row[13] = row[13]
+        new_row[14] = row[14]
 
-    return new_job_data_list
+        new_row[12] = re.compile(r'([\d-]{8,15})').findall(row[12])
+        if new_row[12]:
+            new_row[12] = new_row[12][0]
+            if desc and new_row[12] and len(new_row[12]) == 11 and '-' not in new_row[12] and new_row[12][0] == '1':
+                # print(row)
+                new_job_data_list.append(new_row)
+
+
+    # 按照区县、工种、手机号去重
+    job_data_dict = {}
+    for data in new_job_data_list:
+        key = data[3] + data[7] + data[-3]
+        key = key.replace(' ', '')
+        # print(key)
+        job_data_dict[key] = data
+
+    result_list = []
+    for k, v in job_data_dict.items():
+        print(v)
+        result_list.append(v)
+
+    return result_list
 
 
 def job_data_to_excel(job_data_list):
@@ -314,10 +353,10 @@ def main():
     # clear_phone_of_company_phone()
 
     # 5、清洗
-    # job_data_list = get_data_of_job()
-    # new_job_data_list = clear_job_data(job_data_list)
-    # job_data_to_excel(new_job_data_list)
-    to_company_num_csv()
+    job_data_list = get_data_of_job()
+    new_job_data_list = clear_job_data(job_data_list)
+    job_data_to_excel(new_job_data_list)
+    # to_company_num_csv()
 
 if __name__ == '__main__':
     main()

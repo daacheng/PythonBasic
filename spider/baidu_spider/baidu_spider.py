@@ -23,7 +23,7 @@ import threading
 """
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
-collection = baidu.work_1124
+collection = baidu.work_1126
 
 
 def save_to_mongodb(work_info):
@@ -118,10 +118,10 @@ def crawl(job_type, city, province, token, cookie):
                     title = ''  # 标题
                     job_desc = ''  # 工作描述
                     detail_address = ''  # 详细地址
-                    release_time = ''  # 发布时间
+                    release_time = str(datetime.datetime.now().strftime('%Y/%m/%d'))  # 开工时间(当前时间)
                     valid_time = ''  # 有效时间
                     salary = ''  # 薪水
-                    public_time = str(datetime.datetime.now().strftime('%Y/%m/%d'))  # 采集时间
+                    public_time = ''  # 发布时间
 
                     try:
                         company = re.compile(r'class="bd-tt" data-a-39d218aa>(.*?)<').findall(html)[0]
@@ -170,10 +170,10 @@ def crawl(job_type, city, province, token, cookie):
                             detail_address = "%s市" % city
 
                     try:
-                        release_time = re.compile(r'<p>发布时间：(2018-\d{2}-\d{2}).*?</p>').findall(html)[0]
-                        release_time = release_time.replace('<p>', '').replace('</p>', '')
+                        public_time = re.compile(r'<p>发布时间：(2018-\d{2}-\d{2}).*?</p>').findall(html)[0]
+                        public_time = public_time.replace('<p>', '').replace('</p>', '')
                     except Exception as e:
-                        release_time = str(datetime.datetime.now().strftime('%Y/%m/%d'))
+                        public_time = str(datetime.datetime.now().strftime('%Y/%m/%d'))
 
                     try:
                         valid_time = re.compile(r'<p>有效日期：(.*?)</p>').findall(html)[0]
@@ -191,11 +191,12 @@ def crawl(job_type, city, province, token, cookie):
                     print('公司名称', company)
                     print('区县', district)
                     print('标题: ', title)
-                    print('发布时间: ', release_time)
-                    print('有效时间: ', valid_time)
+                    print('开工时间: ', release_time)
+                    print('完工时间: ', valid_time)
                     print('薪水: ', salary)
                     print('地址: ', detail_address)
                     print('工作描述: ', job_desc)
+                    print('发布时间: ', public_time)
                     print('***************************************')
 
                     info_dict = {
@@ -234,10 +235,10 @@ def main():
 
     job_type_list = ['工长', '电工', '木工', '油漆工', '焊工', '安装工', '水电工', '普工杂工', '工程监理', '工程机械']  # 常见工种
 
-    city = '合肥'
-    province = '安徽'
-    token = '%3D%3DAmjy6qGL7oXNVmghZalBGZqp5kaZIav1WcWuZZZWWl'
-    cookie = 'BAIDUID=2176D64D05517AC3780B774A47F39EB6:FG=1; BIDUPSID=2176D64D05517AC3780B774A47F39EB6; PSTM=1539070163; BDUSS=1lsMWZKSFRUWjBzTDU0TjNJMWxCdnJmc0tOTUR4N2E2MDNxeGdINmZxSk5LdlZiQVFBQUFBJCQAAAAAAAAAAAEAAADi6c1PYmJveb-nt8jX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE2dzVtNnc1bb; MCITY=-218%3A; Hm_lvt_4b55f5db1b521481b884efb1078a89cc=1542350600; Hm_lvt_da3258e243c3132f66f0f3c247b48473=1541989917,1542350086,1542592345; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; H_PS_PSSID=26522_1446_21094; delPer=0; PSINO=2; pgv_pvi=9382668288; pgv_si=s7562173440'
+    city = '广州'
+    province = '广东'
+    token = '%3D%3DQmlCLqXO7oJm4bql5amlWmY6maESlYqlZlk5ZlgJ2Z'
+    cookie = 'BAIDUID=2176D64D05517AC3780B774A47F39EB6:FG=1; BIDUPSID=2176D64D05517AC3780B774A47F39EB6; PSTM=1539070163; BDUSS=1lsMWZKSFRUWjBzTDU0TjNJMWxCdnJmc0tOTUR4N2E2MDNxeGdINmZxSk5LdlZiQVFBQUFBJCQAAAAAAAAAAAEAAADi6c1PYmJveb-nt8jX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE2dzVtNnc1bb; MCITY=-218%3A; Hm_lvt_4b55f5db1b521481b884efb1078a89cc=1542350600; Hm_lvt_da3258e243c3132f66f0f3c247b48473=1541989917,1542350086,1542592345; H_PS_PSSID=26522_1446_21094; delPer=0; PSINO=2; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598'
 
     for job_type in job_type_list:
         td = threading.Thread(target=crawl, args=(job_type, city, province, token, cookie))
