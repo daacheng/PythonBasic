@@ -59,7 +59,7 @@ class Crawler(object):
                 'Accept-Language': 'zh-CN,zh;q=0.9',
                 'Host': 'www.66ip.cn',
                 'Referer': 'http://www.66ip.cn/',
-                'Cookie': 'yd_cookie=0d03f4c4-26bb-40758d4bc5e082b1741734faa584ff7110fc; Hm_lvt_1761fabf3c988e7f04bec51acd4073f4=1542767908,1542944154,1543023644,1543197055; Hm_lpvt_1761fabf3c988e7f04bec51acd4073f4=1543197055; _ydclearance=3fa0bdf567a3c670648fdf86-0a49-4db5-9c1a-44b15647852e-1543204266',
+                'Cookie': 'yd_cookie=d4deb462-2894-45a63e03546d29e525324afdd53eb874e874; Hm_lvt_1761fabf3c988e7f04bec51acd4073f4=1543023644,1543197055,1543369812,1543391648; Hm_lpvt_1761fabf3c988e7f04bec51acd4073f4=1543391648; _ydclearance=5137c06823599348e9ba5f3a-de0f-4048-94a7-2ad0d9e740e5-1543398853',
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36'
             }
 

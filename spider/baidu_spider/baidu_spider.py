@@ -13,8 +13,7 @@ import threading
 """
     该脚本主要是 爬取百度招聘网站上的招聘信息，并将数据存入MongoDB数据库。
     主要内容:
-    (省, 市, 区, 工程标题, 工程描述, 详细地址, 工种, 开工日期, 完工日期, 
-     薪酬金额, 接包要求 , 发布状态, 发布日期)
+    (省, 市, 区, 工程标题, 工程描述, 详细地址, 工种, 开工日期, 完工日期, 薪酬金额, 接包要求 , 发布状态, 发布日期)
 """
 
 
@@ -23,7 +22,7 @@ import threading
 """
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
-collection = baidu.work_1126
+collection = baidu.work_1128
 
 
 def save_to_mongodb(work_info):
@@ -235,10 +234,10 @@ def main():
 
     job_type_list = ['工长', '电工', '木工', '油漆工', '焊工', '安装工', '水电工', '普工杂工', '工程监理', '工程机械']  # 常见工种
 
-    city = '广州'
-    province = '广东'
-    token = '%3D%3DQmlCLqXO7oJm4bql5amlWmY6maESlYqlZlk5ZlgJ2Z'
-    cookie = 'BAIDUID=2176D64D05517AC3780B774A47F39EB6:FG=1; BIDUPSID=2176D64D05517AC3780B774A47F39EB6; PSTM=1539070163; BDUSS=1lsMWZKSFRUWjBzTDU0TjNJMWxCdnJmc0tOTUR4N2E2MDNxeGdINmZxSk5LdlZiQVFBQUFBJCQAAAAAAAAAAAEAAADi6c1PYmJveb-nt8jX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE2dzVtNnc1bb; MCITY=-218%3A; Hm_lvt_4b55f5db1b521481b884efb1078a89cc=1542350600; Hm_lvt_da3258e243c3132f66f0f3c247b48473=1541989917,1542350086,1542592345; H_PS_PSSID=26522_1446_21094; delPer=0; PSINO=2; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598'
+    city = '太原'
+    province = '山西省'
+    token = '%3D%3DQmh26oSu91alYaWyGcrVmZZ6WlZRVmSqWZstZao1ma'
+    cookie = 'BAIDUID=2176D64D05517AC3780B774A47F39EB6:FG=1; BIDUPSID=2176D64D05517AC3780B774A47F39EB6; PSTM=1539070163; BDUSS=1lsMWZKSFRUWjBzTDU0TjNJMWxCdnJmc0tOTUR4N2E2MDNxeGdINmZxSk5LdlZiQVFBQUFBJCQAAAAAAAAAAAEAAADi6c1PYmJveb-nt8jX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE2dzVtNnc1bb; MCITY=-218%3A; Hm_lvt_4b55f5db1b521481b884efb1078a89cc=1542350600; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; Hm_lvt_da3258e243c3132f66f0f3c247b48473=1541989917,1542350086,1542592345,1543200354; H_PS_PSSID=26522_1446_21094; delPer=0; PSINO=2'
 
     for job_type in job_type_list:
         td = threading.Thread(target=crawl, args=(job_type, city, province, token, cookie))

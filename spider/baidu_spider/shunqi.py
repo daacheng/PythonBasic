@@ -49,7 +49,7 @@ company_queue = Queue()
 with open('company_name.csv', 'r', encoding='utf-8') as f:
     reader = csv.reader(f, delimiter='\t')
     for row in reader:
-        print(row)
+        # print(row)
         company_queue.put(row[0])
 
 company_dict = {}
@@ -77,6 +77,7 @@ def get_proxy():
     try:
         get_proxy_utl = 'http://127.0.0.1:5000/random'
         res = requests.get(get_proxy_utl)
+        # print(res.status_code)
         if res.status_code == 200:
             # print('从代理池中获取代理IP: %s' % res.text)
             proxies = {'http': 'http://' + res.text}

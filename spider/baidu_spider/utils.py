@@ -61,14 +61,20 @@ shiqu_dict = {
     '泉州': ['鲤城', '丰泽', '洛江', '泉港'],
     '淄博': ['张店', '淄川', '博山', '周村', '临淄'],
     '安阳': ['文峰', '北关', '殷都', '龙安'],
-    '南阳': ['宛城', '卧龙，南召', '镇平', '内乡', '淅川', '新野', '唐河', '桐柏', '方城', '西峡', '社旗']
+    '南阳': ['宛城', '卧龙', '南召', '镇平', '内乡', '淅川', '新野', '唐河', '桐柏', '方城', '西峡', '社旗'],
+    '桂林': ['秀峰', '叠彩', '象山', '七星', '雁山', '临桂'],
+    '重庆': ['渝中', '万州', '涪陵', '大渡口', '江北', '沙坪坝', '九龙坡', '南岸', '北碚', '綦江', '大足', '渝北', '巴南', '黔江', '长寿', '江津', '合川', '永川'],
+    '宝鸡': ['渭滨', '金台', '陈仓'],
+    '咸阳': ['秦都', '渭城', '兴平', '彬州', '三原', '泾阳'],
+    '兰州': ['城关', '七里河', '西固', '安宁', '红古', '永登'],
+    '天水': ['秦州', '麦积', '甘谷', '武山', '秦安']
 }
 
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
 phonenum = baidu.phonenum            # 里面是增量的有效手机号，不定时更新数据
 company_phone = baidu.company_phone  # 临时的公司-电话数据
-coll = baidu.work_1126
+coll = baidu.work_1128
 
 
 def find_phone_from_desc():
@@ -165,14 +171,19 @@ def clear_job_desc(job_desc):
             .replace('回民绕行', '').replace('回民朋友勿扰', '').replace('回民请饶行', '').replace('回族不要', '').replace('回民及骗路费的勿扰', '')\
             .replace('，回民', '').replace('回民无扰', '').replace('回民请绕道', '').replace('回民及骗路勿扰', '').replace('回民谢绝', '').replace('回民离我远点', '')\
             .replace('回民及提前打路费的勿扰', '').replace('&amp;', '').replace('nbsp;', '').replace('lt;', '').replace('brgt;', '').replace('联系电话', '')\
-            .replace('【', '').replace('】', '').replace('\u200c', '').replace('电话', '').replace('*', '').replace('岗位职责', '')\
-            .replace('：', '').replace('1', '').replace('2', '').replace('3', '').replace('4', '').replace('5', '').replace('、', '') \
-            .replace('任职资格', '').replace('职位要求', '').replace('任职要求', '').replace('职务要求', '').replace('一', '').replace('二', '') \
-            .replace('三', '').replace('四', '').replace('五', '').replace('工资', '').replace('月工资', '').replace('元', '').replace('-', '') \
-            .replace('（', '').replace('）', '').replace('/月', '').replace('月薪', '').replace('0', '').replace('&quot;', '').replace('&amp;', '')\
+            .replace('【', '').replace('】', '').replace('\u200c', '').replace('电话', '').replace('*', '').replace('岗位职责:', '')\
+            .replace('1、', '').replace('2、', '').replace('3、', '').replace('4、', '').replace('5、', '') \
+            .replace('任职资格:', '').replace('职位要求', '').replace('任职要求', '').replace('职务要求', '').replace('一、', '').replace('二、', '') \
+            .replace('三、', '').replace('四、', '').replace('五、', '').replace('工资', '').replace('月工资', '').replace('元', '') \
+            .replace('（', '').replace('）', '').replace('/月', '').replace('月薪', '').replace('&quot;', '').replace('&amp;', '')\
             .replace('nbsp;', '').replace('联系方式:', '').replace('联系电话', '')\
-            .replace('】', '').replace('\xa0', '').replace('\xa02', '').replace('】', '').replace('龙经理招聘经理：龙经理', '')\
-            .replace('quot;', '').replace('\u3000', '').replace('：1', '1')
+            .replace('】', '').replace('\xa0', '').replace('\xa02', '').replace('】', '').replace('工作内容：', '').replace('职位描述:', '')\
+            .replace('quot;', '').replace('\u3000', '').replace('1.', '').replace('2.', '').replace('3.', '').replace('4.', '').replace('5.', '') \
+            .replace('岗位要求', '').replace('岗位职责：', '').replace('以上', '').replace('1】', '').replace('2】', '').replace('3】', '').replace('4】', '').replace('5】', '')\
+            .replace('1．', '').replace('2．', '').replace('3．', '').replace('4．', '').replace('5．', '').replace('职位职责：', '')\
+            .replace('①', '').replace('②', '').replace('③', '').replace('招聘岗位：', '').replace('招聘岗位：', '')
+
+
 
     # 去掉描述中的薪资
     pattern = re.compile(r'\d{4,6}')
@@ -191,7 +202,7 @@ def get_data_of_job():
     job_list = coll.find()
 
     for info in job_list:
-        # print(info)
+
         company = info['company']  # 公司名称
 
         phone = ''  # 公司电话
@@ -218,7 +229,9 @@ def get_data_of_job():
         public_time = info['public_time']  # 发布时间
 
         row = [company, province, city, district, title, job_desc, detail_address, job_type, release_time, valid_time, salary, require, phone, status, public_time]
-        # print(row)
+        print('before:', info['job_desc'])
+        print('after:', row[5])
+        print('##########################')
         job_data_list.append(row)
 
     return job_data_list
@@ -232,7 +245,7 @@ def clear_job_data(job_data_list):
         new_row[0] = row[0]
         new_row[1] = row[1].replace('省', '')
         new_row[2] = row[2].replace('市', '')
-        new_row[3] = row[3].replace('区', '')
+        new_row[3] = row[3].replace('区', '').replace('县', '').replace('市', '')
 
         if new_row[3] in new_row[2]:
             new_row[3] = random.choice(shiqu_dict.get(new_row[2]))
