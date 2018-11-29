@@ -22,7 +22,7 @@ import threading
 """
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
-collection = baidu.work_1128
+collection = baidu.work_1129
 
 
 def save_to_mongodb(work_info):
@@ -120,7 +120,7 @@ def crawl(job_type, city, province, token, cookie):
                     release_time = str(datetime.datetime.now().strftime('%Y/%m/%d'))  # 开工时间(当前时间)
                     valid_time = ''  # 有效时间
                     salary = ''  # 薪水
-                    public_time = ''  # 发布时间
+                    public_time = time.strftime("%Y-%m-%d %H:%M", time.localtime())  # 发布时间(当前时间)
 
                     try:
                         company = re.compile(r'class="bd-tt" data-a-39d218aa>(.*?)<').findall(html)[0]
@@ -168,11 +168,11 @@ def crawl(job_type, city, province, token, cookie):
                         except:
                             detail_address = "%s市" % city
 
-                    try:
-                        public_time = re.compile(r'<p>发布时间：(2018-\d{2}-\d{2}).*?</p>').findall(html)[0]
-                        public_time = public_time.replace('<p>', '').replace('</p>', '')
-                    except Exception as e:
-                        public_time = str(datetime.datetime.now().strftime('%Y/%m/%d'))
+                    # try:
+                    #     public_time = re.compile(r'<p>发布时间：(2018-\d{2}-\d{2}).*?</p>').findall(html)[0]
+                    #     public_time = public_time.replace('<p>', '').replace('</p>', '')
+                    # except Exception as e:
+                    #     public_time = str(datetime.datetime.now().strftime('%Y/%m/%d'))
 
                     try:
                         valid_time = re.compile(r'<p>有效日期：(.*?)</p>').findall(html)[0]
@@ -234,9 +234,9 @@ def main():
 
     job_type_list = ['工长', '电工', '木工', '油漆工', '焊工', '安装工', '水电工', '普工杂工', '工程监理', '工程机械']  # 常见工种
 
-    city = '太原'
-    province = '山西省'
-    token = '%3D%3DQmh26oSu91alYaWyGcrVmZZ6WlZRVmSqWZstZao1ma'
+    city = '杭州'
+    province = '浙江'
+    token = '%3D%3DwmnC7qYyaqbd4YeyZZthmaZapYFuVaceJlYm5ZkVGm'
     cookie = 'BAIDUID=2176D64D05517AC3780B774A47F39EB6:FG=1; BIDUPSID=2176D64D05517AC3780B774A47F39EB6; PSTM=1539070163; BDUSS=1lsMWZKSFRUWjBzTDU0TjNJMWxCdnJmc0tOTUR4N2E2MDNxeGdINmZxSk5LdlZiQVFBQUFBJCQAAAAAAAAAAAEAAADi6c1PYmJveb-nt8jX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE2dzVtNnc1bb; MCITY=-218%3A; Hm_lvt_4b55f5db1b521481b884efb1078a89cc=1542350600; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; Hm_lvt_da3258e243c3132f66f0f3c247b48473=1541989917,1542350086,1542592345,1543200354; H_PS_PSSID=26522_1446_21094; delPer=0; PSINO=2'
 
     for job_type in job_type_list:
