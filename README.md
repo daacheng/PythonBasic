@@ -36,9 +36,11 @@
 
 1.15. [Python通用日志模块配置](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E9%80%9A%E7%94%A8%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97%E9%85%8D%E7%BD%AE.md)
 
-1.16 [git使用文档](https://github.com/daacheng/PythonBasic/blob/master/studynotes/git%E6%96%87%E6%A1%A3.md)
+1.16. [git使用文档](https://github.com/daacheng/PythonBasic/blob/master/studynotes/git%E6%96%87%E6%A1%A3.md)
 
-1.17 [Python之namedtuple对象](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8Bnamedtuple%E5%AF%B9%E8%B1%A1.md)
+1.17. [Python之namedtuple对象](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8Bnamedtuple%E5%AF%B9%E8%B1%A1.md)
+
+1.18. [Python中的单下划线与双下划线](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B8%AD%E7%9A%84%E5%8D%95%E4%B8%8B%E5%88%92%E7%BA%BF%E4%B8%8E%E5%8F%8C%E4%B8%8B%E5%88%92%E7%BA%BF.md)
 ## 2、spider文件夹为爬虫练习代码
 2.[爬虫练习代码](https://github.com/daacheng/PythonBasic/tree/master/spider)
 
