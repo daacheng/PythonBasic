@@ -303,7 +303,7 @@ def clear_job_data(job_data_list):
 
     result_list = []
     for k, v in job_data_dict.items():
-        print(v)
+        # print(v)
         result_list.append(v)
 
     return result_list
@@ -372,10 +372,10 @@ def main():
     # clear_phone_of_company_phone()
 
     # 5、清洗
-    job_data_list = get_data_of_job()
-    new_job_data_list = clear_job_data(job_data_list)
-    job_data_to_excel(new_job_data_list)
-    # to_company_num_csv()
+    # job_data_list = get_data_of_job()
+    # new_job_data_list = clear_job_data(job_data_list)
+    # job_data_to_excel(new_job_data_list)
+    to_company_num_csv()
 
 if __name__ == '__main__':
     main()
