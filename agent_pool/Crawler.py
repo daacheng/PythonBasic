@@ -31,7 +31,8 @@ class Crawler(object):
                     'Accept-Encoding': 'gzip, deflate',
                     'Accept-Language': 'zh-CN,zh;q=0.9',
                     'Host': 'www.xicidaili.com',
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+                    'Cookie': '_free_proxy_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJWJjZjUxMWRkODBlNjA2OTk5YTk2Zjg2MzM5MjQ4YTEwBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMXcwcFpTcXI2NXVFMHo2MXJGbkplSnc1V3Jhc1I0b21EUTk0SGpPdjhxTHc9BjsARg%3D%3D--81e7db215ded5d21af3e1b11de436f65173eb89d; Hm_lvt_0cf76c77469e965d2957f0553e6ecf59=1542337081,1544068047; Hm_lpvt_0cf76c77469e965d2957f0553e6ecf59=1544068047'
                 }
 
                 res = requests.get(url, headers=headers)
@@ -65,7 +66,7 @@ class Crawler(object):
                     'Accept-Language': 'zh-CN,zh;q=0.9',
                     'Host': 'www.66ip.cn',
                     'Referer': 'http://www.66ip.cn/',
-                    'Cookie': 'yd_cookie=9ec1ced4-ed0d-4cc6f642d3cad3acd1e747a5d08e8699e047; Hm_lvt_1761fabf3c988e7f04bec51acd4073f4=1543391648,1543454297,1543800567,1543892144; Hm_lpvt_1761fabf3c988e7f04bec51acd4073f4=1543892144; _ydclearance=eb401d11da57bb1f52164b9b-32e2-4a78-bc55-a7cb6a730f63-1543899348',
+                    'Cookie': 'yd_cookie=9ec1ced4-ed0d-4cc6f642d3cad3acd1e747a5d08e8699e047; Hm_lvt_1761fabf3c988e7f04bec51acd4073f4=1543391648,1543454297,1543800567,1543892144; _ydclearance=087b122808467eb7d221c95e-b9ac-4d09-bcd0-bd6803cce878-1544075321; Hm_lpvt_1761fabf3c988e7f04bec51acd4073f4=1544068132',
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36'
                 }
 
@@ -103,7 +104,7 @@ class Crawler(object):
                     'Accept-Language': 'zh-CN,zh;q=0.9',
                     'Host': 'www.kuaidaili.com',
                     'Referer': 'http://www.66ip.cn/',
-                    'Cookie': 'channelid=0; sid=1543828498576461; _ga=GA1.2.2019923346.1543828501; _gid=GA1.2.1278257690.1543828501; _gat=1; Hm_lvt_7ed65b1cc4b810e9fd37959c9bb51b31=1543828501,1543892257; Hm_lpvt_7ed65b1cc4b810e9fd37959c9bb51b31=1543892259',
+                    'Cookie': 'channelid=0; sid=1543828498576461; _ga=GA1.2.2019923346.1543828501; Hm_lvt_7ed65b1cc4b810e9fd37959c9bb51b31=1543828501,1543892257,1544068211; _gid=GA1.2.330920982.1544068211; _gat=1; Hm_lpvt_7ed65b1cc4b810e9fd37959c9bb51b31=1544068212',
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36'
                 }
 
