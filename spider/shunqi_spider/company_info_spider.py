@@ -23,7 +23,7 @@ for root, dirs, files in os.walk(base_dir):
 """
 client = MongoClient('localhost', 27017)
 shunqi = client.shunqi
-collection = shunqi.company_info            # 公司信息表
+collection = shunqi.company_info_more            # 公司信息表
 
 
 def save_to_mongodb(info):
@@ -71,10 +71,15 @@ def parse_html():
             '所属分类': '',
             '所属城市': '',
             '类型': '',
+            '公司地址': '',
+            '固定电话': '',
+            '经理手机': '',
+            '电子邮件': '',
             '公司URL': url
         }
         try:
             soup = BeautifulSoup(html, 'html.parser')
+            # 爬取工商信息
             tr_list = soup.select('.boxcontent .codl tr')
             for tr in tr_list:
                 td_list = tr.select('td')
@@ -111,6 +116,24 @@ def parse_html():
                     company_info['类型'] = td_list[1].text.replace(' ', '')
                 else:
                     pass
+
+            # 爬取联系方式
+            contact_info_list = soup.select('#contact .boxcontent .codl')
+            for item in contact_info_list:
+                dt_list = item.select('dt')
+                dd_list = item.select('dd')
+                for i in range(0, len(dt_list)):
+                    if '公司地址' in dt_list[i].text:
+                        company_info['公司地址'] = dd_list[i].text
+                    elif '固定电话' in dt_list[i].text:
+                        company_info['固定电话'] = dd_list[i].text
+                    elif '经理手机' in dt_list[i].text:
+                        company_info['经理手机'] = dd_list[i].text
+                    elif '电子邮件' in dt_list[i].text:
+                        company_info['电子邮件'] = dd_list[i].text
+                    else:
+                        pass
+
             if company_info['公司名称']:
                 print(company_info)
                 save_to_mongodb(company_info)

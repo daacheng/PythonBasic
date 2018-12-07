@@ -1,5 +1,20 @@
 import csv
 import os
+from pymongo import MongoClient
+
+"""
+    连接数据库
+"""
+client = MongoClient('localhost', 27017)
+shunqi = client.shunqi
+collection = shunqi.company_info            # 公司信息表
+
+with open('company_name.csv', 'w', encoding='utf-8', newline='') as f:
+    writer = csv.writer(f)
+    for x in collection.find({}, {"公司名称": 1}):
+        # print(x['公司名称'])
+        name = x['公司名称']
+        writer.writerow([name])
 
 
 def clear_company_url():
@@ -51,7 +66,8 @@ def assort_error_url_file():
 
 
 def main():
-    clear_company_url()
+    # clear_company_url()
+    pass
 
 
 if __name__ == '__main__':
