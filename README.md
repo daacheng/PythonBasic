@@ -72,6 +72,8 @@
 
 2.14. [Python爬虫--scrapy爬虫框架入门](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--scrapy%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8.md)
 
+2.15. [Python爬虫--顺企网企业信息爬取](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E9%A1%BA%E4%BC%81%E7%BD%91%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%88%AC%E5%8F%96.md)
+
 ## 3、算法图解
 3.1. [二分查找、选择排序、递归](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E3%80%81%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E3%80%81%E9%80%92%E5%BD%92.md)
 
