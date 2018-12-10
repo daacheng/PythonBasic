@@ -52,6 +52,7 @@
 
 ### Python中使用协程的例子
 yield关键字相当于是暂停功能，程序运行到yield停止，send函数可以传参给生成器函数，参数赋值给yield。
+      
       def customer():
           while True:
               number = yield
