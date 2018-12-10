@@ -80,7 +80,7 @@ client = MongoClient('localhost', 27017)
 baidu = client.baidu
 phonenum = baidu.phonenum            # 里面是增量的有效手机号，不定时更新数据
 company_phone = baidu.company_phone  # 临时的公司-电话数据
-coll = baidu.work_1129
+coll = baidu.work_1210
 
 
 def find_phone_from_desc():
@@ -364,7 +364,7 @@ def main():
     # find_phone_from_desc()
 
     # 2、从数据库读取"公司名称"字段，去重，生成company_name.csv文件
-    # get_company_name_to_csv()
+    get_company_name_to_csv()
 
     # 3、读取company_name.csv文件，通过公司名称，爬取公司电话，存入MongoDB的company_phone表中。(这个表临时存公司-电话信息)  shunqi.py
 

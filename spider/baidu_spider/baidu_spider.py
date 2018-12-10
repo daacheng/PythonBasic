@@ -22,7 +22,7 @@ import threading
 """
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
-collection = baidu.work_1129
+collection = baidu.work_1210
 
 
 def save_to_mongodb(work_info):
@@ -139,7 +139,8 @@ def crawl(job_type, city, province, token, cookie):
                             or '风控岗' in title \
                             or '临床推广' in title \
                             or 'android' in title \
-                            or '推广专员' in title:
+                            or '推广专员' in title \
+                            or '产品运营' in title:
                         continue
 
                     # title = '招' + job_type
@@ -234,10 +235,11 @@ def main():
 
     job_type_list = ['工长', '电工', '木工', '油漆工', '焊工', '安装工', '水电工', '普工杂工', '工程监理', '工程机械']  # 常见工种
 
-    city = '杭州'
-    province = '浙江'
-    token = '%3D%3DwmnC7qYyaqbd4YeyZZthmaZapYFuVaceJlYm5ZkVGm'
-    cookie = 'BAIDUID=2176D64D05517AC3780B774A47F39EB6:FG=1; BIDUPSID=2176D64D05517AC3780B774A47F39EB6; PSTM=1539070163; BDUSS=1lsMWZKSFRUWjBzTDU0TjNJMWxCdnJmc0tOTUR4N2E2MDNxeGdINmZxSk5LdlZiQVFBQUFBJCQAAAAAAAAAAAEAAADi6c1PYmJveb-nt8jX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE2dzVtNnc1bb; MCITY=-218%3A; Hm_lvt_4b55f5db1b521481b884efb1078a89cc=1542350600; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; Hm_lvt_da3258e243c3132f66f0f3c247b48473=1541989917,1542350086,1542592345,1543200354; H_PS_PSSID=26522_1446_21094; delPer=0; PSINO=2'
+    city = '武汉'
+    province = '湖北'
+    token = '%3D%3DgmS3dpYKLpJOVbpFXmWSGmZq2ZHuVauJZaXmmlSq2a'
+    cookie = 'BAIDUID=2176D64D05517AC3780B774A47F39EB6:FG=1; BIDUPSID=2176D64D05517AC3780B774A47F39EB6; PSTM=1539070163; BDUSS=1lsMWZKSFRUWjBzTDU0TjNJMWxCdnJmc0tOTUR4N2E2MDNxeGdINmZxSk5LdlZiQVFBQUFBJCQAAAAAAAAAAAEAAADi6c1PYmJveb-nt8jX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE2dzVtNnc1bb; Hm_lvt_4b55f5db1b521481b884efb1078a89cc=1542350600; Hm_lvt_da3258e243c3132f66f0f3c247b48473=1541989917,1542350086,1542592345,1543200354; MCITY=-218%3A; H_PS_PSSID=26522_1446_21094_28019; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; BDSFRCVID=2hCOJeC62w54I5O9BoB_hKgqX890pzvTH6aowB498DXSvY3rTcPxEG0PDU8g0KubJ2MRogKKLgOTHULF_2uxOjjg8UtVJeC6EG0P3J; H_BDCLCKID_SF=tJ4toCPMJI_3fP36q4Rh-tFO-frQaC62aKDsoJnnBhcqEIL45T_MyjLget5y3qR3WKvDhIPXtPJ0fxbSj4Qo5Uj3eH7RXpJqyR7H-nOxMp5nhMJe3j7JDMP0-4CHWljy523i2n3vQpnl8hQ3DRoWXPIqbN7P-p5Z5mAqKl0MLIOkbRO4-TFajTQLef5'
+
 
     for job_type in job_type_list:
         td = threading.Thread(target=crawl, args=(job_type, city, province, token, cookie))
