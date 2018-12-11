@@ -364,7 +364,7 @@ def main():
     # find_phone_from_desc()
 
     # 2、从数据库读取"公司名称"字段，去重，生成company_name.csv文件
-    get_company_name_to_csv()
+    # get_company_name_to_csv()
 
     # 3、读取company_name.csv文件，通过公司名称，爬取公司电话，存入MongoDB的company_phone表中。(这个表临时存公司-电话信息)  shunqi.py
 
@@ -372,10 +372,10 @@ def main():
     # clear_phone_of_company_phone()
 
     # 5、清洗
-    # job_data_list = get_data_of_job()
-    # new_job_data_list = clear_job_data(job_data_list)
-    # job_data_to_excel(new_job_data_list)
-    to_company_num_csv()
+    job_data_list = get_data_of_job()
+    new_job_data_list = clear_job_data(job_data_list)
+    job_data_to_excel(new_job_data_list)
+    # to_company_num_csv()
 
 if __name__ == '__main__':
     main()
