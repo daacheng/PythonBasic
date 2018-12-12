@@ -73,14 +73,15 @@ shiqu_dict = {
     '宜昌': ['夷陵', '西陵', '伍家岗', '点军', '猇亭'],
     '荆州': ['荆州', '沙市', '江陵', '松滋', '公安'],
     '上海': ['黄浦', '徐汇', '长宁', '静安', '普陀', '虹口', '杨浦', '浦东新', '闵行', '宝山', '嘉定', '金山', '松江', '青浦', '奉贤', '崇明'],
-    '常州': ['天宁', '钟楼', '新北', '武进', '金坛', '溧阳']
+    '常州': ['天宁', '钟楼', '新北', '武进', '金坛', '溧阳'],
+    '玉林': ['玉州', '福绵', '北流', '陆川']
 }
 
 client = MongoClient('localhost', 27017)
 baidu = client.baidu
 phonenum = baidu.phonenum            # 里面是增量的有效手机号，不定时更新数据
 company_phone = baidu.company_phone  # 临时的公司-电话数据
-coll = baidu.work_1210
+coll = baidu.work_1212
 
 
 def find_phone_from_desc():
@@ -187,7 +188,7 @@ def clear_job_desc(job_desc):
             .replace('quot;', '').replace('\u3000', '').replace('1.', '').replace('2.', '').replace('3.', '').replace('4.', '').replace('5.', '') \
             .replace('岗位要求', '').replace('岗位职责：', '').replace('以上', '').replace('1】', '').replace('2】', '').replace('3】', '').replace('4】', '').replace('5】', '')\
             .replace('1．', '').replace('2．', '').replace('3．', '').replace('4．', '').replace('5．', '').replace('职位职责：', '')\
-            .replace('①', '').replace('②', '').replace('③', '').replace('招聘岗位：', '').replace('招聘岗位：', '')
+            .replace('①', '').replace('②', '').replace('③', '').replace('招聘岗位：', '').replace('招聘岗位：', '').replace('br', '')
 
 
 
