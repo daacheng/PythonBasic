@@ -254,3 +254,22 @@
 ## 17、模块和包
 Python中，每一个有效的Python文件（.py）都是模块。每一个包含__init__.py文件的文件夹都被视作包，包让你可以使用文件夹来组织
 模块。__init__.py文件通常被称作构造文件，文件可以为空，也可以用来放置包的初始化代码。当包或包内的模块被导入时，构造文件将被自动执行。
+
+## 18、\_\_name\_\_
+每一个有效的python文件都是一个模块，__name__是标识模块名称的系统变量<br>
+* 如果模块是被导入的，__name__就是模块名（py文件的文件名）
+* 如果模块是被直接执行的，__name__就是'\_\_main\_\_'
+#### test1.py
+
+    def test():
+        print('__name__ is : ', __name__)  # __name__ is :  __main__
+    if __name__ == '__main__':
+        test()
+#### test2.py
+
+    import test1
+    def test():
+        print('__name__ is: ', __name__)  # __name__ is:  __main__
+    if __name__ == '__main__':
+        test()
+        print(test1.__name__)  # test1
