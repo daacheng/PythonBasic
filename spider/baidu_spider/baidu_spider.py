@@ -120,7 +120,7 @@ def crawl(job_type, city, province, token, cookie):
                     release_time = str(datetime.datetime.now().strftime('%Y/%m/%d'))  # 开工时间(当前时间)
                     valid_time = ''  # 有效时间
                     salary = ''  # 薪水
-                    public_time = time.strftime("%Y-%m-%d %H:%M", time.localtime())  # 发布时间(当前时间)
+                    public_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())  # 发布时间(当前时间)
 
                     try:
                         company = re.compile(r'class="bd-tt" data-a-39d218aa>(.*?)<').findall(html)[0]
