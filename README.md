@@ -76,6 +76,7 @@
 
 2.15. [Python爬虫--顺企网企业信息爬取](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E9%A1%BA%E4%BC%81%E7%BD%91%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%88%AC%E5%8F%96.md)
 
+2.16. [Python爬虫--爬取微博指定用户主页下的所有图片](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E7%88%AC%E8%99%AB--%E7%88%AC%E5%8F%96%E5%BE%AE%E5%8D%9A%E6%8C%87%E5%AE%9A%E7%94%A8%E6%88%B7%E4%B8%BB%E9%A1%B5%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87.md)
 ## 3、算法图解
 3.1. [二分查找、选择排序、递归](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E3%80%81%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E3%80%81%E9%80%92%E5%BD%92.md)
 
