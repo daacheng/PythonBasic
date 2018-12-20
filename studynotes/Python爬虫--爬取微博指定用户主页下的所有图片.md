@@ -11,3 +11,6 @@
 
 然后打开谷歌开发者调试页面，这里每一页的内容大概是分两三次动态加载的，页面不断地往下滑动，直到在调试页面出现这样一个链接：
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/weibo2.png)
+
+接下来我们点击下一页，到第二页，然后下滑获取到这个链接的请求url，观察参数有什么变化
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/weibo3.png)
