@@ -66,7 +66,7 @@ class Crawler(object):
                     'Accept-Language': 'zh-CN,zh;q=0.9',
                     'Host': 'www.66ip.cn',
                     'Referer': 'http://www.66ip.cn/',
-                    'Cookie': 'yd_cookie=b04f4f2e-bece-46a1ac6ee50ce2ffd7b607de356fce654d8e; Hm_lvt_1761fabf3c988e7f04bec51acd4073f4=1543800567,1543892144,1544411555,1544411564; Hm_lpvt_1761fabf3c988e7f04bec51acd4073f4=1544411564; _ydclearance=cdc56c50fac95ebdcc5cb44a-f476-4ed6-9412-40debf56f8a6-1544418766',
+                    'Cookie': 'yd_cookie=ff2bb1a7-e805-4cddc1e057fab8bce8141159750163bcaf81; Hm_lvt_1761fabf3c988e7f04bec51acd4073f4=1543754108,1544017881,1545407427; _ydclearance=2fd37a257ebe5b81bd666d7c-1713-4506-8d7d-ff5b5647189c-1545414626; Hm_lpvt_1761fabf3c988e7f04bec51acd4073f4=1545407429',
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36'
                 }
 
@@ -104,7 +104,7 @@ class Crawler(object):
                     'Accept-Language': 'zh-CN,zh;q=0.9',
                     'Host': 'www.kuaidaili.com',
                     'Referer': 'http://www.66ip.cn/',
-                    'Cookie': 'channelid=0; sid=1543828498576461; _ga=GA1.2.2019923346.1543828501; _gid=GA1.2.613511733.1544411613; _gat=1; Hm_lvt_7ed65b1cc4b810e9fd37959c9bb51b31=1543828501,1543892257,1544068211,1544411614; Hm_lpvt_7ed65b1cc4b810e9fd37959c9bb51b31=1544411614',
+                    'Cookie': 'channelid=0; sid=1544017933009606; _ga=GA1.2.493718697.1544017936; _gid=GA1.2.1906934372.1545407524; _gat=1; Hm_lvt_7ed65b1cc4b810e9fd37959c9bb51b31=1544017936,1545407524; Hm_lpvt_7ed65b1cc4b810e9fd37959c9bb51b31=1545407525',
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36'
                 }
 
