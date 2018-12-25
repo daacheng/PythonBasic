@@ -8,7 +8,13 @@
 
 代码还有很多可以优化的地方，比如用redis去缓存抓取到的图片url，我这里是用生成csv文件的方式，比较偷懒就没用redis，后面再好好优化一下。
 
-## 分析
-爬取知乎钓鱼贴，首先要确定哪些是你要爬取的钓鱼贴，比如知乎每一个问题，都有一个对应的id，这里我就去找了下面这20来个帖子，如图：
+## 请求URL分析
+**爬取知乎钓鱼贴，首先要确定哪些是你要爬取的钓鱼贴，比如知乎每一个问题，都有一个对应的id，这里我就去找了下面这20多个帖子，如图：**
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/zhihu1.png)
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/zhihu2.png)
+**随便打开一个帖子，F12打开，不断向下滑动，观察得到一下结果。**
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/zhihu3.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/zhihu4.png)
+**多向下滑动，获取不同的请求url，对比发现URL有什么不同**
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/zhihu5.png)
+
