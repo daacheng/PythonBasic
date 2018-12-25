@@ -8,7 +8,8 @@
 
 代码还有很多可以优化的地方，比如用redis去缓存抓取到的图片url，我这里是用生成csv文件的方式，比较偷懒就没用redis，后面再好好优化一下。
 
-## 请求URL分析
+## 大概思路
+### 一、请求URL分析
 **爬取知乎钓鱼贴，首先要确定哪些是你要爬取的钓鱼贴，比如知乎每一个问题，都有一个对应的id，这里我就去找了下面这20多个帖子，如图：**
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/zhihu1.png)
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/zhihu2.png)
@@ -18,3 +19,15 @@
 **多向下滑动，获取不同的请求url，对比发现URL有什么不同**
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/zhihu5.png)
 
+### 二、解析获取图片url
+**我们发现了请求url的规律，知道如何获取答案数据，之后就是从答案中解析获取图片url的路径，这个就比较简单了，直接通过正则表达式，就可以获取答案中所有的
+图片链接了。**
+
+    r"""<img\s.*?\s?data-original\s*=\s*['|"]?([^\s'"]+).*?>"""
+
+### 三、将获取到的图片url保存到csv文件中
+### 四、读取csv文件中的url链接到队列中，开启多线程处理队列取下载图片
+### 五、最终结果
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/zhihu6.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/zhihu7.png)
+### 具体代码
