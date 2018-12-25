@@ -44,56 +44,13 @@ def to_csv(image_url_dict):
             writer.writerow([k, v])
 
 
-def download_pictures(image_url_dict):
-    # 读取csv文件中的内容到内存中
-    url_dict = {}
-    with open('image_urls.csv', 'r', encoding='utf-8') as f:
-        reader = csv.reader(f)
-        for row in reader:
-            url_dict[row[0]] = row[1]
-
-
-    headers = {
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36'
-    }
-
-    for image_url, question_id in url_dict.items():
-        try:
-            headers['referer'] = 'https://www.zhihu.com/question/' + question_id
-
-            res = requests.get(image_url, headers=headers)
-
-            # 获取图片所属的问题名称
-            question_name = question_id_dict.get(question_id)
-            # 创建图片存储的文件夹
-            pic_dir = os.path.join(base_dir, question_name)
-            if not os.path.exists(pic_dir):
-                try:
-                    os.makedirs(pic_dir)
-                except:
-                    pass
-            # 图片名称
-            pic_name = image_url.split('/')[-1]
-            # 图片路径
-            pic_path = os.path.join(pic_dir, pic_name)
-            if res.status_code == 200:
-                with open(pic_path, 'wb') as f:
-                    f.write(res.content)
-                    print('下载成功: ', pic_name)
-                    time.sleep(0.3)
-        except Exception as e:
-            print('下载图片出错, (%s)' % e)
-            continue
-
-
 def get_pic_urls():
     for question_id in question_id_dict.keys():
 
         headers = {
             'referer': 'https://www.zhihu.com/question/' + question_id,
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36',
-            'cookie': '_zap=7046aefd-0092-44d1-b880-04de5f981682; _xsrf=G3PwSWza9HcMJ59BxVlze0wjfN1pdghU; d_c0="AKDhuw7Hqg6PThIMSmp4O6KItYCXzMi1pKo=|1544758857"; q_c1=4625ea8f2521418fb16b7045d3344de2|1544758863000|1544758863000; l_cap_id="NDBiN2NmN2UwYmQ4NDNmYmFmZDkyODQ1MTBiZjkxMzk=|1545111159|80d038eba45b0fcd1e0cbdf34427f52bd7765917"; r_cap_id="OGRkNzg0NDE3M2Q0NGUwMWE1ZTk0OTkyMzE2NDMxYjQ=|1545111159|1063ab0137447e5fdc882adc38b1e5a816939cbc"; cap_id="ZTZjNmVkMzBjMTVkNGRmYmIyMDIxYmFiYjRlZjZiN2I=|1545111159|222b5a0f21a39905dac643764b61ac3be422784a"; _cid="2|1:0|10:1545120509|4:_cid|28:MTA1ODM5MjgwODc3NTI2NjMwNA==|b00990cddf1479254a819f23e7942f42952535e4638ffc2428941f089d6b9615"; tst=r; __gads=ID=a9b1d670d026cb80:T=1545291223:S=ALNI_MZ20uGeV5nVgwy2Hv4l3lNYZMyH-g; __utma=51854390.1825326029.1545371950.1545371950.1545371950.1; __utmc=51854390; __utmz=51854390.1545371950.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmv=51854390.100-1|2=registration_date=20140204=1^3=entry_date=20140204=1; capsion_ticket="2|1:0|10:1545374067|14:capsion_ticket|44:OWEzZjVlMjgzYmM4NGZlZDgwYWYzYWEwNDk4Zjc3Njc=|4d1dd267e4fb6931876a78565a8addcc63d9d826501e6c263420a5e03b7134f7"; z_c0="2|1:0|10:1545374068|4:z_c0|92:Mi4xcDljekFBQUFBQUFBb09HN0RzZXFEaVlBQUFCZ0FsVk5kTmNKWFFDNUkwc254NkZrUWpRbG0xVUlQaS0yVURpbi13|daa0e9ef9f099b761fe392ffa1047f2c7ead1a5bdf80e0e9336d3149f99755bc"; tgw_l7_route=27a99ac9a31c20b25b182fd9e44378b8'
-
+            'cookie': ''
         }
 
         for i in range(0, 500, 5):
@@ -127,11 +84,9 @@ def get_pic_urls():
 
 
 def main():
-    # get_pic_urls()
+    get_pic_urls()
 
-    # to_csv(image_url_dict)
-
-    download_pictures(image_url_dict)
+    to_csv(image_url_dict)
 
 
 if __name__ == '__main__':
