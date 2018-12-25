@@ -30,4 +30,5 @@
 ### 五、最终结果
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/zhihu6.png)
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/zhihu7.png)
-### 具体代码
+### 具体代码地址
+[知乎钓鱼贴3万多张漂亮小姐姐照片](https://github.com/daacheng/PythonBasic/tree/master/spider/zhihu_spider)
