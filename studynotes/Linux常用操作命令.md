@@ -14,6 +14,7 @@
 * 查看当前目录下有多少个文件及文件夹  **：ls | wc -w**
 * 查看当前目录下有多少个文件  **：ls | wc -c**
 * 查看端口状态  **：netstat -ano | grep 10088**
+* linux后台运行  **：nohup command > myout.file 2>&1 &**
 
 
 ## linux下离线安装python，先下载压缩包
