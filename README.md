@@ -43,6 +43,8 @@
 1.18. [Python中的单下划线与双下划线](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B8%AD%E7%9A%84%E5%8D%95%E4%B8%8B%E5%88%92%E7%BA%BF%E4%B8%8E%E5%8F%8C%E4%B8%8B%E5%88%92%E7%BA%BF.md)
 
 1.19. [Python之协程](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%8D%8F%E7%A8%8B.md)
+
+1.20. [Python之利用MongoDB存储图片](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E5%88%A9%E7%94%A8MongoDB%E5%AD%98%E5%82%A8%E5%9B%BE%E7%89%87.md)
 ## 2、spider文件夹为爬虫练习代码
 2.[爬虫练习代码](https://github.com/daacheng/PythonBasic/tree/master/spider)
 
