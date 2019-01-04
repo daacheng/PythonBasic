@@ -16,6 +16,7 @@
 * 查看当前目录下有多少个指定类型的文件(包含子文件夹) **:ls -lR|grep ".jpg"|wc -l** 
 * 查看端口状态  **：netstat -ano | grep 10088**
 * linux后台运行  **：nohup command > myout.file 2>&1 &**
+* 查看总的线程数  **：pstree -p | wc -l**
 
 
 ## linux下离线安装python，先下载压缩包
