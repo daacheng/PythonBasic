@@ -21,7 +21,7 @@
 * 观察线程进程占用文件情况  **：lsof 命令可以查看当前系统文件被打开情况，lsof -p {进程id} 可以看到**
 * 查看网络状态  **：netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'**
 *  linux下取进程占用cpu最高的前10个进程  **：ps aux|head -1;ps aux|grep -v PID|sort -rn -k +3|head**
-
+* 查看磁盘占用  **：iostat -xdk 1**
 
 
 ## linux下离线安装python，先下载压缩包
