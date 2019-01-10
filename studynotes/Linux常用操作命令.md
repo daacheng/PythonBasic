@@ -22,6 +22,7 @@
 * 查看网络状态  **：netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'**
 *  linux下取进程占用cpu最高的前10个进程  **：ps aux|head -1;ps aux|grep -v PID|sort -rn -k +3|head**
 * 查看磁盘占用  **：iostat -xdk 1**
+* nohup后台不打印解决  **：nohup python -u test.py > nohup.out 2>&1 &**
 
 
 ## linux下离线安装python，先下载压缩包
