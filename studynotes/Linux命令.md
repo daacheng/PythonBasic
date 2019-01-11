@@ -22,3 +22,5 @@
 #### 命令
 * mkdir dirname : 创建单个文件目录
 * mkdir -p /dir1/dir2/dir3 : 递归创建文件夹
+## 4、stat（查看文件/文件夹状态）
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/linux/linuxcmd_stat.png)
