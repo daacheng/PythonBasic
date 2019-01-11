@@ -10,3 +10,4 @@
 * ls -l : 显示目录下文件的详细信息
 * ls -ld : 显示某个文件夹的详细信息
 * ls -lh : 人性化的方式显示文件详细信息
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/linux/linuxcmd_ls.png)
