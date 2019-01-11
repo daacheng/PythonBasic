@@ -24,3 +24,16 @@
 * mkdir -p /dir1/dir2/dir3 : 递归创建文件夹
 ## 4、stat（查看文件/文件夹状态）
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/linux/linuxcmd_stat.png)
+## 5、cat（査看文件内容） 
+**cat [选项] 文件名**
+#### 选项
+* -n：显示行数
+* -A：显示所有隐藏字符，回车符 ($)、Tab 键 (^I)等 
+## 6、more（查看大文件内容）
+**more是分屏显示文件的命令**
+#### 命令
+* 空格键：向下翻页
+* b：向上翻页
+* 回车：向下滚动一行
+* / 字符串：搜索指定的字符串
+* q：退出
