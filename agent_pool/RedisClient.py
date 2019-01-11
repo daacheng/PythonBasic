@@ -3,6 +3,7 @@ import redis
 
 
 REDIS_HOST = '127.0.0.1'
+# REDIS_HOST = '132.232.146.31'
 REDIS_PORT = 6379
 # redis的Sorted Set结构的key
 REDIS_KEY = 'proxies'
@@ -32,7 +33,8 @@ class RedisClient(object):
             如果proxy已经存在redis中，就不添加; 新添加进来的代理proxy默认优先级为10
         """
         if not self.redisdb.zscore(REDIS_KEY, proxy):
-            self.redisdb.zadd(REDIS_KEY, score, proxy)
+            # self.redisdb.zadd(REDIS_KEY, score, proxy)
+            self.redisdb.zadd(REDIS_KEY, {proxy: score})
 
     def get_proxy(self):
         """
@@ -56,7 +58,8 @@ class RedisClient(object):
         """
         score = self.redisdb.zscore(REDIS_KEY, proxy)
         if score and score > MIN_SCORE:
-            self.redisdb.zincrby(REDIS_KEY, proxy, -1)
+            # self.redisdb.zincrby(REDIS_KEY, proxy, -1)
+            self.redisdb.zincrby(REDIS_KEY, -1, proxy)
         else:
             self.redisdb.zrem(REDIS_KEY, proxy)
 
@@ -74,7 +77,8 @@ class RedisClient(object):
         """
             检测到代理可用，就将其优先级设置成最大100
         """
-        self.redisdb.zadd(REDIS_KEY, MAX_SCORE, proxy)
+        # self.redisdb.zadd(REDIS_KEY, MAX_SCORE, proxy)
+        self.redisdb.zadd(REDIS_KEY, {proxy: MAX_SCORE})
 
     def get_proxy_count(self):
         """

@@ -31,14 +31,20 @@ question_id_dict = {'292901966': '有着一双大长腿是什么感觉',
                     '51863354': '你觉得自己身体哪个部位最漂亮',
                     '66313867': '身为真正的素颜美女是种怎样的体验',
                     '34243513': '你见过最漂亮的女生长什么样',
-                    '21052148': '有哪些评价女性身材好的标准'
+                    '21052148': '有哪些评价女性身材好的标准',
+                    '52308383': '在校女学生如何才能穿搭得低调又时尚',
+                    '50426133': '平常人可以漂亮到什么程度',
+                    '268395554': '你最照骗的一张照片是什么样子',
+                    '277593543': '什么时候下定决心一定要瘦的',
+                    '277242822': '室友认为我的穿着很轻浮我该如何回应',
+                    '36523379': '穿和服是怎样的体验'
                     }
 
 headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36'
     }
 
-base_dir = r'D:\zhihu_picture'
+base_dir = r'F:\zhihu_picture'
 
 
 def get_proxy():
@@ -121,7 +127,7 @@ def download_pictures():
 
 
 def main():
-    for i in range(10):
+    for i in range(15):
         td = threading.Thread(target=download_pictures)
         td.start()
 

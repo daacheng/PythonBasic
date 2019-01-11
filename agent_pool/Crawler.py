@@ -7,6 +7,10 @@ import time
     爬取代理网站的免费代理并返回
 """
 
+cookie_xici = '_free_proxy_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJWVlNzA3ZGVlY2FiMzBmZTM5M2Y3NWZlYTAxNWVkNmI3BjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMWdkMXZ5NU1nSE5ER28wMGIrb3BXc2ZTN1M2TWlJNDJjTURYWDRtRlNRdkU9BjsARg%3D%3D--6d3e73ec6691de9bbde84f468902081df04bad8a; Hm_lvt_0cf76c77469e965d2957f0553e6ecf59=1545813398; Hm_lpvt_0cf76c77469e965d2957f0553e6ecf59=1545813398'
+cookie_66 = 'yd_cookie=3c0b844a-798c-4d524968641500e344b93f5e1737238bb3f9; _ydclearance=e11b1ee84c5753aac89dcadb-089c-4665-87b0-0d479901e503-1545971473'
+
+cookie_kuai = 'channelid=bdtg_a10_a10a1; sid=1545964035727943; _ga=GA1.2.437500424.1545964225; _gid=GA1.2.823622894.1545964225; _gat=1; Hm_lvt_7ed65b1cc4b810e9fd37959c9bb51b31=1545964225; Hm_lpvt_7ed65b1cc4b810e9fd37959c9bb51b31=1545964225'
 
 class Crawler(object):
 
@@ -32,7 +36,7 @@ class Crawler(object):
                     'Accept-Language': 'zh-CN,zh;q=0.9',
                     'Host': 'www.xicidaili.com',
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
-                    'Cookie': '_free_proxy_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJWJjZjUxMWRkODBlNjA2OTk5YTk2Zjg2MzM5MjQ4YTEwBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMXcwcFpTcXI2NXVFMHo2MXJGbkplSnc1V3Jhc1I0b21EUTk0SGpPdjhxTHc9BjsARg%3D%3D--81e7db215ded5d21af3e1b11de436f65173eb89d; Hm_lvt_0cf76c77469e965d2957f0553e6ecf59=1542337081,1544068047; Hm_lpvt_0cf76c77469e965d2957f0553e6ecf59=1544068047'
+                    'Cookie': cookie_xici
                 }
 
                 res = requests.get(url, headers=headers)
@@ -66,7 +70,7 @@ class Crawler(object):
                     'Accept-Language': 'zh-CN,zh;q=0.9',
                     'Host': 'www.66ip.cn',
                     'Referer': 'http://www.66ip.cn/',
-                    'Cookie': 'yd_cookie=ff2bb1a7-e805-4cddc1e057fab8bce8141159750163bcaf81; Hm_lvt_1761fabf3c988e7f04bec51acd4073f4=1543754108,1544017881,1545407427; _ydclearance=2fd37a257ebe5b81bd666d7c-1713-4506-8d7d-ff5b5647189c-1545414626; Hm_lpvt_1761fabf3c988e7f04bec51acd4073f4=1545407429',
+                    'Cookie': cookie_66,
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36'
                 }
 
@@ -104,7 +108,7 @@ class Crawler(object):
                     'Accept-Language': 'zh-CN,zh;q=0.9',
                     'Host': 'www.kuaidaili.com',
                     'Referer': 'http://www.66ip.cn/',
-                    'Cookie': 'channelid=0; sid=1544017933009606; _ga=GA1.2.493718697.1544017936; _gid=GA1.2.1906934372.1545407524; _gat=1; Hm_lvt_7ed65b1cc4b810e9fd37959c9bb51b31=1544017936,1545407524; Hm_lpvt_7ed65b1cc4b810e9fd37959c9bb51b31=1545407525',
+                    'Cookie': cookie_kuai,
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36'
                 }
 
