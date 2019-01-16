@@ -3,6 +3,8 @@
 [Linux常用操作命令(更新……)](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.md)
 
 [Linux命令](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux%E5%91%BD%E4%BB%A4.md)
+
+[Linux文件权限](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90.md)
 ## 1、studynote文件夹
 1.[日常学习笔记总结](https://github.com/daacheng/PythonBasic/tree/master/studynotes)
 
