@@ -37,3 +37,18 @@
 * 回车：向下滚动一行
 * / 字符串：搜索指定的字符串
 * q：退出 
+## 7、head(显示文件开头的命令)
+* head -n 20 filename:指定显示行数
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/linux/linuxcmd_head.png)
+## 8、tail(显示文件结尾的命令)
+* tail -f filename: 监听文件新增的内容
+## 9、rm(删除文件或目录)
+**rm [选项] 文件或目录**
+#### 选项
+* -f: 强制删除(force)
+* -r: 递归删除，可以删除目录
+#### 命令
+* rm -rf 目录 ： 强制递归删除(不会提示，直接默认删除)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/linux/linuxcmd_rm.png)
+## 10、cp(复制文件)
+**命令： cp 源文件 目标文件**
