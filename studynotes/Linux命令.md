@@ -52,3 +52,6 @@
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/linux/linuxcmd_rm.png)
 ## 10、cp(复制文件)
 **命令： cp 源文件 目标文件**
+## 11、mv(移动文件)
+**命令： mv 源文件 目标文件**<br>
+**命令： mv 1.txt 2.txt 如果源文件和目标文件在同一个目录下，就相当于改名字**
