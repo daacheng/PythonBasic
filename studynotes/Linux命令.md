@@ -55,3 +55,12 @@
 ## 11、mv(移动文件)
 **命令： mv 源文件 目标文件**<br>
 **命令： mv 1.txt 2.txt 如果源文件和目标文件在同一个目录下，就相当于改名字**
+## 12、whereis(搜索命令)
+**whereis 命令不能搜索普通文件，而只能搜索系统命令**
+## 13、locate(按照文件名搜索普通文件)
+**centOS7以上的系统中使用“locate”文件查找命令,需要先安装locate命令**
+* yum install mlocate
+* updatedb
+* locate inittab
+
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/linux/linuxcmd_locate.png)
