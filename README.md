@@ -5,6 +5,8 @@
 [Linux命令](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux%E5%91%BD%E4%BB%A4.md)
 
 [Linux文件权限](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90.md)
+
+[Linux-vim编辑器](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux-vim%E7%BC%96%E8%BE%91%E5%99%A8.md)
 ## 1、studynote文件夹
 1.[日常学习笔记总结](https://github.com/daacheng/PythonBasic/tree/master/studynotes)
 
