@@ -2,6 +2,7 @@
 教程来源  https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
 ## 一、git简介
 Git是目前世界上最先进的分布式版本控制系统（没有之一）。
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/gitbase.png)
 ### 1.1、关于版本控制系统：
 
 如果你用Microsoft Word写过长篇大论，那你一定有这样的经历：
