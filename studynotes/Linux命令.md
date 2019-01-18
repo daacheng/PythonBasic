@@ -13,7 +13,7 @@
 <a href="#jump12" target="_self">12、whereis(搜索命令)</a><br>
 <a href="#jump13" target="_self">13、locate(按照文件名搜索普通文件)</a><br>
 
-## <span id = "jump">1、ls（list查看）</span>
+## <span id = "jump1">1、ls（list查看）</span>
 **ls [选项][文件名/目录名]**
 #### [选项]
 * -a：显示所有文件
