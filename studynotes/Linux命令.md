@@ -1,5 +1,8 @@
 # Linux命令
-## 1、ls（list查看）
+<a href="#jump" target="_self">1、ls(查看)</a>
+
+
+## <span id = "jump">1、ls（list查看）</span>
 **ls [选项][文件名/目录名]**
 #### [选项]
 * -a：显示所有文件
