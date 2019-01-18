@@ -29,7 +29,7 @@ UDP是一种面向无连接的传输协议，不检查对端是否存在就直�
 * 服务端关闭与客户端之间的连接，发送FIN包给客户端。
 * 客户端收到后，发送一个ACK应答给服务端，此时连接断开。
 
-![](https://github.com/daacheng/PythonBasic/blob/master/pic/tcpconn.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/tcpstatus.png)
 ### 3.2、通过序列号与确认应答提高传输可靠性
 TCP传输协议，两台主机建立好连接之后，开始进行数据传输，当发送端的数据到达接收端，接收端会返回一个收到消息的应答，这个消息叫做确认应答ACK。
 TCP通过确认应答ACK实现可靠的数据传输。
