@@ -1,14 +1,13 @@
 **平时工作中经常用到的Python零碎知识点总结，Python爬虫知识总结及练习，Python数据分析等**
-## Linux常用操作命令
-[Linux常用操作命令(更新……)](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.md)
+## 0、Linux常用操作命令
+0.0. [Linux常用操作命令(更新……)](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.md)
 
-[Linux命令](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux%E5%91%BD%E4%BB%A4.md)
+0.1. [Linux命令](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux%E5%91%BD%E4%BB%A4.md)
 
-[Linux文件权限](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90.md)
+0.2. [Linux文件权限](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90.md)
 
-[Linux-vim编辑器](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux-vim%E7%BC%96%E8%BE%91%E5%99%A8.md)
+0.3. [Linux-vim编辑器](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux-vim%E7%BC%96%E8%BE%91%E5%99%A8.md)
 ## 1、studynote文件夹
-1.[日常学习笔记总结](https://github.com/daacheng/PythonBasic/tree/master/studynotes)
 
 1.0. [Python常用小知识点（更新……）](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%B8%B8%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9(%E6%9B%B4%E6%96%B0ing%E2%80%A6%E2%80%A6).md)
 
