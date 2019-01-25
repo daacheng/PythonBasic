@@ -23,6 +23,9 @@
 *  linux下取进程占用cpu最高的前10个进程  **：ps aux|head -1;ps aux|grep -v PID|sort -rn -k +3|head**
 * 查看磁盘占用  **：iostat -xdk 1**
 * nohup后台不打印解决  **：nohup python -u test.py > nohup.out 2>&1 &**
+* 查看防火墙状态  **：service iptables status**
+* 开启防火墙  **：service iptables start**
+* 关闭防火墙  **：service iptables stop**
 
 
 ## linux下离线安装python，先下载压缩包
