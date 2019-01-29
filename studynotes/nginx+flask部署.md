@@ -46,3 +46,5 @@
 * 停止/重启： /usr/local/nginx/sbin/nginx -s stop(quit、reload)
 * 帮助： /usr/local/nginx/sbin/nginx -h
 * 配置文件： vim /usr/local/nginx/conf/nginx.conf
+## 四、配置nginx
+## 五、安装gunicorn
