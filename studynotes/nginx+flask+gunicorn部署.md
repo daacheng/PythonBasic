@@ -48,9 +48,9 @@
 * 停止/重启： /usr/local/nginx/sbin/nginx -s stop(quit、reload)
 * 帮助： /usr/local/nginx/sbin/nginx -h
 * 配置文件： vim /usr/local/nginx/conf/nginx.conf
-## 四、配置nginx
-* 修改nginx配置文件 vim /usr/local/nginx/conf/nginx.conf.default
-![](https://github.com/daacheng/PythonBasic/blob/master/pic/nginxproxy4.png)
+## 四、配置nginx，设置反向代理
+* 修改nginx配置文件 vim /usr/local/nginx/conf/nginx.conf
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/nginxproxy6.png)
 * 重启nginx sbin/nginx -s reload
 ## 五、安装gunicorn
 * pip3 install gunicorn
