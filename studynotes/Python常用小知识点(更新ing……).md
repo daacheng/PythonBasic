@@ -250,30 +250,3 @@
 
     # 把网络字节序 整型表示的IP 转换成标准字符串形式的IP
     socket.inet_ntoa(struct.pack('I', socket.htonl(3232235787)))   # '192.168.1.11'
-
-## 17、模块和包
-Python中，每一个有效的Python文件（.py）都是模块。每一个包含__init__.py文件的文件夹都被视作包，包让你可以使用文件夹来组织
-模块。__init__.py文件通常被称作构造文件，文件可以为空，也可以用来放置包的初始化代码。当包或包内的模块被导入时，构造文件将被自动执行。
-
-## 18、\_\_name\_\_
-每一个有效的python文件都是一个模块，__name__是标识模块名称的系统变量<br>
-* 如果模块是被导入的，__name__就是模块名（py文件的文件名）
-* 如果模块是被直接执行的，__name__就是'\_\_main\_\_'
-#### test1.py
-
-    def test():
-        print('__name__ is : ', __name__)  # __name__ is :  __main__
-    if __name__ == '__main__':
-        test()
-#### test2.py
-
-    import test1
-    def test():
-        print('__name__ is: ', __name__)  # __name__ is:  __main__
-    if __name__ == '__main__':
-        test()
-        print(test1.__name__)  # test1
-## 19、Python3中的字符串与字节
-* **str: python3中只有一种能够保存文本信息的数据类型，就是str(字符串)，str是不可变序列，保存的是Unicode编码的文本。**<br>
-* **bytes:字节序列，只能用字节作为序列值，即0~256范围内的整数。**<br>
-* **python3中字节序列(bytes)和字符串(str),都是不可变序列。由于不变性，字符串可以作为字典的key或者set集合的元素。但另一面，每当需要修改字符串时，即使是很小的修改，都需要创建一个全新的字符串实例。**
