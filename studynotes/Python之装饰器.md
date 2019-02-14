@@ -114,3 +114,41 @@
 
     if __name__ == '__main__':
         foo('aaa')
+## 三、带参数的装饰器
+**对于带参数的装饰器，需要多一层嵌套关系。比如，实现一个装饰器，控制"被装饰函数"的执行次数。**
+
+    def repeat(num):
+        def actual_deco(func):
+            def deco(*args, **kwargs):
+                for _ in range(num):
+                    print('执行第%d次' % num)
+                    func(*args, **kwargs)
+            return deco
+        return actual_deco
+
+    @repeat(num=3)
+    def foo(arg):
+        print('in the foo! ', arg)
+
+    if __name__ == '__main__':
+        foo('aaa')
+## 四、类装饰器
+**类装饰器必须实现__call__()方法**
+
+    class count_time:
+        def __init__(self, func):
+            self.func = func
+
+        def __call__(self, *args, **kwargs):
+            start_time = time.time()
+            self.func()
+            end_time = time.time()
+            print('run time is ', end_time - start_time)
+
+    @count_time
+    def foo():
+        time.sleep(2)
+        print('in the foo!')
+
+    if __name__ == '__main__':
+        foo()
