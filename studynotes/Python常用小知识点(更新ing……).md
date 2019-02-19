@@ -49,6 +49,12 @@
 
     hex(ord(b'K'))  # 0x4b     K是ascii中可见字符，所以编辑器在碰到0x4b的时候就把0x4b转换成了b'K'
 
+## 字节转换成十六进制表示
+
+    import binascii
+    data = b'\\\x00?\x00?\x00\\\x00E\x00:\x00'
+    print(binascii.hexlify(data))  # b'5c003f003f005c0045003a00'
+
 ## 3.struct用法
 
     unpack反序列化:字节转换成常用数据类型
