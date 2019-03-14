@@ -27,7 +27,29 @@
 * $# : 参数个数
 * $* : 显示所有参数
 
-    echo "执行的文件名 $0"
-    echo "第一个参数 $1"
-    echo "第二个参数 $2"
+        echo "执行的文件名 $0"
+        echo "第一个参数 $1"
+        echo "第二个参数 $2"
+        echo "参数个数 $#"
+        echo "所有参数 $*"
+
+        for arg in  "$*";do
+            echo $arg
+        done
+
+    
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/shell1.png)
+## 五、基本运算符
+#### 算数运算符
+* 原生bash不支持简单的数学运算，但是可以通过expr命令来实现。
+* 注意使用的是反引号 ，而不是单引号。
+* 表达式和运算符之间要有空格，例如 2+2 是不对的，必须写成 2 + 2
+
+        a=2
+        b=3
+        var=`expr $a + $b`
+        echo "2+3 = $var"
+
+        var=`expr $a \* $b`
+        echo "2*3 = $var"
+
