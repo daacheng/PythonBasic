@@ -25,6 +25,14 @@ r = requests.get('https://github.com/timeline.json')
 r.encoding='utf-8'
 r.text
 u'[{"repository":{"open_issues":0,"url":"https://github.com/...</code></pre>
+
+### 网页乱码问题
+
+    # 查看网页编码
+    print(res.apparent_encoding)
+    # 设置编码
+    res.encoding = 'GB2312'
+
 ### 二进制响应内容(r.content)
 可以通过字节<strong>r.content</strong>的方式访问请求响应体，对于非文本（比如图片）请求：
 <pre><code>
