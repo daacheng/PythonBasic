@@ -1,5 +1,5 @@
 # Python连接数据库操作
-## 连接mysql
+## 一、连接mysql
 ### 方式一
 
     # 创建数据库连接
@@ -64,7 +64,7 @@
           print(data)
       conn.close()
 
-## 连接oracal
+## 二、连接oracal
 * 1、下载安装cx_Oracle    https://pypi.org/project/cx-Oracle/#files
 * 2、下载instantclient，配置环境变量。    https://www.oracle.com/technetwork/cn/topics/winx64soft-101515-zhs.html
 * 3、 把instantclient文件夹下所有的ddl文件复制到anaconda文件夹下。（复制oci，oraocci11，oraociei11的3个DLL粘贴到你的PY目录的Libs/site-packages文件夹下面）
@@ -88,7 +88,7 @@
         scan_result = res.fetchall()
     conn.close()
 
-## 连接sqlite
+## 三、连接sqlite
 sqlite数据库可以当做缓存来用，如果不想用redis的话，可以考虑用sqlite
 
     import sqlite3
