@@ -56,6 +56,8 @@
 1.21. [nginx+flask+gunicorn部署](https://github.com/daacheng/PythonBasic/blob/master/studynotes/nginx%2Bflask%2Bgunicorn%E9%83%A8%E7%BD%B2.md)
 
 1.22. [Python之装饰器](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8B%E8%A3%85%E9%A5%B0%E5%99%A8.md)
+
+1.23. [Python之连接数据库](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C.md)
 ## 2、spider文件夹为爬虫练习代码
 2.[爬虫练习代码](https://github.com/daacheng/PythonBasic/tree/master/spider)
 
