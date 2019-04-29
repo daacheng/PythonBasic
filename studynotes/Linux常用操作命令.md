@@ -27,6 +27,8 @@
 * 查看防火墙状态  **：service iptables status**
 * 开启防火墙  **：service iptables start**
 * 关闭防火墙  **：service iptables stop**
+* 查看端口占用  **：lsof -i:端口**
+* 给文件或者文件夹权限  **：chmod 777 文件名**
 
 
 ## linux下离线安装python，先下载压缩包
