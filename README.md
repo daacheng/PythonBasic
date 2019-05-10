@@ -9,6 +9,8 @@
 0.3. [Linux-vim编辑器](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Linux-vim%E7%BC%96%E8%BE%91%E5%99%A8.md)
 
 0.4. [shell语法](https://github.com/daacheng/PythonBasic/blob/master/studynotes/shell%E8%AF%AD%E6%B3%95.md)
+
+0.5. [redis基础操作](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Redis%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.md)
 ## 1、studynote文件夹
 
 1.0. [Python常用小知识点（更新……）](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%B8%B8%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9(%E6%9B%B4%E6%96%B0ing%E2%80%A6%E2%80%A6).md)
