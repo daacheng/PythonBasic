@@ -41,4 +41,4 @@
 * zrangebyscore key min max : 返回指定分数区间中的所有成员。
 * zscore key member : 返回指定元素的分数（优先级）。
 
-
+[Python操作redis](https://www.cnblogs.com/cnkai/p/7642787.html)
