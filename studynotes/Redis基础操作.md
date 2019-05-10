@@ -31,4 +31,14 @@
 ## Set（无序，不重复）
 * sadd key member : 往集合中添加一个元素。
 * scard key : 查看集合中元素个数。
-*
+* sismember key member : 判断元素是否存在集合中。
+* srandmember key  ： 随机从集合中取出一个元素。
+* srem key member ：移除集合中的元素。
+## Sorted Set(有序集合)
+* zadd key score member : 向有序集合中添加一个成员，指定分数（优先级）
+* zcard key : 获取有序集合的元素个数。
+* zcount key min max : 获取指定分数区间内元素个数。
+* zrangebyscore key min max : 返回指定分数区间中的所有成员。
+* zscore key member : 返回指定元素的分数（优先级）。
+
+
