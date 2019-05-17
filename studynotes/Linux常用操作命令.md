@@ -29,6 +29,7 @@
 * 关闭防火墙  **：service iptables stop**
 * 查看端口占用  **：lsof -i:端口**
 * 给文件或者文件夹权限  **：chmod 777 文件名**
+* 查看tcp连接状态 **：netstat -plant | grep ip**
 
 
 ## linux下离线安装python，先下载压缩包
