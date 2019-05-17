@@ -30,6 +30,7 @@
 * 查看端口占用  **：lsof -i:端口**
 * 给文件或者文件夹权限  **：chmod 777 文件名**
 * 查看tcp连接状态 **：netstat -plant | grep ip**
+* 抓取指定IP的tcp包数据 **： tcpdump src host 112.96.248.22 -Xvv > tcp.out**
 
 
 ## linux下离线安装python，先下载压缩包
