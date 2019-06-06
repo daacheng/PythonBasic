@@ -66,3 +66,11 @@
 * 第一个app是flask服务脚本的名字，我这里是app.py,所以用app，第二个app是app.py中Flask()实例对象的名字，我给取的是app，所以这里是app:app.
 ## 五、部署成功
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/nginxproxy5.png)
+
+## 六、nginx配置https
+### 6.1 申请证书和秘钥
+### 6.2 重新编译nginx  https://www.cnblogs.com/ghjbk/p/6744131.html
+### 6.3 修改配置文件
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/nginxhttps.jpg)
+### 6.4 注意开启443端口
+
