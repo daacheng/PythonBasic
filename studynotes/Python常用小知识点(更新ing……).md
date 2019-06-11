@@ -304,3 +304,17 @@
         #     observer.stop()
         observer.join()
         print('end...')
+## 18、正则表达式匹配车牌
+**利用正则表达式校验一个字符串是否是合法的车牌**
+
+    import re 
+
+    s1 = "浙AD12345*"
+    s2 = "鄂A8P8F8D"
+    s3 = ""
+    s4 = "鄂A-8P8F8"
+    regex = '^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][-]{0,1}[DF]?[A-Z0-9]{4}[A-Z0-9挂学警港澳领][DF]?$'
+    print(re.match(regex,s1))
+    print(re.match(regex,s2))
+    print(re.match(regex,s3))
+    print(re.match(regex,s4))
