@@ -64,6 +64,8 @@
 1.24. [Python之AES加密解密](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E4%B9%8BAES%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86.md)
 
 1.25. [Python利用socket实现http协议](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%88%A9%E7%94%A8socket%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95http%20server.md)
+
+1.26. [Python变量作用域与闭包](https://github.com/daacheng/PythonBasic/blob/master/studynotes/Python%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E9%97%AD%E5%8C%85.md)
 ## 2、spider文件夹为爬虫练习代码
 2.[爬虫练习代码](https://github.com/daacheng/PythonBasic/tree/master/spider)
 
