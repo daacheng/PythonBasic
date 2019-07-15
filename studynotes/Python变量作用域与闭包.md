@@ -23,3 +23,5 @@
         print(a)
         print(b)
         b = 1
+
+## 二、闭包
