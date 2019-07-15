@@ -318,3 +318,8 @@
     print(re.match(regex,s2))
     print(re.match(regex,s3))
     print(re.match(regex,s4))
+## 19、关于tuple
+**答案：D**
+* 不要把可变对象放在元组中。
+* 增量赋值不是一个原子操作，虽然抛出了异常，但还是添加成功了。
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/tuple2.png)
