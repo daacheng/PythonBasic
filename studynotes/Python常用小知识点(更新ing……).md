@@ -323,3 +323,14 @@
 * 不要把可变对象放在元组中。
 * 增量赋值不是一个原子操作，虽然抛出了异常，但还是添加成功了。
 ![](https://github.com/daacheng/PythonBasic/blob/master/pic/tuple2.png)
+
+## 20、Linux下创建Python虚拟环境
+**python3 -m venv virtual-environment-name**</br>
+* -m venv 选项的作用是以独立的脚本运行标准库中的 venv 包，后面的参数为虚拟环境的名称。
+
+        # 创建
+        python3 -m venv venv
+        # 激活
+        source venv/bin/activate
+        # 退出
+        deactivate
