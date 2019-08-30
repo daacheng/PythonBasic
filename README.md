@@ -158,3 +158,5 @@
 7.2. [《深入浅出统计学》笔记下.md](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%BB%9F%E8%AE%A1%E5%AD%A6%E3%80%8B%E7%AC%94%E8%AE%B0%E4%B8%8B.md)
 ## 8、kafka(分布式发布消息订阅系统)
 8.1. [一、kafka基本概念](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E4%B8%80%E3%80%81kafka%E6%98%AF%E4%BB%80%E4%B9%88.md)
+## 9、ZeroMQ
+9.1. [ZeroMQ基础](https://github.com/daacheng/PythonBasic/blob/master/studynotes/ZeroMQ%E5%9F%BA%E7%A1%80.md)
