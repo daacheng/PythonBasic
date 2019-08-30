@@ -84,3 +84,7 @@
         while True:
             message = socket.recv_string()
             print("（订阅者一号）接收到'发布者'发送的消息：{}".format(message))
+## 1.3. Push-Pull(平行管道模式/分布式处理)
+* Ventilator: 任务发布器会生成大量可以并行运算的任务
+* Worker: 有一组worker会处理这些任务
+* Sink: 结果接收器会在末端接收所有Worker的处理结果，进行汇总
