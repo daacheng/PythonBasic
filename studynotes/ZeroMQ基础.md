@@ -6,6 +6,8 @@
 * 服务端和客户端谁先启动，效果都是一样的。
 * 服务端在收到消息之前，会一直阻塞，等待客户端连上来。
 
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/chapter1_1zmq.png)
+
 #### 创建一个客户端和服务端，客户端发送Hello给服务端，服务端返回World给客户端
 #### client.py
 
@@ -50,6 +52,8 @@
 * “慢连接”：我们不知道订阅者是何时开始接收消息的，就算先启动“订阅者”，再启动“发布者”，“订阅者”还是会缺失一部分消息，**因为建立连接是需要时间的，虽然很短，但不是零。ZMQ在后台是进行异步的IO传输，在建立TCP连接的短短的时间段内，ZMQ就可以发送很多消息了。**
 * 有种简单的方法来同步“发布者”和“订阅者”，通过sleep让发布者延迟发送消息，等连接建立完成后再进行发送。
 
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/chapter1_4zmq.png)
+
 #### Publisher.py
 
     import zmq
@@ -88,3 +92,100 @@
 * Ventilator: 任务发布器会生成大量可以并行运算的任务
 * Worker: 有一组worker会处理这些任务
 * Sink: 结果接收器会在末端接收所有Worker的处理结果，进行汇总
+* Worker上游和“任务分发器”相连，下游和“结果接收器”相连。
+* “任务分发器”和“结果接收器”是这个网路结构中比较稳定的部分，由他们绑定至端点。Worker只是连接两个端点。
+* **需要等Worker全部启动后，再进行任务分发。socket的连接会消耗一定时间（慢连接），如果不进行同步的话，第一个Worker启动时会一下子接收很多任务。**
+* “任务分发器”会向Worker均匀地分发任务（负载均衡机制）。
+* “结果接收器”会均匀地从Worker处收集消息（公平队列机制）。
+
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/chapter1_5zmq.png)
+
+#### Ventilator.py 任务分发
+
+    import zmq
+    import random
+
+    raw_input = input
+    context = zmq.Context()
+
+    sender = context.socket(zmq.PUSH)
+    sender.bind("tcp://*:5557")
+
+    sink = context.socket(zmq.PUSH)
+    sink.connect("tcp://localhost:5558")
+
+    if __name__ == '__main__':
+
+        # 同步操作
+        print("Press Enter when the workers are ready: ")
+        _ = raw_input()
+        print("Sending tasks to workers…")
+
+        sink.send_string('0')
+
+        # 发送十个任务
+        total_msec = 0
+        for task_nbr in range(10):
+
+            # 每个任务耗时为N
+            workload = random.randint(1, 5)
+            total_msec += workload
+
+            sender.send_string(u'%i' % workload)
+
+        print("10个任务的总工作量: %s 秒" % total_msec)
+
+#### Worker.py 
+
+    import time
+    import zmq
+
+    context = zmq.Context()
+
+    receiver = context.socket(zmq.PULL)
+    receiver.connect("tcp://localhost:5557")
+
+    sender = context.socket(zmq.PUSH)
+    sender.connect("tcp://localhost:5558")
+
+    if __name__ == '__main__':
+
+        while True:
+            s = receiver.recv()
+            print('work1 接收到一个任务... 需要{}秒'.format(s))
+
+            # Do the work
+            time.sleep(int(s))
+
+            # Send results to sink
+            sender.send_string('work1 完成一个任务，耗时{}秒'.format(s))
+
+#### Sink.py 结果接收器
+
+    import time
+    import zmq
+
+    context = zmq.Context()
+
+    receiver = context.socket(zmq.PULL)
+    receiver.bind("tcp://*:5558")
+
+    if __name__ == '__main__':
+
+        s = receiver.recv()
+        print('开始接收处理结果.....')
+
+        # 计时，所有任务处理完一共需要多久
+        tstart = time.time()
+
+        # 接受十个任务的处理结果
+        for task_nbr in range(10):
+            s = receiver.recv_string()
+            print(s)
+
+        tend = time.time()
+        print("三个worker同时工作，耗时: %d 秒" % (tend-tstart))
+
+#### 结果
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/zmq_ventilator.png)
+![](https://github.com/daacheng/PythonBasic/blob/master/pic/zmq_sink.png)
