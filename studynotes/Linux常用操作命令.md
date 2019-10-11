@@ -32,6 +32,7 @@
 * 查看tcp连接状态 **：netstat -plant | grep ip**
 * 抓取指定IP的tcp包数据 **： tcpdump src host 112.96.248.22 -Xvv > tcp.out**
 * 查看某一进程下的所有线程 **： ps -T -p 37772**
+* 查看centos版本 **： cat /etc/redhat-release**
 
 
 ## linux下离线安装python，先下载压缩包
