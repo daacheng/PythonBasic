@@ -24,15 +24,18 @@
 * 查看磁盘占用  **：iostat -xdk 1**
 * 查看磁盘占用  **：df -lh**
 * nohup后台不打印解决  **：nohup python -u test.py > nohup.out 2>&1 &**
-* 查看防火墙状态  **：service iptables status**
-* 开启防火墙  **：service iptables start**
-* 关闭防火墙  **：service iptables stop**
+* centos6查看防火墙状态  **：service iptables status**
+* centos6开启防火墙  **：service iptables start**
+* centos6关闭防火墙  **：service iptables stop**
 * 查看端口占用  **：lsof -i:端口**
 * 给文件或者文件夹权限  **：chmod 777 文件名**
 * 查看tcp连接状态 **：netstat -plant | grep ip**
 * 抓取指定IP的tcp包数据 **： tcpdump src host 112.96.248.22 -Xvv > tcp.out**
 * 查看某一进程下的所有线程 **： ps -T -p 37772**
 * 查看centos版本 **： cat /etc/redhat-release**
+* centos7查看防火墙状态 **： firewall-cmd --state**
+* centos7关闭防火墙 **： systemctl stop firewalld.service**
+* centos7禁止开机启动防火墙 **： systemctl disable firewalld.service**
 
 
 ## linux下离线安装python，先下载压缩包
