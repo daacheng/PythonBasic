@@ -31,6 +31,7 @@
 * 给文件或者文件夹权限  **：chmod 777 文件名**
 * 查看tcp连接状态 **：netstat -plant | grep ip**
 * 抓取指定IP的tcp包数据 **： tcpdump src host 112.96.248.22 -Xvv > tcp.out**
+* 抓取指定IP的tcp包数据 **：tcpdump -i eth0 port 5060 -w dump.pcap -v**
 * 查看某一进程下的所有线程 **： ps -T -p 37772**
 * 查看centos版本 **： cat /etc/redhat-release**
 * centos7查看防火墙状态 **： firewall-cmd --state**
