@@ -160,3 +160,5 @@
 8.1. [一、kafka基本概念](https://github.com/daacheng/PythonBasic/blob/master/studynotes/%E4%B8%80%E3%80%81kafka%E6%98%AF%E4%BB%80%E4%B9%88.md)
 ## 9、ZeroMQ
 9.1. [ZeroMQ基础](https://github.com/daacheng/PythonBasic/blob/master/studynotes/ZeroMQ%E5%9F%BA%E7%A1%80.md)
+## 10、Vue.js
+10.1. [vue.js基础](https://github.com/daacheng/PythonBasic/blob/master/studynotes/vue.js%E5%9F%BA%E7%A1%80.md)
