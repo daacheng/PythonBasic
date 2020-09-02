@@ -40,6 +40,7 @@
 
 
 ## linux下离线安装python，先下载压缩包
+    yum -y install zlib*
     mkdir -p /usr/local/python3/
     # rpm -ivh ./package/zlib-devel-1.2.7-17.el7.x86_64.rpm
     tar zxvf Python-3.6.4.tgz
