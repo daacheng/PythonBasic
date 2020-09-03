@@ -37,6 +37,7 @@
 * centos7查看防火墙状态 **： firewall-cmd --state**
 * centos7关闭防火墙 **： systemctl stop firewalld.service**
 * centos7禁止开机启动防火墙 **： systemctl disable firewalld.service**
+* scp传输文件：scp python3_centos7_installer.zip root@172.16.1.60:/root
 
 
 ## linux下离线安装python，先下载压缩包
