@@ -1,5 +1,5 @@
 ## 常用系统工作命令
-常用系统工作命令(echo,date,reboot,poweroff,wget,ps,top,pidof,kill,killall)。
+常用系统工作命令(echo,date,reboot,poweroff,wget,ps,top,pidof,kill,killall,whereis,locate,tar,sync)。
 
 #### 1.echo命令(用于在终端输出字符串或变量提取后的值)
 
@@ -94,3 +94,35 @@ COMMAND | 命令名称与参数
 **用于终止指定PID的进程服务。**
 #### 10.killall命令
 **用于终止指定名称的服务所对应的全部进程。**
+
+#### 11.whereis(搜索命令)
+**whereis 命令不能搜索普通文件，而只能搜索系统命令**
+#### 12.locate(按照文件名搜索普通文件)
+**centOS7以上的系统中使用“locate”文件查找命令,需要先安装locate命令**
+* yum install mlocate
+* updatedb
+* locate inittab
+
+![](../pic/linux/linuxcmd_locate.png)
+
+#### 13.tar(打包与解打包)
+**打包： tar -cvf 压缩包名 源文件**
+* -c：打包
+* -v：显示打包文件过程
+* -f：指定压缩包的文件名
+
+**解打包(.tar)：tar xvf 压缩包**
+* -x：解打包
+* -v：显示打包文件过程
+* -f：指定压缩包的文件名
+
+**解打包(.gz)：tar zxvf 压缩包**
+
+![](../pic/linux/tar1.png)
+
+#### 14.sync(刷新文件系统缓冲区)
+计算机上保存数据其实是先在内存中保存一定时间，再写入硬盘。这其实是一种缓存机制，当在内存中保存的数据需要被读取的时候，从内存中读取要比从硬盘中读取快得多。
+
+不过，如果数据还没有来得及保存到硬盘中，就发生了突然岩机（比如断电）的情况，数据就会丟失。
+
+sync 命令的作用就是把内存中的数据强制向硬盘中保存。这个命令在常规关机的命令中其实会自动执行，但如果不放心，则应该在关机或重启之前手工执行几次，避免数据丟失。

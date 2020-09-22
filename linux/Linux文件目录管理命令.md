@@ -15,6 +15,9 @@
 ```
 #### 2.mkdir命令
 **用于创建空白目录。-p:递归创建**
+* mkdir dirname : 创建单个文件目录
+* mkdir -p /dir1/dir2/dir3 : 递归创建文件夹
+
 #### 3.cp命令
 **用于复制文件或目录。**
 - 如果目标文件是目录，则会把源文件复制到该目录中。
@@ -39,8 +42,13 @@ install.log  X.log
 [root@iZ8vb6ughzbdqkfd58dowoZ test]# ls
 install.log  linux.log
 ```
-#### 5.rm命令
-**删除文件或目录。**
+#### 5.rm命令(删除文件或目录)
+* -f: 强制删除(force)
+* -r: 递归删除，可以删除目录
+* rm -rf 目录 ： 强制递归删除(不会提示，直接默认删除)
+
+![](../pic/linux/linuxcmd_rm.png)
+
 #### 6.dd命令
 **用于按照指定大小和个数的数据块来复制文件或转换文件。**
 
