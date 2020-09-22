@@ -1,0 +1,40 @@
+## Linux常用操作命令
+* 查看程序softname的进程id  **:  ps -ef | grep softname**
+* 后台运行程序  **:  nohup python3 others2bh.py &**
+* 删除文件夹  **:  rm -rf 目录名字**
+* 删除文件  **:  rm 文件名**
+* 批量删除文件  **： find . -name "*.java" |xargs rm -rfv**
+* 接收文件  **: rz**
+* 发送文件  **: sz**
+* 复制粘贴文件  **: cp 源文件或目录 目标文件或目录**
+* 查看文件的行数  **：wc -l 文件名**
+* 按照大小切分文件  **：split -b 100m 文件名**
+* 按照行数切分文件  **：split -l 10000 文件名**
+* 查看目录下文件大小  **：du -ah --max-depth=1  （a表示显示目录下所有的文件和文件夹（不含子目录），h表示以人类能看懂的方式，max-depth表示目录的深度）**
+* 查看当前目录下有多少个文件及文件夹  **：ls | wc -w**
+* 查看当前目录下有多少个文件  **：ls | wc -c**
+* 查看当前目录下有多少个指定类型的文件(包含子文件夹) **:ls -lR|grep ".jpg"|wc -l**
+* 查看端口状态  **：netstat -ano | grep 10088**
+* linux后台运行  **：nohup command > myout.file 2>&1 &**
+* 查看总的线程数  **：pstree -p | wc -l**
+* 观察线程信息  **：top -H -p {进程id}**
+* 观察线程进程占用文件情况  **：lsof 命令可以查看当前系统文件被打开情况，lsof -p {进程id} 可以看到**
+* 查看网络状态  **：netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'**
+*  linux下取进程占用cpu最高的前10个进程  **：ps aux|head -1;ps aux|grep -v PID|sort -rn -k +3|head**
+* 查看磁盘占用  **：iostat -xdk 1**
+* 查看磁盘占用  **：df -lh**
+* nohup后台不打印解决  **：nohup python -u test.py > nohup.out 2>&1 &**
+* centos6查看防火墙状态  **：service iptables status**
+* centos6开启防火墙  **：service iptables start**
+* centos6关闭防火墙  **：service iptables stop**
+* 查看端口占用  **：lsof -i:端口**
+* 给文件或者文件夹权限  **：chmod 777 文件名**
+* 查看tcp连接状态 **：netstat -plant | grep ip**
+* 抓取指定IP的tcp包数据 **： tcpdump src host 112.96.248.22 -Xvv > tcp.out**
+* 抓取指定IP的tcp包数据 **：tcpdump -i eth0 port 5060 -w dump.pcap -v**
+* 查看某一进程下的所有线程 **： ps -T -p 37772**
+* 查看centos版本 **： cat /etc/redhat-release**
+* centos7查看防火墙状态 **： firewall-cmd --state**
+* centos7关闭防火墙 **： systemctl stop firewalld.service**
+* centos7禁止开机启动防火墙 **： systemctl disable firewalld.service**
+* scp传输文件：scp python3_centos7_installer.zip root@172.16.1.60:/root
