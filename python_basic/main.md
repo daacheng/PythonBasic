@@ -19,4 +19,4 @@
 17. [json文件处理](json文件处理.md)
 18. [Excel文件处理](Excel文件处理.md)
 19. [深拷贝与浅拷贝](深拷贝与浅拷贝.md)
-20. [列表推导式,map,filter,reduce](列表推导式.md)
+20. [列表推导式,字典推导式,生成器表达式,map,filter,reduce](列表推导式.md)
