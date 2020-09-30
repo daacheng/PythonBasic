@@ -110,3 +110,120 @@ receive b = 10
 receive c = 20
 coroutine end...
 ```
+
+#### 4.示例，使用协程计算移动平均值
+```python
+def averager():
+    total = 0
+    count = 0
+    averager_ = 0
+    while True:
+        item = yield averager_
+        total += item
+        count += 1
+        averager_ = total / count
+
+if __name__ == '__main__':
+    ave = averager()
+    next(ave)
+    print(ave.send(10))
+    print(ave.send(20))
+    print(ave.send(30))
+```
+
+#### 5.终止协程和异常处理
+#### 终止协程 generator.close()
+generator.close()使生成器在暂停的yield表达式处抛出GeneratorExit异常。
+如果生成器没有处理这个异常，或者抛出了 StopIteration 异常（通常是指运行到结尾），调用方也不会报错。
+```python
+from inspect import getgeneratorstate
+
+def simple_coroutine():
+    print('coroutine start...')
+    while True:
+        x = yield
+        print('receive x = {}'.format(x))
+
+if __name__ == '__main__':
+    coro = simple_coroutine()
+    next(coro)
+    print(getgeneratorstate(coro))  # GEN_SUSPENDED
+    coro.send(10)  # receive x = 10
+    coro.send(20)  # receive x = 20
+    coro.close()
+    print(getgeneratorstate(coro))  # GEN_CLOSED
+```
+#### 异常处理 generator.throw()
+generator.throw()使协程在暂停的yield处抛出指定的异常，如果协程内部捕捉并处理了这个异常，代码会向前执行到下一个yield处，如果协程没有捕捉处理异常，异常会向上冒泡，传到调用方。
+```python
+from inspect import getgeneratorstate
+
+def simple_coroutine():
+    print('coroutine start...')
+    while True:
+        try:
+            x = yield
+            print('receive x = {}'.format(x))
+        except ValueError:
+            print('something error...')
+
+if __name__ == '__main__':
+    coro = simple_coroutine()
+    next(coro)
+    print(getgeneratorstate(coro))  # GEN_SUSPENDED
+    coro.send(10)  # receive x = 10
+    coro.send(20)  # receive x = 20
+    # 此时抛出异常给协程，协程内部捕捉处理了，协程继续运行到下一个yield处暂停
+    coro.throw(ValueError)  # something error...
+    print(getgeneratorstate(coro))  # GEN_SUSPENDED
+    coro.send(30)  # receive x = 30
+```
+#### 6.yield from <iterable>表达式
+yield from 的主要功能是打开双向通道，把最外层的调用方与最内层的子生成器连接起来，这样二者可以直接发送和产出值，还可以直接传入异常，而不用在位于中间的协程中添加大量处理异常的样板代码。
+
+#### 委派生成器
+包含 yield from <iterable> 表达式的生成器函数。
+#### 子生成器
+从 yield from 表达式中 <iterable> 部分获取的生成器。
+#### 调用方
+调用委派生成器的客户端代码
+
+```python
+# 子生成器: yield from <iterable> 表达式中的<iterable>。
+def averager():
+    total = 0
+    count = 0
+    averager_ = 0
+    while True:
+        item = yield averager_
+        if item is None:
+            break
+        total += item
+        count += 1
+        averager_ = total / count
+    return averager_
+
+# 委派生成器: 包含 yield from <iterable>表达式的生成器函数
+def grouper(key):
+    global results
+    while True:
+        results[key] = yield from averager()
+
+
+if __name__ == '__main__':
+    data = {
+        'girls;kg': [40.9, 38.5, 44.3, 42.2, 45.2, 41.7, 44.5, 38.0, 40.6, 44.5],
+        'boys;kg': [39.0, 40.8, 43.2, 40.8, 43.1, 38.6, 41.4, 40.6, 36.3],
+    }
+    results = {}
+    for key, values in data.items():
+        # 客户端调用委派生成器后，可以直接把数据传给子生成器
+        group_coro = grouper(key)
+        next(group_coro)
+        for value in values:
+            group_coro.send(value)
+        group_coro.send(None)
+
+    print(results)
+
+```
