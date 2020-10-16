@@ -71,7 +71,7 @@ driver.find_element_by_xpath('//*[@id="imgVerifyCodeP"]').get_attribute('src')
 # 通过id或者名称
 driver.switch_to.frame("iframeLoginIfm")
 
-browser.switch_to.frame(0)
+driver.switch_to.frame(0)
 
 frame = driver.find_element_by_xpath('//div[@id="loginDiv"]/iframe')
 driver.switch_to.frame(frame)
@@ -181,13 +181,13 @@ time.sleep(1)
 ```python
 from selenium import webdriver
 
-browser = webdriver.Chrome()
+driver = webdriver.Chrome()
 # 隐式等待
-browser.implicitly_wait(10)
-browser.get('https://www.zhihu.com/explore')
-logo = browser.find_element_by_id('zh-top-link-logo')
+driver.implicitly_wait(10)
+driver.get('https://www.zhihu.com/explore')
+logo = driver.find_element_by_id('zh-top-link-logo')
 print(logo)
-browser.close()
+driver.close()
 ```
 
 ## 5.其他操作

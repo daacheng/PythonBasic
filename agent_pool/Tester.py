@@ -14,13 +14,9 @@ test_url = 'https://zhaopin.baidu.com/'
 
 
 class Tester(object):
-
     def __init__(self):
         self.redisdb = RedisClient.RedisClient()
 
-    """
-        通过async关键字创建一个协程函数
-    """
     async def test_proxy(self, proxy):
         """
             检测代理的可用性
