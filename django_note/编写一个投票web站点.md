@@ -246,3 +246,18 @@ urlpatterns = [
 
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
 ```
+### 10.django后台管理系统
+#### 创建管理员账号
+```python
+python manage.py createsuperuser
+```
+#### 向后台管理系统注册模型
+polls/admin.py
+```python
+from django.contrib import admin
+from .models import Question, Choice
+
+admin.site.register(Question)
+admin.site.register(Choice)
+```
+#### 启动web服务，访问127.0.0.1/admin
