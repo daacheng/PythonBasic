@@ -198,7 +198,7 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
 ]
 ```
-### 9.使用模板
+### 9.使用模板(Templates)
 1. 在polls目录下创建一个templates目录，django会在这个目录下查找查找模板文件。
 2. 在创建的templates目录下，再创建一个polls目录。
 3. 然后在polls/templates/polls目录下创建三个模板(index.html,detail.html,result.html).
@@ -261,3 +261,5 @@ admin.site.register(Question)
 admin.site.register(Choice)
 ```
 #### 启动web服务，访问127.0.0.1/admin
+
+## [完整代码](./django_code/mysite)
