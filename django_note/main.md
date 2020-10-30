@@ -6,3 +6,5 @@
 4. [Django入门-聚合](聚合.md)
 #### 处理HTTP请求
 5. [Django入门-URL调度器](URL调度器.md)
+6. [Django入门-编写视图](编写视图.md)
+7. [Django入门-快捷函数](快捷函数.md)
