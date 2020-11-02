@@ -8,3 +8,4 @@
 |[TCP/IP与HTTP协议](./network_protocol/main.md)|网络基础知识，tcp/ip协议与http协议等......|
 |[LeetCode-数组](./leetcode_array/main.md)|leetcode数组类算法刷题。|
 |[Django学习](./django_note/main.md)|Django学习笔记。|
+|[其他](./others/main.md)|kafka，ZeroMQ等|
