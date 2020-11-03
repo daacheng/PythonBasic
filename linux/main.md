@@ -8,3 +8,4 @@
 6. [Linux文件权限](Linux文件权限.md)
 7. [管道符、重定向与环境变量](管道符重定向与环境变量.md)
 8. [vim编辑器与shell命令脚本](vim编辑器与shell命令脚本.md)
+9. [shell语法](shell语法.md)
