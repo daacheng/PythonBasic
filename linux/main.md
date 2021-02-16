@@ -9,7 +9,7 @@
 8. [vim编辑器与shell命令脚本](vim编辑器与shell命令脚本.md)
 9. [shell语法](shell语法.md)
 
-### Linux文件权限与目录配置
-6. [Linux文件权限概念](Linux文件权限.md)
-### Linux文件与命令管理
-7. [Linux文件权限概念](Linux文件权限.md)
+## Linux基础
+6. [Linux文件属性与权限](Linux文件权限.md)
+7. [Linux文件与目录管理](Linux文件目录管理.md)
+8. [Linux文件系统(索引式文件系统)](Linux文件系统.md)
