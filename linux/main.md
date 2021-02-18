@@ -13,3 +13,4 @@
 6. [Linux文件属性与权限](Linux文件权限.md)
 7. [Linux文件与目录管理](Linux文件目录管理.md)
 8. [Linux文件系统(索引式文件系统)](Linux文件系统.md)
+9. [Linux文件压缩与打包](Linux文件压缩与打包.md)
