@@ -6,7 +6,8 @@
 3. [Linux文件与目录管理](Linux文件目录管理.md)
 4. [Linux文件系统(索引式文件系统)](Linux文件系统.md)
 5. [Linux文件压缩与打包](Linux文件压缩与打包.md)
-7. [vim编辑器基本操作](vim编辑器基本操作.md)
+6. [vim编辑器基本操作](vim编辑器基本操作.md)
+7. [数据流重定向与管线命令](数据流重定向与管线命令.md)
 
 
 2. [常用系统工作命令(echo, date, reboot, poweroff, wget, ps, top, pidof, kill, killall, whereis, locate, tar, sync)](Linux常用系统工作命令.md)
