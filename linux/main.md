@@ -8,6 +8,7 @@
 5. [Linux文件压缩与打包](Linux文件压缩与打包.md)
 6. [vim编辑器基本操作](vim编辑器基本操作.md)
 7. [数据流重定向与管线命令](数据流重定向与管线命令.md)
+8. [正则表达式](正则表达式.md)
 
 
 2. [常用系统工作命令(echo, date, reboot, poweroff, wget, ps, top, pidof, kill, killall, whereis, locate, tar, sync)](Linux常用系统工作命令.md)
