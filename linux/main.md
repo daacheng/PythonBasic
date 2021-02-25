@@ -9,6 +9,7 @@
 6. [vim编辑器基本操作](vim编辑器基本操作.md)
 7. [数据流重定向与管线命令](数据流重定向与管线命令.md)
 8. [正则表达式](正则表达式.md)
+9. [sed命令与awk命令](sed命令与awk命令.md)
 
 
 2. [常用系统工作命令(echo, date, reboot, poweroff, wget, ps, top, pidof, kill, killall, whereis, locate, tar, sync)](Linux常用系统工作命令.md)
