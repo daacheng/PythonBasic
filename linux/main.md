@@ -11,6 +11,9 @@
 8. [正则表达式](正则表达式.md)
 9. [sed命令与awk命令](sed命令与awk命令.md)
 
+## Nginx
+1. [centos7安装nginx](centos7安装nginx.md)
+
 
 ## 常用命令
 1. [常用系统工作命令(echo, date, reboot, poweroff, wget, ps, top, pidof, kill, killall, whereis, locate, tar, sync)](Linux常用系统工作命令.md)
