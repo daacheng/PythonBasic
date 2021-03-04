@@ -15,6 +15,9 @@
 1. [centos7安装nginx](centos7安装nginx.md)
 2. [nginx基本配置与参数说明](nginx基本配置与参数说明.md)
 
+## Shell
+1. [Shell变量](Shell变量.md)
+
 
 ## 常用命令
 1. [常用系统工作命令(echo, date, reboot, poweroff, wget, ps, top, pidof, kill, killall, whereis, locate, tar, sync)](Linux常用系统工作命令.md)
