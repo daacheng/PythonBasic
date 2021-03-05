@@ -18,6 +18,7 @@
 ## Shell
 1. [Shell变量](Shell变量.md)
 2. [Shell位置参数与特殊变量](Shell位置参数与特殊变量.md)
+3. [Shell字符串](Shell字符串.md)
 
 
 ## 常用命令
