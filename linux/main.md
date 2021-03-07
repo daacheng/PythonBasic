@@ -20,6 +20,13 @@
 2. [Shell位置参数与特殊变量](Shell位置参数与特殊变量.md)
 3. [Shell字符串](Shell字符串.md)
 4. [Shell数组](Shell数组.md)
+5. [Shell数学计算](Shell数学计算.md)
+6. [Shell if else语句](if语句.md)
+7. [Shell test命令和\[\[\]\]](test命令和[[]].md)
+8. [Shell case in语句](casein语句.md)
+9. [Shell while语句](while语句.md)
+10. [Shell for循环](for循环.md)
+11. [Shell函数](Shell函数.md)
 
 
 ## 常用命令
