@@ -27,3 +27,5 @@ getsum 1 2 3
 echo $?
 
 ```
+
+**shell的function只能返回整数值，可以将返回值赋值给一个变量，调用该funciton后，可以通过该变量获取到返回值**

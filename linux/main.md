@@ -27,6 +27,7 @@
 9. [Shell while语句](while语句.md)
 10. [Shell for循环](for循环.md)
 11. [Shell函数](Shell函数.md)
+12. [常用shell脚本](常用shell脚本.md)
 
 
 ## 常用命令
