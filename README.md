@@ -10,5 +10,6 @@
 |[LeetCode-栈](./leetcode_stack/main.md)|leetcode栈类算法刷题。|
 |[LeetCode-链表](./leetcode_linked_list/main.md)|leetcode链表类算法刷题。|
 |[LeetCode-树](./leetcode_tree/main.md)|leetcode树类算法刷题。|
+|[剑指offer](./JZ_offer/main.md)|《剑指offer》练习|
 |[Django学习](./django_note/main.md)|Django学习笔记。|
 |[其他](./others/main.md)|redis，kafka，ZeroMQ等|
