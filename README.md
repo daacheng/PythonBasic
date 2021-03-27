@@ -5,7 +5,7 @@
 |[Linux相关](./linux/main.md)|linux常用操作命令，vim，环境安装部署等......|
 |[Python数据分析](./data_analysis/main.md)|《深入浅出统计学》,numpy,pandas基础概念及练习等......|
 |[Python爬虫](./spiders/main.md)|python爬虫基础库requests，beautifulsoup，xpath，selenium，代理池，部分网站爬虫等......|
-|[TCP/IP与HTTP协议](./network_protocol/main.md)|网络基础知识，tcp/ip协议与http协议等......|
+|[计算机网络基础](./network_protocol/main.md)|网络基础知识，tcp/ip协议与http协议等......|
 |[LeetCode-数组](./leetcode_array/main.md)|leetcode数组类算法刷题。|
 |[LeetCode-栈](./leetcode_stack/main.md)|leetcode栈类算法刷题。|
 |[LeetCode-链表](./leetcode_linked_list/main.md)|leetcode链表类算法刷题。|
