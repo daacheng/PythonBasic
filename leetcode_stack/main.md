@@ -1,5 +1,19 @@
-## LeetCode栈
+# LeetCode栈与队列
+## 1.定义
+#### 队列
+队列是一种先进先出的线性表（FIFO：First In First Out），它只允许在表的前端进行删除操作，在表的后端进行插入操作。
+
+![](../pic/leetcode_stack/duilie.png)
+
+#### 栈
+栈是一种后进先出的线性表（LIFO：Last In First Out），它只允许在表尾部进行插入和删除操作。
+
+![](../pic/leetcode_stack/stack.png)
+
+## 2.题目
 * [有效的括号](有效的括号.md)
+* [用栈实现队列](用栈实现队列.md)
+* [用队列实现栈](用队列实现栈.md)
 
 <!--
 2. [最小栈](最小栈.md)
