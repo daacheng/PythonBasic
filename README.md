@@ -10,6 +10,6 @@
 |[LeetCode-链表](./leetcode_linked_list/main.md)|leetcode链表类算法练习|
 |[LeetCode-哈希表](./leetcode_hash/main.md)|leetcode哈希表类算法练习|
 |[LeetCode-栈+队列](./leetcode_stack/main.md)|leetcode栈+队列类算法练习|
-|[LeetCode-树](./leetcode_tree/main.md)|leetcode树类算法练习|
+|[LeetCode-二叉树](./leetcode_tree/main.md)|leetcode二叉树类算法练习|
 |[Django学习](./django_note/main.md)|Django学习笔记。|
 |[其他](./others/main.md)|redis，kafka，ZeroMQ等|
