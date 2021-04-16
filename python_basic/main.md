@@ -23,3 +23,5 @@
 * [匿名函数,列表推导式,字典推导式,生成器表达式,map,filter,reduce](列表推导式.md)
 * [== 与 is的区别](is.md)
 * [python异常处理机制](python异常处理机制.md)
+* [\_\_new__()与\_\_init__()方法](new和init方法.md)
+* [@property 保护变量的访问与设置](保护变量的访问与设置.md)
