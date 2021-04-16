@@ -17,6 +17,7 @@
 * [关于tuple](关于tuple.md)
 * [json文件处理](json文件处理.md)
 * [Excel文件处理](Excel文件处理.md)
+* [Python标准数据类型](Python标准数据类型.md)
 * [深拷贝与浅拷贝](深拷贝与浅拷贝.md)
 * [匿名函数,列表推导式,字典推导式,生成器表达式,map,filter,reduce](列表推导式.md)
 * [== 与 is的区别](is.md)
