@@ -25,3 +25,4 @@
 * [python异常处理机制](python异常处理机制.md)
 * [\_\_new__()与\_\_init__()方法](new和init方法.md)
 * [@property 保护变量的访问与设置](保护变量的访问与设置.md)
+* [Python函数参数的传递机制](Python函数参数的传递机制.md)
