@@ -21,3 +21,4 @@
 * [concurrent.futures模块](concurrentfutures模块.md)
 * [Python垃圾回收机制](Python垃圾回收机制.md)
 * [Python上下文管理器与with语句](Python上下文管理器与with语句.md)
+* [Python实现单例模式](Python实现单例模式.md)
