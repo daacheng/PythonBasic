@@ -40,6 +40,17 @@ git官网下载windows版本的， https://git-scm.com/downloads
 
 ![](../pic/gitdoc/1_3.png)
 
+* 查看所有配置: git config -l
+* 查看系统配置：git config --system --list
+* 查看本地配置：git config --global --list
+* 配置用户名: git config --global user.name "XXX"
+* 配置邮箱: git config --global user.email "XXX@qq.com"
+* 新建一个分支：git branch [branch-name]
+* 新建一个分支并切换到新的分支上：git checkout -b [branch]
+* 合并指定分支到当前分支：git merge [branch]
+* 删除分支: git branch -d [branch-name]
+* 删除远程分支：git push origin --delete [branch-name]
+
 ## 二、git使用
 ### 2.1、用git创建版本库
 学习三个git命令：
