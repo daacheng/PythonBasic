@@ -27,3 +27,4 @@
 * [@property 保护变量的访问与设置](保护变量的访问与设置.md)
 * [Python函数参数的传递机制](Python函数参数的传递机制.md)
 * [Python猴子补丁 monkey patch](猴子补丁.md)
+* [Python在内存中读写数据StringIO/BytesIO](Python在内存中读写数据.md)
