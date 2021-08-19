@@ -1,5 +1,6 @@
 ## Linux相关
 1. [Linux常用操作命令(更新……)](Linux常用操作命令.md)
+2. [tmux常用操作命令](tmux常用操作命令.md)
 
 ## Linux基础
 2. [Linux文件属性与权限](Linux文件权限.md)
