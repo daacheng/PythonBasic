@@ -12,6 +12,8 @@ Redis是一个基于内存的高性能key-value数据库。
 #### 4.redis是单进程单线程的
 redis利用队列将并发访问变为串行访问。
 
+redis连接指定数据库：redis-cli -n 1
+
 ## key
 * keys * : 查看所有的key
 * del key ： 删除指定的key
